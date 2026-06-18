@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Volume2, Check, ArrowRight } from 'lucide-react';
+import imageWordMap from '../imageWordMap.json';
 
 interface QuizItem {
   id: number;
@@ -137,6 +138,25 @@ export default function DragMode({
 
   const hasMedial = quiz && quiz.correctAnswer.medial && quiz.correctAnswer.medial.trim() !== "";
 
+  // Resolve word and core character for highlight
+  const getWordDetails = (imageUrl: string, defaultWord: string) => {
+    const parts = imageUrl.split('/');
+    const fileName = parts[parts.length - 1];
+    const mapData = (imageWordMap as Record<string, { word: string; core: string }>)[fileName];
+    if (mapData) {
+      return {
+        word: mapData.word,
+        core: mapData.core
+      };
+    }
+    return {
+      word: defaultWord,
+      core: defaultWord
+    };
+  };
+
+  const { word, core } = getWordDetails(quiz.imageUrl, quiz.wordText);
+
   // Initialize for new quiz item
   useEffect(() => {
     if (quiz) {
@@ -192,6 +212,17 @@ export default function DragMode({
       }, 500);
     }
   }, [quiz]);
+
+  // Lock body scroll and touch actions when component is mounted
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    document.body.style.touchAction = 'none';
+
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.touchAction = '';
+    };
+  }, []);
 
   // Check completion
   useEffect(() => {
@@ -437,65 +468,84 @@ export default function DragMode({
 
   // Responsive styling
   const cabinSizeClass = hasMedial
-    ? "w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32"
-    : "w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44";
+    ? "w-14 h-14 sm:w-24 sm:h-24 md:w-32 md:h-32"
+    : "w-18 h-18 sm:w-28 sm:h-28 md:w-44 md:h-44";
 
   const toneSizeClass = hasMedial
-    ? "w-16 h-24 sm:w-20 sm:h-28 md:w-24 md:h-32"
-    : "w-20 h-32 sm:w-24 sm:h-36 md:w-28 md:h-44";
+    ? "w-10 h-18 sm:w-16 sm:h-24 md:w-24 md:h-32"
+    : "w-12 h-22 sm:w-20 sm:h-28 md:w-28 md:h-44";
 
   const letterTextSize = hasMedial
-    ? "text-4xl sm:text-5xl md:text-6xl"
-    : "text-5xl sm:text-6xl md:text-7xl";
+    ? "text-2xl sm:text-4xl md:text-6xl"
+    : "text-3xl sm:text-5xl md:text-7xl";
 
   const toneTextSize = hasMedial
-    ? "text-3xl sm:text-4xl md:text-5xl"
-    : "text-4xl sm:text-5xl md:text-6xl";
+    ? "text-xl sm:text-3xl md:text-5xl"
+    : "text-2xl sm:text-4xl md:text-6xl";
 
   return (
-    <div className="w-full flex-1 flex flex-col justify-between relative overflow-hidden py-4">
+    <div className="w-full h-[100vh] md:h-auto flex-1 flex flex-col justify-between relative overflow-hidden p-1.5 sm:py-4 select-none">
       
       {/* Game Content Grid */}
-      <div className="flex-1 max-w-6xl mx-auto w-full px-4 py-6 flex flex-col md:grid md:grid-cols-12 gap-6 items-center justify-center relative">
+      <div className="flex-1 max-w-6xl mx-auto w-full px-2 py-2 flex flex-col md:grid md:grid-cols-12 gap-3 md:gap-6 items-center justify-center relative overflow-hidden min-h-0">
         
-        {/* Word Card & Audio Pronounce (Left) */}
-        <div className="md:col-span-5 flex flex-col items-center justify-center bg-white border-2 border-stone-200/80 rounded-3xl p-6 shadow-sm w-full max-w-sm md:max-w-none">
-          <div className="relative group mb-6">
-            <div className="absolute -inset-1.5 bg-gradient-to-r from-amber-200 to-orange-200 rounded-3xl blur opacity-30 group-hover:opacity-40 transition duration-500"></div>
-            <div className="relative bg-stone-50 border border-stone-200/60 rounded-2xl overflow-hidden shadow-inner">
-              <img
-                src={quiz.imageUrl}
-                alt={quiz.wordText}
-                className="w-48 h-48 sm:w-56 sm:h-56 object-contain p-4 select-none pointer-events-none"
-              />
+        {/* Word Card & Audio Pronounce (Left) - horizontal row layout on mobile */}
+        <div className="md:col-span-5 flex flex-row md:flex-col items-center justify-between md:justify-center bg-white border-2 border-stone-200/80 rounded-2xl md:rounded-3xl p-2.5 md:p-6 shadow-sm w-full md:max-w-none">
+          <div className="flex items-center space-x-3 md:flex-col md:space-x-0 md:space-y-6">
+            <div className="relative group">
+              <div className="absolute -inset-1.5 bg-gradient-to-r from-amber-200 to-orange-200 rounded-3xl blur opacity-30 group-hover:opacity-40 transition duration-500 hidden md:block"></div>
+              <div className="relative bg-stone-50 border border-stone-200/60 rounded-xl md:rounded-2xl overflow-hidden shadow-inner">
+                <img
+                  src={quiz.imageUrl}
+                  alt={quiz.wordText}
+                  className="w-16 h-16 md:w-56 md:h-56 object-contain p-1.5 md:p-4 select-none pointer-events-none"
+                />
+              </div>
+            </div>
+
+            <div className="text-left md:text-center">
+              <span className="text-3xl md:text-7xl font-extrabold text-stone-850 drop-shadow-sm flex items-center tracking-wide">
+                {Array.from(word).map((char, index) => {
+                  if (char === core) {
+                    return (
+                      <span key={index} className="text-3xl md:text-7xl font-black text-emerald-600 inline-block px-0.5 md:px-1 animate-bounce">
+                        {char}
+                      </span>
+                    );
+                  }
+                  return (
+                    <span key={index} className="text-stone-400 text-lg md:text-5xl font-bold inline-block">
+                      {char}
+                    </span>
+                  );
+                })}
+              </span>
+              <span className="text-[9px] md:text-[10px] text-stone-450 block mt-0.5 md:mt-2 font-bold tracking-widest uppercase">
+                請拖曳組合高亮字的注音
+              </span>
             </div>
           </div>
 
-          <div className="flex items-center space-x-5">
-            <span className="text-6xl md:text-7xl font-extrabold text-stone-850 drop-shadow-sm">
-              {quiz.wordText}
-            </span>
-            <button
-              onClick={() => playPronunciation(quiz.wordText)}
-              className="bg-amber-500 hover:bg-amber-400 active:scale-95 transition-all text-white p-4 rounded-full shadow-md hover:shadow-amber-500/20 flex items-center justify-center cursor-pointer"
-              aria-label="播放讀音"
-            >
-              <Volume2 className="w-7 h-7 sm:w-8 sm:h-8" />
-            </button>
-          </div>
+          <button
+            onClick={() => playPronunciation(quiz.wordText)}
+            className="bg-amber-500 hover:bg-amber-400 active:scale-95 transition-all text-white p-2.5 md:p-4 rounded-full shadow-md hover:shadow-amber-500/20 flex items-center justify-center cursor-pointer"
+            aria-label="播放讀音"
+          >
+            <Volume2 className="w-5 h-5 md:w-8 md:h-8 text-white" />
+          </button>
         </div>
 
         {/* Drop zones / space cabins (Right) */}
-        <div className="md:col-span-7 flex flex-col items-center justify-center space-y-6 w-full">
-          <div className="flex items-center space-x-6 bg-white border-2 border-stone-200/60 p-6 rounded-3xl shadow-sm">
+        <div className="md:col-span-7 flex flex-col items-center justify-center space-y-2.5 md:space-y-6 w-full">
+          <div className="flex items-center space-x-3 md:space-x-6 bg-white border-2 border-stone-200/60 p-2.5 md:p-6 rounded-3xl shadow-sm justify-center w-full">
             
             {/* Vowels Stack */}
-            <div className="flex flex-col space-y-4">
+            <div className="flex flex-col space-y-2 md:space-y-4">
               
               {/* Initial (聲母) */}
               <div
                 ref={initialZoneRef}
-                className={`relative ${cabinSizeClass} rounded-3xl border-3 flex flex-col items-center justify-center transition-all duration-300 shadow-sm overflow-hidden ${
+                className={`relative ${cabinSizeClass} rounded-2xl md:rounded-3xl border-3 flex flex-col items-center justify-center transition-all duration-300 shadow-sm overflow-hidden ${
                   placedAnswers.initial
                     ? 'border-teal-500 bg-teal-50/50 text-teal-800'
                     : (wrongPlacedAnswers.initial && !isResettingWrong)
@@ -507,7 +557,7 @@ export default function DragMode({
                     : 'border-dashed border-stone-300 bg-stone-50 text-stone-400'
                 }`}
               >
-                <span className="absolute top-1 text-[9px] sm:text-xs font-bold tracking-wider opacity-60">
+                <span className="absolute top-0.5 md:top-1 text-[8px] sm:text-xs font-bold tracking-wider opacity-60">
                   聲母
                 </span>
                 {placedAnswers.initial ? (
@@ -517,11 +567,11 @@ export default function DragMode({
                     {wrongPlacedAnswers.initial}
                   </span>
                 ) : (
-                  <span className="text-[10px] sm:text-xs text-stone-400 font-bold">ㄅ ~ ㄙ</span>
+                  <span className="text-[8px] sm:text-xs text-stone-400 font-bold">ㄅ ~ ㄙ</span>
                 )}
                 {placedAnswers.initial && (
-                  <div className="absolute bottom-1 bg-teal-100 p-0.5 rounded-full">
-                    <Check className="w-3.5 h-3.5 text-teal-650" />
+                  <div className="absolute bottom-0.5 md:bottom-1 bg-teal-100 p-0.5 rounded-full">
+                    <Check className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 text-teal-650" />
                   </div>
                 )}
               </div>
@@ -530,7 +580,7 @@ export default function DragMode({
               {hasMedial && (
                 <div
                   ref={medialZoneRef}
-                  className={`relative ${cabinSizeClass} rounded-3xl border-3 flex flex-col items-center justify-center transition-all duration-300 shadow-sm overflow-hidden ${
+                  className={`relative ${cabinSizeClass} rounded-2xl md:rounded-3xl border-3 flex flex-col items-center justify-center transition-all duration-300 shadow-sm overflow-hidden ${
                     placedAnswers.medial
                       ? 'border-teal-500 bg-teal-50/50 text-teal-800'
                       : (wrongPlacedAnswers.medial && !isResettingWrong)
@@ -542,7 +592,7 @@ export default function DragMode({
                       : 'border-dashed border-stone-300 bg-stone-50 text-stone-400'
                   }`}
                 >
-                  <span className="absolute top-1 text-[9px] sm:text-xs font-bold tracking-wider opacity-60">
+                  <span className="absolute top-0.5 md:top-1 text-[8px] sm:text-xs font-bold tracking-wider opacity-60">
                     介母
                   </span>
                   {placedAnswers.medial ? (
@@ -552,11 +602,11 @@ export default function DragMode({
                       {wrongPlacedAnswers.medial}
                     </span>
                   ) : (
-                    <span className="text-[10px] sm:text-xs text-stone-400 font-bold">ㄧ ㄨ ㄩ</span>
+                    <span className="text-[8px] sm:text-xs text-stone-400 font-bold">ㄧ ㄨ ㄩ</span>
                   )}
                   {placedAnswers.medial && (
-                    <div className="absolute bottom-1 bg-teal-100 p-0.5 rounded-full">
-                      <Check className="w-3.5 h-3.5 text-teal-650" />
+                    <div className="absolute bottom-0.5 md:bottom-1 bg-teal-100 p-0.5 rounded-full">
+                      <Check className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 text-teal-650" />
                     </div>
                   )}
                 </div>
@@ -565,7 +615,7 @@ export default function DragMode({
               {/* Final (韻母) */}
               <div
                 ref={finalZoneRef}
-                className={`relative ${cabinSizeClass} rounded-3xl border-3 flex flex-col items-center justify-center transition-all duration-300 shadow-sm overflow-hidden ${
+                className={`relative ${cabinSizeClass} rounded-2xl md:rounded-3xl border-3 flex flex-col items-center justify-center transition-all duration-300 shadow-sm overflow-hidden ${
                   placedAnswers.final
                     ? 'border-teal-500 bg-teal-50/50 text-teal-800'
                     : (wrongPlacedAnswers.final && !isResettingWrong)
@@ -577,7 +627,7 @@ export default function DragMode({
                     : 'border-dashed border-stone-300 bg-stone-50 text-stone-400'
                 }`}
               >
-                <span className="absolute top-1 text-[9px] sm:text-xs font-bold tracking-wider opacity-60">
+                <span className="absolute top-0.5 md:top-1 text-[8px] sm:text-xs font-bold tracking-wider opacity-60">
                   韻母
                 </span>
                 {placedAnswers.final ? (
@@ -587,11 +637,11 @@ export default function DragMode({
                     {wrongPlacedAnswers.final}
                   </span>
                 ) : (
-                  <span className="text-[10px] sm:text-xs text-stone-400 font-bold">ㄚ ~ ㄦ</span>
+                  <span className="text-[8px] sm:text-xs text-stone-400 font-bold">ㄚ ~ ㄦ</span>
                 )}
                 {placedAnswers.final && (
-                  <div className="absolute bottom-1 bg-teal-100 p-0.5 rounded-full">
-                    <Check className="w-3.5 h-3.5 text-teal-650" />
+                  <div className="absolute bottom-0.5 md:bottom-1 bg-teal-100 p-0.5 rounded-full">
+                    <Check className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 text-teal-650" />
                   </div>
                 )}
               </div>
@@ -601,7 +651,7 @@ export default function DragMode({
             {/* Tone Cabin (聲調) */}
             <div
               ref={toneZoneRef}
-              className={`relative ${toneSizeClass} rounded-3xl border-3 flex flex-col items-center justify-center transition-all duration-300 shadow-sm overflow-hidden ${
+              className={`relative ${toneSizeClass} rounded-2xl md:rounded-3xl border-3 flex flex-col items-center justify-center transition-all duration-300 shadow-sm overflow-hidden ${
                 placedAnswers.tone
                   ? 'border-amber-500 bg-amber-50/50 text-amber-800'
                   : (wrongPlacedAnswers.tone && !isResettingWrong)
@@ -613,36 +663,36 @@ export default function DragMode({
                   : 'border-dashed border-stone-300 bg-stone-50 text-stone-400'
               }`}
             >
-              <span className="absolute top-1 text-[9px] sm:text-xs font-bold tracking-wider opacity-60">
+              <span className="absolute top-0.5 md:top-1 text-[8px] sm:text-xs font-bold tracking-wider opacity-60">
                 聲調
               </span>
               {placedAnswers.tone ? (
                 <div className="flex flex-col items-center justify-center">
                   <span className={`${toneTextSize} font-extrabold`}>{getToneDisplay(placedAnswers.tone)}</span>
-                  <span className="text-[9px] sm:text-[10px] text-amber-700 font-bold mt-0.5">
+                  <span className="text-[8px] sm:text-[10px] text-amber-700 font-bold mt-0.5 hidden sm:block">
                     {getToneLabel(placedAnswers.tone)}
                   </span>
                 </div>
               ) : wrongPlacedAnswers.tone ? (
                 <div className={`flex flex-col items-center justify-center text-red-500 transition-all duration-300 ${isResettingWrong ? 'scale-0 opacity-0' : 'scale-100 opacity-100'}`}>
                   <span className={`${toneTextSize} font-extrabold`}>{getToneDisplay(wrongPlacedAnswers.tone)}</span>
-                  <span className="text-[9px] sm:text-[10px] text-red-750 font-bold mt-0.5">
+                  <span className="text-[8px] sm:text-[10px] text-red-750 font-bold mt-0.5 hidden sm:block">
                     {getToneLabel(wrongPlacedAnswers.tone)}
                   </span>
                 </div>
               ) : (
-                <span className="text-[10px] sm:text-xs text-stone-400 font-bold">聲調</span>
+                <span className="text-[8px] sm:text-xs text-stone-400 font-bold">聲調</span>
               )}
               {placedAnswers.tone && (
-                <div className="absolute bottom-1 bg-amber-100 p-0.5 rounded-full">
-                  <Check className="w-3.5 h-3.5 text-amber-650" />
+                <div className="absolute bottom-0.5 md:bottom-1 bg-amber-100 p-0.5 rounded-full">
+                  <Check className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 text-amber-650" />
                 </div>
               )}
             </div>
 
           </div>
 
-          <p className="text-xs text-stone-450 font-bold text-center max-w-sm">
+          <p className="text-[10px] sm:text-xs text-stone-450 font-bold text-center max-w-sm hidden sm:block">
             提示：將下方的注音與聲調卡片，拖曳到對應的空格內。
           </p>
         </div>
@@ -650,20 +700,20 @@ export default function DragMode({
       </div>
 
       {/* Card pool (Bottom) */}
-      <footer className="mt-auto px-4 w-full max-w-4xl mx-auto z-10">
-        <div className="bg-white border-2 border-stone-200/80 rounded-3xl p-6 shadow-sm">
-          <h2 className="text-sm font-bold text-stone-500 mb-4 text-center tracking-wide uppercase">
+      <footer className="mt-0 px-2 w-full max-w-4xl mx-auto z-10">
+        <div className="bg-white border-2 border-stone-200/80 rounded-2xl p-2.5 md:p-6 shadow-sm">
+          <h2 className="text-xs md:text-sm font-bold text-stone-500 mb-2 md:mb-4 text-center tracking-wide uppercase hidden sm:block">
             注音符號卡片艙
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-6">
             
             {/* Left part: symbols */}
             <div className="md:col-span-8">
-              <h3 className="text-xs font-bold text-stone-400 mb-3 text-center uppercase tracking-wide">
-                注音符號 (聲母 / 介母 / 韻母)
+              <h3 className="text-xs font-bold text-stone-400 mb-3 text-center uppercase tracking-wide hidden sm:block">
+                注音符號
               </h3>
-              <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3 justify-items-center">
+              <div className="grid grid-cols-6 gap-1.5 md:gap-3 justify-items-center">
                 {cardPool
                   .filter((card) => card.type !== 'tone')
                   .map((card) => {
@@ -680,9 +730,9 @@ export default function DragMode({
                         onTouchStart={(e) => handleDragStart(e, card)}
                         onMouseDown={(e) => handleDragStart(e, card)}
                         style={{ opacity: isDragging ? 0.25 : 1 }}
-                        className={`w-20 h-20 sm:w-22 sm:h-22 md:w-24 md:h-24 bg-gradient-to-br border-2 rounded-2xl flex items-center justify-center cursor-grab active:cursor-grabbing shadow-sm select-none transition-all duration-150 transform hover:-translate-y-1 hover:shadow-md ${typeStyles}`}
+                        className={`w-11 h-11 sm:w-16 sm:h-16 md:w-24 md:h-24 bg-gradient-to-br border-2 rounded-xl md:rounded-2xl flex items-center justify-center cursor-grab active:cursor-grabbing shadow-sm select-none transition-all duration-150 transform hover:-translate-y-1 hover:shadow-md ${typeStyles}`}
                       >
-                        <span className="text-4xl sm:text-5xl font-black">
+                        <span className="text-xl sm:text-3xl md:text-5xl font-black">
                           {card.symbol}
                         </span>
                       </div>
@@ -696,10 +746,10 @@ export default function DragMode({
 
             {/* Right part: tones */}
             <div className="md:col-span-3">
-              <h3 className="text-xs font-bold text-stone-400 mb-3 text-center uppercase tracking-wide">
+              <h3 className="text-xs font-bold text-stone-400 mb-3 text-center uppercase tracking-wide hidden sm:block">
                 聲調符號
               </h3>
-              <div className="grid grid-cols-2 gap-3 justify-items-center">
+              <div className="flex flex-row md:grid md:grid-cols-2 gap-1.5 md:gap-3 justify-center">
                 {TONE_CARDS.map((card) => {
                   const isPlaced = placedAnswers.tone === card.symbol;
                   const isDragging = activeDrag?.cardId === `fixed-tone-${card.symbol}`;
@@ -714,12 +764,12 @@ export default function DragMode({
                         opacity: isDragging ? 0.25 : isPlaced ? 0.4 : 1,
                         pointerEvents: isPlaced ? 'none' : 'auto',
                       }}
-                      className={`w-20 h-20 sm:w-22 sm:h-22 md:w-24 md:h-24 bg-gradient-to-br border-2 rounded-2xl flex flex-col items-center justify-center cursor-grab active:cursor-grabbing shadow-sm select-none transition-all duration-150 transform hover:-translate-y-1 hover:shadow-md ${typeStyles}`}
+                      className={`w-11 h-11 sm:w-16 sm:h-16 md:w-24 md:h-24 bg-gradient-to-br border-2 rounded-xl md:rounded-2xl flex flex-col items-center justify-center cursor-grab active:cursor-grabbing shadow-sm select-none transition-all duration-150 transform hover:-translate-y-1 hover:shadow-md ${typeStyles}`}
                     >
-                      <span className="text-3xl sm:text-4xl font-extrabold">
+                      <span className="text-xl sm:text-3xl md:text-4xl font-extrabold">
                         {card.display}
                       </span>
-                      <span className="text-[9px] sm:text-[10px] font-bold opacity-85 mt-0.5">
+                      <span className="text-[9px] sm:text-[10px] font-bold opacity-85 mt-0.5 hidden sm:block">
                         {card.label}
                       </span>
                     </div>
@@ -743,7 +793,7 @@ export default function DragMode({
             pointerEvents: 'none',
             zIndex: 9999,
           }}
-          className={`w-20 h-20 sm:w-24 h-24 bg-gradient-to-br rounded-2xl flex flex-col items-center justify-center border-4 border-white shadow-2xl text-white font-extrabold select-none ${
+          className={`w-11 h-11 sm:w-24 sm:h-24 bg-gradient-to-br rounded-2xl flex flex-col items-center justify-center border-4 border-white shadow-2xl text-white font-extrabold select-none ${
             activeDrag.type === 'initial'
               ? 'from-teal-400 to-teal-500'
               : activeDrag.type === 'medial'
@@ -753,11 +803,11 @@ export default function DragMode({
               : 'from-amber-400 to-amber-500'
           }`}
         >
-          <span className="text-4xl sm:text-5xl font-black">
+          <span className="text-2xl sm:text-5xl font-black">
             {activeDrag.type === 'tone' ? getToneDisplay(activeDrag.symbol) : activeDrag.symbol}
           </span>
           {activeDrag.type === 'tone' && (
-            <span className="text-[9px] sm:text-[10px] font-bold opacity-90 mt-1">
+            <span className="text-[9px] sm:text-[10px] font-bold opacity-90 mt-1 hidden sm:block">
               {getToneLabel(activeDrag.symbol)}
             </span>
           )}
@@ -797,7 +847,7 @@ export default function DragMode({
             <button
               id="btn-next-level"
               onClick={onNext}
-              className="w-full bg-emerald-500 hover:bg-emerald-400 active:scale-95 transition-all text-white font-bold py-4 px-6 rounded-2xl shadow-md flex items-center justify-center space-x-2 cursor-pointer border-b-4 border-emerald-700"
+              className="w-full bg-emerald-500 hover:bg-emerald-405 active:scale-95 transition-all text-white font-bold py-4 px-6 rounded-2xl shadow-md flex items-center justify-center space-x-2 cursor-pointer border-b-4 border-emerald-700"
             >
               <span>下一關</span>
               <ArrowRight className="w-5 h-5" />

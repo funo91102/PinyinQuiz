@@ -338,7 +338,7 @@ export default function CanvasMode({
   };
 
   return (
-    <div className="w-full h-[100vh] md:h-auto flex-1 flex flex-col items-center justify-between md:justify-center p-2 sm:p-6 overflow-hidden select-none relative">
+    <div className="w-full h-[100vh] md:h-auto flex-1 flex flex-col items-center justify-between md:justify-center p-1.5 sm:p-6 overflow-hidden select-none relative">
       
       {/* Guidance Header - hidden on mobile to maximize layout height */}
       <div className="text-center mb-2 md:mb-6 hidden sm:block">
@@ -352,12 +352,12 @@ export default function CanvasMode({
       </div>
 
       {/* Main Canvas writing board grid */}
-      <div className="w-full max-w-4xl flex flex-col md:grid md:grid-cols-2 gap-3 md:gap-8 items-center md:items-stretch bg-white border-2 border-stone-200/80 p-3 md:p-8 rounded-3xl shadow-sm flex-1 md:min-h-[500px] min-h-0 overflow-hidden">
+      <div className="w-full max-w-4xl flex flex-col md:grid md:grid-cols-2 gap-2 md:gap-8 items-center md:items-stretch bg-white border-2 border-stone-200/80 p-2 md:p-8 rounded-3xl shadow-sm flex-1 md:min-h-[500px] min-h-0 overflow-hidden">
         
         {/* Left Column: Word details & sound trigger - horizontal row layout on mobile */}
         <div className="flex flex-row md:flex-col items-center justify-between md:justify-center w-full pb-2 md:pb-0 border-b border-stone-150 md:border-b-0 md:border-r border-stone-200/60 md:pr-8 md:space-y-6">
           <div className="flex items-center space-x-3 md:flex-col md:space-x-0 md:space-y-6">
-            <div className="w-14 h-14 sm:w-20 sm:h-20 md:w-44 md:h-44 bg-gradient-to-b from-stone-50 to-white border-2 md:border-3 border-stone-200 rounded-2xl flex items-center justify-center p-1.5 shadow-inner">
+            <div className="w-20 h-20 md:w-44 md:h-44 bg-gradient-to-b from-stone-50 to-white border-2 md:border-3 border-stone-200 rounded-2xl flex items-center justify-center p-1.5 shadow-inner">
               <img
                 src={quiz.imageUrl}
                 alt={quiz.wordText}
@@ -398,7 +398,7 @@ export default function CanvasMode({
         </div>
 
         {/* Right Column: Writing Canvas & Parents decision zone */}
-        <div className="flex flex-col justify-between items-center md:items-stretch w-full flex-1 min-h-0 md:pl-8 space-y-2 md:space-y-6">
+        <div className="flex flex-col justify-between items-center md:items-stretch w-full flex-1 min-h-0 md:pl-8 space-y-1.5 md:space-y-6">
           
           {/* Writing Board */}
           <div className="flex flex-col items-center justify-center w-full">
@@ -424,7 +424,7 @@ export default function CanvasMode({
           {/* Parental Decision Area */}
           <div className="bg-stone-50 border border-stone-200/80 rounded-2xl p-2.5 md:p-4 flex flex-col items-center space-y-2 md:space-y-4 shadow-inner w-full">
             <div className="w-full flex justify-between items-center px-1">
-              <span className="text-[10px] md:text-xs font-extrabold text-stone-500">家長評核席</span>
+              <span className="text-[10px] md:text-xs font-extrabold text-stone-550">家長評核席</span>
               
               <button
                 onClick={() => setShowAnswer(prev => !prev)}
@@ -445,13 +445,13 @@ export default function CanvasMode({
             </div>
 
             {/* Answer Display */}
-            <div className="w-full h-auto py-2 md:py-6 bg-white border border-stone-200 rounded-xl flex items-center justify-center shadow-inner relative overflow-hidden">
+            <div className="w-full h-auto py-4.5 md:py-6 bg-white border border-stone-200 rounded-xl flex items-center justify-center shadow-inner relative overflow-hidden">
               {showAnswer ? (
-                <div className="animate-fade-in flex items-center justify-center scale-90 md:scale-100">
+                <div className="animate-fade-in flex items-center justify-center scale-100 md:scale-105">
                   <VerticalZhuyin correctAnswer={quiz.correctAnswer} />
                 </div>
               ) : (
-                <span className="text-[10px] md:text-xs font-bold text-stone-400">❓ 對照答案</span>
+                <span className="text-xs md:text-sm font-bold text-stone-400">❓ 對照答案</span>
               )}
             </div>
 
@@ -477,5 +477,5 @@ export default function CanvasMode({
       </div>
 
     </div>
-  );
+  );}
 }
