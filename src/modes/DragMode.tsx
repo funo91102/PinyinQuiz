@@ -473,25 +473,22 @@ export default function DragMode({
 
   // Responsive styling
   const cabinSizeClass = hasMedial
-    ? "w-20 h-16 md:w-32 md:h-20"
-    : "w-28 h-16 md:w-44 md:h-20";
+    ? "w-20 h-14 md:w-32 md:h-20"
+    : "w-28 h-14 md:w-44 md:h-20";
 
   const toneSizeClass = hasMedial
-    ? "w-14 h-16 md:w-24 md:h-20"
-    : "w-16 h-16 md:w-28 md:h-20";
+    ? "w-14 h-14 md:w-24 md:h-20"
+    : "w-16 h-14 md:w-28 md:h-20";
 
   const letterTextSize = "text-2xl md:text-4xl";
   const toneTextSize = "text-xl md:text-3xl";
 
   return (
-    <div className="w-full h-[100dvh] overflow-hidden flex flex-col gap-2 p-3 select-none relative">
+    <div className="max-w-6xl mx-auto w-full h-[100dvh] overflow-hidden flex flex-col justify-between p-3 select-none relative">
       
-      {/* Game Content Grid */}
-      <div className="flex-1 max-w-6xl mx-auto w-full flex flex-col gap-2 items-center justify-center relative overflow-hidden min-h-0">
-        
-        {/* Word Card & Audio Pronounce (Left) - horizontal row layout on mobile */}
-        <div className="shrink-0 flex flex-row items-center justify-between gap-3 bg-white rounded-2xl px-4 h-20 md:h-24 shadow-sm w-full">
-          <div className="flex items-center gap-3">
+      {/* Word Card & Audio Pronounce (Top) */}
+      <div className="shrink-0 flex flex-row items-center justify-between gap-3 bg-white rounded-2xl px-4 h-[12dvh] shadow-sm w-full">
+        <div className="flex items-center gap-3">
             <div className="bg-stone-50 border border-stone-200/60 rounded-xl overflow-hidden shadow-inner">
               <img
                 src={quiz.imageUrl}
@@ -532,9 +529,9 @@ export default function DragMode({
           </button>
         </div>
 
-        {/* Drop zones / space cabins (Right) */}
-        <div className="flex-1 min-h-0 bg-white rounded-2xl p-3 md:p-5 flex flex-col justify-center gap-3 w-full shadow-sm">
-          <div className="flex flex-row items-center justify-center gap-2 md:gap-4 w-full">
+      {/* Drop zones / space cabins (Middle) */}
+      <div className="h-[52dvh] shrink-0 bg-white rounded-2xl p-2 md:p-5 flex flex-col justify-around w-full shadow-sm">
+        <div className="flex flex-row flex-wrap items-center justify-center gap-2 md:gap-4 w-full">
             
             {/* Initial (聲母) */}
             <div
@@ -672,12 +669,10 @@ export default function DragMode({
             </div>
 
           </div>
-        </div>
-
       </div>
 
       {/* Card pool (Bottom) */}
-      <footer ref={footerRef} className="shrink-0 bg-white rounded-2xl p-2 md:p-4 h-28 md:h-36 flex flex-wrap gap-2 justify-center items-center shadow-sm w-full select-none">
+      <footer ref={footerRef} className="h-[32dvh] shrink-0 bg-white rounded-2xl p-2 md:p-4 flex flex-wrap gap-2 justify-center items-center shadow-sm w-full select-none">
         {/* Left part: symbols */}
         {cardPool
           .filter((card) => card.type !== 'tone')
