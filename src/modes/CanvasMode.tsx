@@ -134,7 +134,7 @@ export default function CanvasMode({
   };
 
   // Get mouse/touch coordinates relative to Canvas element bounds
-  const getCoordinates = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
+  const getCoordinates = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement> | MouseEvent | TouchEvent) => {
     const canvas = canvasRef.current;
     if (!canvas) return null;
     const rect = canvas.getBoundingClientRect();
@@ -158,7 +158,7 @@ export default function CanvasMode({
   };
 
   // Start Drawing action
-  const startDrawing = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
+  const startDrawing = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement> | MouseEvent | TouchEvent) => {
     const coords = getCoordinates(e);
     if (!coords) return;
 
@@ -178,7 +178,7 @@ export default function CanvasMode({
   };
 
   // Process Continuous Line Drawing
-  const draw = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
+  const draw = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement> | MouseEvent | TouchEvent) => {
     if (!isDrawing || !lastPosRef.current) return;
     const coords = getCoordinates(e);
     if (!coords) return;
@@ -205,6 +205,62 @@ export default function CanvasMode({
     setIsDrawing(false);
     lastPosRef.current = null;
   };
+
+  const startDrawingRef = useRef(startDrawing);
+  const drawRef = useRef(draw);
+  const stopDrawingRef = useRef(stopDrawing);
+
+  // Keep refs up to date to prevent stale closures
+  useEffect(() => {
+    startDrawingRef.current = startDrawing;
+    drawRef.current = draw;
+    stopDrawingRef.current = stopDrawing;
+  });
+
+  // Native touch event listeners for canvas to prevent default scrolling gestures
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const handleTouchStart = (e: TouchEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      startDrawingRef.current(e);
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      drawRef.current(e);
+    };
+
+    const handleTouchEnd = (e: TouchEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      stopDrawingRef.current();
+    };
+
+    canvas.addEventListener('touchstart', handleTouchStart, { passive: false });
+    canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
+    canvas.addEventListener('touchend', handleTouchEnd, { passive: false });
+
+    return () => {
+      canvas.removeEventListener('touchstart', handleTouchStart);
+      canvas.removeEventListener('touchmove', handleTouchMove);
+      canvas.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, []);
+
+  // Lock body scroll and touch actions when component is mounted
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    document.body.style.touchAction = 'none';
+
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.touchAction = '';
+    };
+  }, []);
 
   // Resolve word and core character for highlight
   const getWordDetails = (imageUrl: string, defaultWord: string) => {
@@ -344,17 +400,14 @@ export default function CanvasMode({
           
           {/* Writing Board */}
           <div className="flex-1 flex flex-col items-center justify-center space-y-3">
-            <div className="w-full max-w-[280px] aspect-square border-2 border-stone-200 rounded-2xl overflow-hidden relative bg-stone-50/50 shadow-inner">
+            <div className="w-full max-w-[280px] aspect-square border-2 border-stone-200 rounded-2xl overflow-hidden relative bg-stone-50/50 shadow-inner touch-none select-none">
               <canvas
                 ref={canvasRef}
                 onMouseDown={startDrawing}
                 onMouseMove={draw}
                 onMouseUp={stopDrawing}
                 onMouseLeave={stopDrawing}
-                onTouchStart={(e) => { e.preventDefault(); startDrawing(e); }}
-                onTouchMove={(e) => { e.preventDefault(); draw(e); }}
-                onTouchEnd={stopDrawing}
-                className="w-full h-full cursor-crosshair block bg-transparent"
+                className="w-full h-full cursor-crosshair block bg-transparent touch-none"
               />
             </div>
             
