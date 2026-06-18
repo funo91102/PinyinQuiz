@@ -335,147 +335,123 @@ export default function CanvasMode({
     onWrongAttempt(quiz.correctAnswer);
     onCorrect(true);
     onNext();
-  };
-
   return (
-    <div className="w-full h-[100vh] md:h-auto flex-1 flex flex-col items-center justify-between md:justify-center p-1.5 sm:p-6 overflow-hidden select-none relative">
+    <div className="w-full h-[100dvh] overflow-hidden flex flex-col gap-2 p-3 select-none relative">
       
-      {/* Guidance Header - hidden on mobile to maximize layout height */}
-      <div className="text-center mb-2 md:mb-6 hidden sm:block">
-        <span className="inline-flex items-center space-x-1.5 bg-rose-100/80 border border-rose-200 px-3 py-1 rounded-full text-xs font-black text-rose-800 shadow-inner animate-pulse">
-          <Sparkles className="w-3.5 h-3.5" />
-          <span>手寫挑戰板</span>
-        </span>
-        <h2 className="text-lg sm:text-xl font-bold mt-2 text-stone-550">
-          請看左側發音，在米字格中手寫拼寫出正確的注音！
-        </h2>
-      </div>
-
-      {/* Main Canvas writing board grid */}
-      <div className="w-full max-w-4xl flex flex-col md:grid md:grid-cols-2 gap-2 md:gap-8 items-center md:items-stretch bg-white border-2 border-stone-200/80 p-2 md:p-8 rounded-3xl shadow-sm flex-1 md:min-h-[500px] min-h-0 overflow-hidden">
-        
-        {/* Left Column: Word details & sound trigger - horizontal row layout on mobile */}
-        <div className="flex flex-row md:flex-col items-center justify-between md:justify-center w-full pb-2 md:pb-0 border-b border-stone-150 md:border-b-0 md:border-r border-stone-200/60 md:pr-8 md:space-y-6">
-          <div className="flex items-center space-x-3 md:flex-col md:space-x-0 md:space-y-6">
-            <div className="w-20 h-20 md:w-44 md:h-44 bg-gradient-to-b from-stone-50 to-white border-2 md:border-3 border-stone-200 rounded-2xl flex items-center justify-center p-1.5 shadow-inner">
-              <img
-                src={quiz.imageUrl}
-                alt={quiz.wordText}
-                className="w-full h-full object-contain pointer-events-none select-none"
-              />
-            </div>
-            
-            <div className="text-left md:text-center">
-              <span className="text-lg md:text-2xl font-black flex items-center md:justify-center tracking-wide">
-                {Array.from(word).map((char, index) => {
-                  if (char === core) {
-                    return (
-                      <span key={index} className="text-2xl md:text-4xl font-black text-emerald-600 inline-block px-0.5 md:px-1 animate-bounce">
-                        {char}
-                      </span>
-                    );
-                  }
+      {/* ① 頂部題目區 */}
+      <div className="shrink-0 flex flex-row items-center justify-between gap-3 bg-white rounded-2xl px-4 h-20 md:h-28 shadow-sm w-full">
+        <div className="flex items-center gap-3">
+          <div className="w-14 h-14 md:w-24 md:h-24 bg-gradient-to-b from-stone-50 to-white border border-stone-200 rounded-xl flex items-center justify-center p-1 shadow-inner">
+            <img
+              src={quiz.imageUrl}
+              alt={quiz.wordText}
+              className="w-full h-full object-contain pointer-events-none select-none"
+            />
+          </div>
+          <div className="text-left">
+            <span className="text-lg md:text-3xl font-black flex items-center tracking-wide">
+              {Array.from(word).map((char, index) => {
+                if (char === core) {
                   return (
-                    <span key={index} className="text-stone-400 text-sm md:text-lg font-bold inline-block">
+                    <span key={index} className="text-3xl md:text-5xl font-black text-emerald-600 inline-block px-0.5 animate-bounce">
                       {char}
                     </span>
                   );
-                })}
-              </span>
-              <span className="text-[9px] md:text-[10px] text-stone-450 block mt-0.5 md:mt-2 font-bold tracking-widest uppercase">
-                請手寫高亮字的注音
-              </span>
-            </div>
+                }
+                return (
+                  <span key={index} className="text-stone-400 text-lg md:text-3xl font-bold inline-block">
+                    {char}
+                  </span>
+                );
+              })}
+            </span>
+            <span className="text-[9px] md:text-[11px] text-stone-450 block mt-0.5 font-bold tracking-widest uppercase">
+              請手寫高亮字的注音
+            </span>
           </div>
+        </div>
 
+        <button
+          onClick={() => playPronunciation(quiz.wordText)}
+          className="bg-gradient-to-br from-rose-400 to-pink-500 hover:from-rose-350 hover:to-pink-400 active:scale-95 transition-all text-white p-3 md:p-4 rounded-full shadow-md border-b-3 border-pink-700 flex items-center justify-center cursor-pointer"
+          aria-label="播放發音"
+        >
+          <Volume2 className="w-5 h-5 md:w-7 md:h-7 text-white" />
+        </button>
+      </div>
+
+      {/* ② 中間畫布區 */}
+      <div className="flex-1 min-h-0 bg-white rounded-2xl p-3 flex items-center justify-center relative shadow-sm">
+        <div className="relative w-full h-full max-w-[300px] max-h-[300px] md:max-w-[420px] md:max-h-[420px] border border-stone-200 rounded-2xl overflow-hidden bg-stone-50/50 shadow-inner touch-none select-none">
+          <canvas
+            ref={canvasRef}
+            onMouseDown={startDrawing}
+            onMouseMove={draw}
+            onMouseUp={stopDrawing}
+            onMouseLeave={stopDrawing}
+            className="w-full h-full cursor-crosshair block bg-transparent"
+          />
           <button
-            onClick={() => playPronunciation(quiz.wordText)}
-            className="bg-gradient-to-br from-rose-400 to-pink-500 hover:from-rose-350 hover:to-pink-400 active:scale-95 transition-all text-white p-3 md:p-5 rounded-full shadow-md cursor-pointer border-b-3 md:border-b-4 border-pink-700 flex items-center justify-center"
-            aria-label="播放發音"
+            onClick={handleClear}
+            className="absolute bottom-3 right-3 flex items-center space-x-1 text-xs font-bold text-stone-555 hover:text-rose-600 transition-colors bg-white/95 border border-stone-250 hover:bg-stone-100/90 px-3 py-1.5 rounded-xl cursor-pointer shadow-md"
           >
-            <Volume2 className="w-5 h-5 md:w-8 md:h-8 text-white" />
+            <Trash2 className="w-3.5 h-3.5" />
+            <span>清除</span>
+          </button>
+        </div>
+      </div>
+
+      {/* ③ 底部家長席 */}
+      <div className="shrink-0 bg-white rounded-2xl p-4 md:p-6 h-auto flex flex-col gap-3 shadow-sm w-full">
+        <div className="w-full flex justify-between items-center px-1">
+          <span className="text-[10px] md:text-sm font-extrabold text-stone-550">家長評核席</span>
+          
+          <button
+            onClick={() => setShowAnswer(prev => !prev)}
+            className="text-stone-500 hover:text-stone-700 p-1.5 rounded-lg bg-white border border-stone-250 transition-colors cursor-pointer flex items-center space-x-1 text-[9px] md:text-xs font-black shadow-sm"
+          >
+            {showAnswer ? (
+              <>
+                <EyeOff className="w-3.5 h-3.5" />
+                <span>隱藏答案</span>
+              </>
+            ) : (
+              <>
+                <Eye className="w-3.5 h-3.5" />
+                <span>對照正確注音</span>
+              </>
+            )}
           </button>
         </div>
 
-        {/* Right Column: Writing Canvas & Parents decision zone */}
-        <div className="flex flex-col justify-between items-center md:items-stretch w-full flex-1 min-h-0 md:pl-8 space-y-1.5 md:space-y-6">
-          
-          {/* Writing Board */}
-          <div className="flex flex-col items-center justify-center w-full">
-            <div className="w-[180px] h-[180px] sm:w-[220px] sm:h-[220px] md:w-full md:max-w-[280px] md:aspect-square border-2 border-stone-200 rounded-2xl overflow-hidden relative bg-stone-50/50 shadow-inner touch-none select-none">
-              <canvas
-                ref={canvasRef}
-                onMouseDown={startDrawing}
-                onMouseMove={draw}
-                onMouseUp={stopDrawing}
-                onMouseLeave={stopDrawing}
-                className="w-full h-full cursor-crosshair block bg-transparent touch-none"
-              />
-              <button
-                onClick={handleClear}
-                className="absolute bottom-2 right-2 flex items-center space-x-1 text-[10px] font-bold text-stone-500 hover:text-rose-600 transition-colors bg-white/90 border border-stone-200 hover:bg-stone-100 px-2 py-1 rounded-lg cursor-pointer shadow-sm"
-              >
-                <Trash2 className="w-3 h-3" />
-                <span>清除</span>
-              </button>
+        {/* Answer Display */}
+        <div className="w-full min-h-[60px] md:min-h-[100px] bg-stone-50 border border-stone-200 rounded-xl flex items-center justify-center shadow-inner relative overflow-hidden p-2">
+          {showAnswer ? (
+            <div className="animate-fade-in flex items-center justify-center scale-100 md:scale-110">
+              <VerticalZhuyin correctAnswer={quiz.correctAnswer} />
             </div>
-          </div>
-
-          {/* Parental Decision Area */}
-          <div className="bg-stone-50 border border-stone-200/80 rounded-2xl p-2.5 md:p-4 flex flex-col items-center space-y-2 md:space-y-4 shadow-inner w-full">
-            <div className="w-full flex justify-between items-center px-1">
-              <span className="text-[10px] md:text-xs font-extrabold text-stone-550">家長評核席</span>
-              
-              <button
-                onClick={() => setShowAnswer(prev => !prev)}
-                className="text-stone-500 hover:text-stone-700 p-1.5 rounded-lg bg-white border border-stone-250 transition-colors cursor-pointer flex items-center space-x-1 text-[9px] md:text-[10px] font-black"
-              >
-                {showAnswer ? (
-                  <>
-                    <EyeOff className="w-3 h-3" />
-                    <span>隱藏答案</span>
-                  </>
-                ) : (
-                  <>
-                    <Eye className="w-3 h-3" />
-                    <span>對照正確注音</span>
-                  </>
-                )}
-              </button>
-            </div>
-
-            {/* Answer Display */}
-            <div className="w-full h-auto py-4.5 md:py-6 bg-white border border-stone-200 rounded-xl flex items-center justify-center shadow-inner relative overflow-hidden">
-              {showAnswer ? (
-                <div className="animate-fade-in flex items-center justify-center scale-100 md:scale-105">
-                  <VerticalZhuyin correctAnswer={quiz.correctAnswer} />
-                </div>
-              ) : (
-                <span className="text-xs md:text-sm font-bold text-stone-400">❓ 對照答案</span>
-              )}
-            </div>
-
-            {/* Judgment buttons */}
-            <div className="flex gap-2.5 w-full">
-              <button
-                onClick={handleIncorrectClick}
-                className="flex-1 bg-red-50 border-2 border-red-250 hover:bg-red-100 text-red-650 font-black py-2 md:py-3 px-3 rounded-xl cursor-pointer flex items-center justify-center space-x-1.5 transition-all active:scale-95 shadow-sm text-xs md:text-sm"
-              >
-                <span>❌ 需再練習</span>
-              </button>
-              <button
-                onClick={handleCorrectClick}
-                className="flex-1 bg-emerald-500 hover:bg-emerald-450 text-white font-black py-2 md:py-3 px-3 rounded-xl cursor-pointer flex items-center justify-center space-x-1.5 transition-all active:scale-95 shadow-md border-b-3 border-emerald-700 text-xs md:text-sm"
-              >
-                <span>🎉 寫得好棒</span>
-              </button>
-            </div>
-          </div>
-
+          ) : (
+            <span className="text-xs md:text-sm font-bold text-stone-400">❓ 對照答案</span>
+          )}
         </div>
 
+        {/* Judgment buttons */}
+        <div className="flex gap-3 w-full">
+          <button
+            onClick={handleIncorrectClick}
+            className="flex-1 bg-red-50 border-2 border-red-250 hover:bg-red-100 text-red-650 font-black py-2.5 md:py-3.5 px-4 rounded-xl cursor-pointer flex items-center justify-center space-x-1.5 transition-all active:scale-95 shadow-sm text-xs md:text-base"
+          >
+            <span>❌ 需再練習</span>
+          </button>
+          <button
+            onClick={handleCorrectClick}
+            className="flex-1 bg-emerald-500 hover:bg-emerald-450 text-white font-black py-2.5 md:py-3.5 px-4 rounded-xl cursor-pointer flex items-center justify-center space-x-1.5 transition-all active:scale-95 shadow-md border-b-3 border-emerald-700 text-xs md:text-base"
+          >
+            <span>🎉 寫得好棒</span>
+          </button>
+        </div>
       </div>
 
     </div>
-  );}
+  );
 }
