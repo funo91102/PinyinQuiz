@@ -50,17 +50,6 @@ const getToneDisplay = (tone: string) => {
   }
 };
 
-const getToneLabel = (tone: string) => {
-  switch (tone) {
-    case '1': return '一聲';
-    case '2': return '二聲';
-    case '3': return '三聲';
-    case '4': return '四聲';
-    case '5': return '輕聲';
-    default: return '';
-  }
-};
-
 const TONE_CARDS = [
   { symbol: '5', display: '•', label: '輕聲' },
   { symbol: '1', display: '¯', label: '一聲' },

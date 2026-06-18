@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Volume2, Eye, EyeOff, Trash2, Sparkles } from 'lucide-react';
+import { Volume2, Eye, EyeOff, Trash2 } from 'lucide-react';
 import VerticalZhuyin from '../components/VerticalZhuyin';
 import imageWordMap from '../imageWordMap.json';
 
@@ -335,6 +335,8 @@ export default function CanvasMode({
     onWrongAttempt(quiz.correctAnswer);
     onCorrect(true);
     onNext();
+  };
+
   return (
     <div className="w-full h-[100dvh] overflow-hidden flex flex-col gap-2 p-3 select-none relative">
       
