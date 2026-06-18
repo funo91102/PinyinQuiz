@@ -472,22 +472,16 @@ export default function DragMode({
   };
 
   // Responsive styling
-  const cabinSizeClass = hasMedial
-    ? "w-20 h-14 md:w-32 md:h-20"
-    : "w-28 h-14 md:w-44 md:h-20";
-
-  const toneSizeClass = hasMedial
-    ? "w-14 h-14 md:w-24 md:h-20"
-    : "w-16 h-14 md:w-28 md:h-20";
-
-  const letterTextSize = "text-2xl md:text-4xl";
+  const cabinSizeClass = "w-12 h-12 md:w-20 md:h-20";
+  const toneSizeClass = "w-14 h-14 md:w-20 md:h-20";
+  const letterTextSize = "text-xl md:text-3xl";
   const toneTextSize = "text-xl md:text-3xl";
 
   return (
     <div className="max-w-6xl mx-auto w-full h-[100dvh] overflow-hidden flex flex-col justify-between p-3 select-none relative">
       
       {/* Word Card & Audio Pronounce (Top) */}
-      <div className="shrink-0 flex flex-row items-center justify-between gap-3 bg-white rounded-2xl px-4 h-[12dvh] shadow-sm w-full">
+      <div className="shrink-0 flex flex-row items-center justify-between gap-3 bg-white rounded-2xl px-4 h-[10dvh] shadow-sm w-full">
         <div className="flex items-center gap-3">
             <div className="bg-stone-50 border border-stone-200/60 rounded-xl overflow-hidden shadow-inner">
               <img
@@ -529,150 +523,150 @@ export default function DragMode({
           </button>
         </div>
 
-      {/* Drop zones / space cabins (Middle) */}
-      <div className="h-[52dvh] shrink-0 bg-white rounded-2xl p-2 md:p-5 flex flex-col justify-around w-full shadow-sm">
-        <div className="flex flex-row flex-wrap items-center justify-center gap-2 md:gap-4 w-full">
-            
-            {/* Initial (聲母) */}
-            <div
-              ref={initialZoneRef}
-              className={`relative ${cabinSizeClass} rounded-xl md:rounded-2xl border-2 flex flex-col items-center justify-center transition-all duration-300 shadow-sm overflow-hidden ${
-                placedAnswers.initial
-                  ? 'border-teal-500 bg-teal-50/50 text-teal-800'
-                  : (wrongPlacedAnswers.initial && !isResettingWrong)
-                  ? `border-red-450 bg-red-50 text-red-700 ${errorZones.initial ? 'animate-shake' : ''}`
-                  : hoveredZone === 'initial'
-                  ? 'border-teal-400 bg-teal-50/20 scale-105 shadow-teal-500/10'
-                  : errorZones.initial
-                  ? 'border-red-500 bg-red-50 text-red-650 animate-shake'
-                  : 'border-dashed border-stone-300 bg-stone-50 text-stone-400'
-              }`}
-            >
-              <span className="absolute top-0.5 md:top-1 text-[8px] md:text-xs font-bold tracking-wider opacity-60">
-                聲母
-              </span>
-              {placedAnswers.initial ? (
-                <span className={`${letterTextSize} font-extrabold`}>{placedAnswers.initial}</span>
-              ) : wrongPlacedAnswers.initial ? (
-                <span className={`${letterTextSize} font-extrabold text-red-500 transition-all duration-300 ${isResettingWrong ? 'scale-0 opacity-0' : 'scale-100 opacity-100'}`}>
-                  {wrongPlacedAnswers.initial}
-                </span>
-              ) : (
-                <span className="text-[10px] md:text-xs text-stone-400 font-bold">聲母</span>
-              )}
-              {placedAnswers.initial && (
-                <div className="absolute bottom-0.5 md:bottom-1 bg-teal-100 p-0.5 rounded-full">
-                  <Check className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 text-teal-650" />
-                </div>
-              )}
-            </div>
+      {/* Drop zones / space cabins (Middle) - 台灣直式注音結構 */}
+      <div className="h-[45dvh] shrink-0 bg-white rounded-2xl p-3 md:p-6 flex flex-row justify-center items-center gap-6 md:gap-10 w-full shadow-sm">
 
-            {/* Medial (介母) */}
-            {hasMedial && (
-              <div
-                ref={medialZoneRef}
-                className={`relative ${cabinSizeClass} rounded-xl md:rounded-2xl border-2 flex flex-col items-center justify-center transition-all duration-300 shadow-sm overflow-hidden ${
-                  placedAnswers.medial
-                    ? 'border-teal-500 bg-teal-50/50 text-teal-800'
-                    : (wrongPlacedAnswers.medial && !isResettingWrong)
-                    ? `border-red-450 bg-red-50 text-red-700 ${errorZones.medial ? 'animate-shake' : ''}`
-                    : hoveredZone === 'medial'
-                    ? 'border-teal-400 bg-teal-50/20 scale-105 shadow-teal-500/10'
-                    : errorZones.medial
-                    ? 'border-red-500 bg-red-50 text-red-650 animate-shake'
-                    : 'border-dashed border-stone-300 bg-stone-50 text-stone-400'
-                }`}
-              >
-                <span className="absolute top-0.5 md:top-1 text-[8px] md:text-xs font-bold tracking-wider opacity-60">
-                  介母
-                </span>
-                {placedAnswers.medial ? (
-                  <span className={`${letterTextSize} font-extrabold`}>{placedAnswers.medial}</span>
-                ) : wrongPlacedAnswers.medial ? (
-                  <span className={`${letterTextSize} font-extrabold text-red-500 transition-all duration-300 ${isResettingWrong ? 'scale-0 opacity-0' : 'scale-100 opacity-100'}`}>
-                    {wrongPlacedAnswers.medial}
-                  </span>
-                ) : (
-                  <span className="text-[10px] md:text-xs text-stone-400 font-bold">介母</span>
-                )}
-                {placedAnswers.medial && (
-                  <div className="absolute bottom-0.5 md:bottom-1 bg-teal-100 p-0.5 rounded-full">
-                    <Check className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 text-teal-650" />
-                  </div>
-                )}
+        {/* 左側：聲母 + 介母 + 韻母（由上往下垂直堆疊） */}
+        <div className="flex flex-col gap-2 items-center">
+
+          {/* Initial (聲母) */}
+          <div
+            ref={initialZoneRef}
+            className={`relative ${cabinSizeClass} rounded-xl md:rounded-2xl border-2 flex flex-col items-center justify-center transition-all duration-300 shadow-sm overflow-hidden ${
+              placedAnswers.initial
+                ? 'border-teal-500 bg-teal-50/50 text-teal-800'
+                : (wrongPlacedAnswers.initial && !isResettingWrong)
+                ? `border-red-450 bg-red-50 text-red-700 ${errorZones.initial ? 'animate-shake' : ''}`
+                : hoveredZone === 'initial'
+                ? 'border-teal-400 bg-teal-50/20 scale-105 shadow-teal-500/10'
+                : errorZones.initial
+                ? 'border-red-500 bg-red-50 text-red-650 animate-shake'
+                : 'border-dashed border-stone-300 bg-stone-50 text-stone-400'
+            }`}
+          >
+            <span className="absolute top-0.5 text-[7px] md:text-[9px] font-bold tracking-wider opacity-50">聲</span>
+            {placedAnswers.initial ? (
+              <span className={`${letterTextSize} font-extrabold`}>{placedAnswers.initial}</span>
+            ) : wrongPlacedAnswers.initial ? (
+              <span className={`${letterTextSize} font-extrabold text-red-500 transition-all duration-300 ${isResettingWrong ? 'scale-0 opacity-0' : 'scale-100 opacity-100'}`}>
+                {wrongPlacedAnswers.initial}
+              </span>
+            ) : (
+              <span className="text-[9px] md:text-xs text-stone-400 font-bold">聲母</span>
+            )}
+            {placedAnswers.initial && (
+              <div className="absolute bottom-0.5 bg-teal-100 p-0.5 rounded-full">
+                <Check className="w-2.5 h-2.5 md:w-3 md:h-3 text-teal-650" />
               </div>
             )}
-
-            {/* Final (韻母) */}
-            <div
-              ref={finalZoneRef}
-              className={`relative ${cabinSizeClass} rounded-xl md:rounded-2xl border-2 flex flex-col items-center justify-center transition-all duration-300 shadow-sm overflow-hidden ${
-                placedAnswers.final
-                  ? 'border-teal-500 bg-teal-50/50 text-teal-800'
-                  : (wrongPlacedAnswers.final && !isResettingWrong)
-                  ? `border-red-450 bg-red-50 text-red-700 ${errorZones.final ? 'animate-shake' : ''}`
-                  : hoveredZone === 'final'
-                  ? 'border-rose-400 bg-rose-50/20 scale-105 shadow-rose-500/10'
-                  : errorZones.final
-                  ? 'border-red-500 bg-red-50 text-red-650 animate-shake'
-                  : 'border-dashed border-stone-300 bg-stone-50 text-stone-400'
-              }`}
-            >
-              <span className="absolute top-0.5 md:top-1 text-[8px] md:text-xs font-bold tracking-wider opacity-60">
-                韻母
-              </span>
-              {placedAnswers.final ? (
-                <span className={`${letterTextSize} font-extrabold`}>{placedAnswers.final}</span>
-              ) : wrongPlacedAnswers.final ? (
-                <span className={`${letterTextSize} font-extrabold text-red-500 transition-all duration-300 ${isResettingWrong ? 'scale-0 opacity-0' : 'scale-100 opacity-100'}`}>
-                  {wrongPlacedAnswers.final}
-                </span>
-              ) : (
-                <span className="text-[10px] md:text-xs text-stone-400 font-bold">韻母</span>
-              )}
-              {placedAnswers.final && (
-                <div className="absolute bottom-0.5 md:bottom-1 bg-teal-100 p-0.5 rounded-full">
-                  <Check className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 text-teal-650" />
-                </div>
-              )}
-            </div>
-
-            {/* Tone Cabin (聲調) - No label text, single row */}
-            <div
-              ref={toneZoneRef}
-              className={`relative ${toneSizeClass} rounded-xl md:rounded-2xl border-2 flex flex-col items-center justify-center transition-all duration-300 shadow-sm overflow-hidden ${
-                placedAnswers.tone
-                  ? 'border-amber-500 bg-amber-50/50 text-amber-800'
-                  : (wrongPlacedAnswers.tone && !isResettingWrong)
-                  ? `border-red-450 bg-red-50 text-red-700 ${errorZones.tone ? 'animate-shake' : ''}`
-                  : hoveredZone === 'tone'
-                  ? 'border-amber-400 bg-amber-50/20 scale-105 shadow-amber-500/10'
-                  : errorZones.tone
-                  ? 'border-red-500 bg-red-50 text-red-650 animate-shake'
-                  : 'border-dashed border-stone-300 bg-stone-50 text-stone-400'
-              }`}
-            >
-              {placedAnswers.tone ? (
-                <span className={`${toneTextSize} font-extrabold`}>{getToneDisplay(placedAnswers.tone)}</span>
-              ) : wrongPlacedAnswers.tone ? (
-                <span className={`${toneTextSize} font-extrabold text-red-500 transition-all duration-300 ${isResettingWrong ? 'scale-0 opacity-0' : 'scale-100 opacity-100'}`}>
-                  {getToneDisplay(wrongPlacedAnswers.tone)}
-                </span>
-              ) : (
-                <span className="text-[10px] md:text-xs text-stone-400 font-bold">聲調</span>
-              )}
-              {placedAnswers.tone && (
-                <div className="absolute bottom-0.5 md:bottom-1 bg-amber-100 p-0.5 rounded-full">
-                  <Check className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 text-amber-650" />
-                </div>
-              )}
-            </div>
-
           </div>
+
+          {/* Medial (介母) */}
+          {hasMedial && (
+            <div
+              ref={medialZoneRef}
+              className={`relative ${cabinSizeClass} rounded-xl md:rounded-2xl border-2 flex flex-col items-center justify-center transition-all duration-300 shadow-sm overflow-hidden ${
+                placedAnswers.medial
+                  ? 'border-teal-500 bg-teal-50/50 text-teal-800'
+                  : (wrongPlacedAnswers.medial && !isResettingWrong)
+                  ? `border-red-450 bg-red-50 text-red-700 ${errorZones.medial ? 'animate-shake' : ''}`
+                  : hoveredZone === 'medial'
+                  ? 'border-teal-400 bg-teal-50/20 scale-105 shadow-teal-500/10'
+                  : errorZones.medial
+                  ? 'border-red-500 bg-red-50 text-red-650 animate-shake'
+                  : 'border-dashed border-stone-300 bg-stone-50 text-stone-400'
+              }`}
+            >
+              <span className="absolute top-0.5 text-[7px] md:text-[9px] font-bold tracking-wider opacity-50">介</span>
+              {placedAnswers.medial ? (
+                <span className={`${letterTextSize} font-extrabold`}>{placedAnswers.medial}</span>
+              ) : wrongPlacedAnswers.medial ? (
+                <span className={`${letterTextSize} font-extrabold text-red-500 transition-all duration-300 ${isResettingWrong ? 'scale-0 opacity-0' : 'scale-100 opacity-100'}`}>
+                  {wrongPlacedAnswers.medial}
+                </span>
+              ) : (
+                <span className="text-[9px] md:text-xs text-stone-400 font-bold">介母</span>
+              )}
+              {placedAnswers.medial && (
+                <div className="absolute bottom-0.5 bg-teal-100 p-0.5 rounded-full">
+                  <Check className="w-2.5 h-2.5 md:w-3 md:h-3 text-teal-650" />
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Final (韻母) */}
+          <div
+            ref={finalZoneRef}
+            className={`relative ${cabinSizeClass} rounded-xl md:rounded-2xl border-2 flex flex-col items-center justify-center transition-all duration-300 shadow-sm overflow-hidden ${
+              placedAnswers.final
+                ? 'border-teal-500 bg-teal-50/50 text-teal-800'
+                : (wrongPlacedAnswers.final && !isResettingWrong)
+                ? `border-red-450 bg-red-50 text-red-700 ${errorZones.final ? 'animate-shake' : ''}`
+                : hoveredZone === 'final'
+                ? 'border-rose-400 bg-rose-50/20 scale-105 shadow-rose-500/10'
+                : errorZones.final
+                ? 'border-red-500 bg-red-50 text-red-650 animate-shake'
+                : 'border-dashed border-stone-300 bg-stone-50 text-stone-400'
+            }`}
+          >
+            <span className="absolute top-0.5 text-[7px] md:text-[9px] font-bold tracking-wider opacity-50">韻</span>
+            {placedAnswers.final ? (
+              <span className={`${letterTextSize} font-extrabold`}>{placedAnswers.final}</span>
+            ) : wrongPlacedAnswers.final ? (
+              <span className={`${letterTextSize} font-extrabold text-red-500 transition-all duration-300 ${isResettingWrong ? 'scale-0 opacity-0' : 'scale-100 opacity-100'}`}>
+                {wrongPlacedAnswers.final}
+              </span>
+            ) : (
+              <span className="text-[9px] md:text-xs text-stone-400 font-bold">韻母</span>
+            )}
+            {placedAnswers.final && (
+              <div className="absolute bottom-0.5 bg-teal-100 p-0.5 rounded-full">
+                <Check className="w-2.5 h-2.5 md:w-3 md:h-3 text-teal-650" />
+              </div>
+            )}
+          </div>
+
+        </div>
+
+        {/* 右側：聲調艙（獨立置右） */}
+        <div className="flex flex-col items-center justify-center">
+          <div
+            ref={toneZoneRef}
+            className={`relative ${toneSizeClass} rounded-xl md:rounded-2xl border-2 flex flex-col items-center justify-center transition-all duration-300 shadow-sm overflow-hidden ${
+              placedAnswers.tone
+                ? 'border-amber-500 bg-amber-50/50 text-amber-800'
+                : (wrongPlacedAnswers.tone && !isResettingWrong)
+                ? `border-red-450 bg-red-50 text-red-700 ${errorZones.tone ? 'animate-shake' : ''}`
+                : hoveredZone === 'tone'
+                ? 'border-amber-400 bg-amber-50/20 scale-105 shadow-amber-500/10'
+                : errorZones.tone
+                ? 'border-red-500 bg-red-50 text-red-650 animate-shake'
+                : 'border-dashed border-amber-200 bg-amber-50/30 text-amber-400'
+            }`}
+          >
+            <span className="absolute top-0.5 text-[7px] md:text-[9px] font-bold tracking-wider opacity-50">調</span>
+            {placedAnswers.tone ? (
+              <span className={`${toneTextSize} font-extrabold`}>{getToneDisplay(placedAnswers.tone)}</span>
+            ) : wrongPlacedAnswers.tone ? (
+              <span className={`${toneTextSize} font-extrabold text-red-500 transition-all duration-300 ${isResettingWrong ? 'scale-0 opacity-0' : 'scale-100 opacity-100'}`}>
+                {getToneDisplay(wrongPlacedAnswers.tone)}
+              </span>
+            ) : (
+              <span className="text-[9px] md:text-xs text-amber-400 font-bold">聲調</span>
+            )}
+            {placedAnswers.tone && (
+              <div className="absolute bottom-0.5 bg-amber-100 p-0.5 rounded-full">
+                <Check className="w-2.5 h-2.5 md:w-3 md:h-3 text-amber-650" />
+              </div>
+            )}
+          </div>
+        </div>
+
       </div>
 
       {/* Card pool (Bottom) */}
-      <footer ref={footerRef} className="h-[32dvh] shrink-0 bg-white rounded-2xl p-2 md:p-4 flex flex-wrap gap-2 justify-center items-center shadow-sm w-full select-none">
+      <footer ref={footerRef} className="h-[38dvh] shrink-0 bg-white rounded-2xl p-2 md:p-4 flex flex-wrap gap-1.5 md:gap-2 content-center justify-center items-center shadow-sm w-full select-none overflow-hidden">
         {/* Left part: symbols */}
         {cardPool
           .filter((card) => card.type !== 'tone')
@@ -690,10 +684,10 @@ export default function DragMode({
                 onTouchStart={(e) => handleDragStart(e, card)}
                 onMouseDown={(e) => handleDragStart(e, card)}
                 style={{ opacity: isDragging ? 0.25 : 1 }}
-                className="draggable-card w-11 h-11 md:w-14 md:h-14 bg-gradient-to-br border-2 rounded-xl flex items-center justify-center cursor-grab active:cursor-grabbing shadow-sm transition-all duration-150 transform hover:-translate-y-0.5 hover:shadow-md"
+                className="draggable-card w-10 h-10 md:w-14 md:h-14 bg-gradient-to-br border-2 rounded-xl flex items-center justify-center cursor-grab active:cursor-grabbing shadow-sm transition-all duration-150 transform hover:-translate-y-0.5 hover:shadow-md"
               >
                 <div className={`w-full h-full flex items-center justify-center rounded-lg bg-gradient-to-br ${typeStyles}`}>
-                  <span className="text-xl md:text-3xl font-black">
+                  <span className="text-base md:text-3xl font-black">
                     {card.symbol}
                   </span>
                 </div>

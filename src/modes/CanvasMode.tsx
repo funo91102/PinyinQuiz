@@ -341,7 +341,7 @@ export default function CanvasMode({
     <div className="max-w-6xl mx-auto w-full h-[100dvh] overflow-hidden flex flex-col justify-between p-3 select-none relative">
       
       {/* ① 頂部題目區 */}
-      <div className="shrink-0 flex flex-row items-center justify-between gap-3 bg-white rounded-2xl px-4 h-[12dvh] shadow-sm w-full">
+      <div className="shrink-0 flex flex-row items-center justify-between gap-3 bg-white rounded-2xl px-4 h-[10dvh] shadow-sm w-full">
         <div className="flex items-center gap-3">
           <div className="w-14 h-14 md:w-24 md:h-24 bg-gradient-to-b from-stone-50 to-white border border-stone-200 rounded-xl flex items-center justify-center p-1 shadow-inner">
             <img
@@ -383,8 +383,8 @@ export default function CanvasMode({
       </div>
 
       {/* ② 中間畫布區 */}
-      <div className="h-[53dvh] shrink-0 bg-white rounded-2xl p-3 flex items-center justify-center relative shadow-sm w-full">
-        <div className="relative w-full h-full max-w-[300px] max-h-[38dvh] md:max-w-[420px] md:max-h-[420px] border border-stone-200 rounded-2xl overflow-hidden bg-stone-50/50 shadow-inner touch-none select-none">
+      <div className="h-[45dvh] shrink-0 bg-white rounded-2xl p-3 flex items-center justify-center relative shadow-sm w-full">
+        <div className="relative w-full h-full max-w-[32dvh] max-h-[32dvh] md:max-w-[38dvh] md:max-h-[38dvh] border border-stone-200 rounded-2xl overflow-hidden bg-stone-50/50 shadow-inner touch-none select-none">
           <canvas
             ref={canvasRef}
             onMouseDown={startDrawing}
@@ -404,7 +404,7 @@ export default function CanvasMode({
       </div>
 
       {/* ③ 底部家長席 */}
-      <div className="h-[31dvh] shrink-0 bg-white rounded-2xl p-3 md:p-5 flex flex-col justify-between shadow-sm w-full">
+      <div className="h-[40dvh] shrink-0 bg-white rounded-2xl p-3 pb-5 flex flex-col gap-2 shadow-sm w-full">
         <div className="w-full flex justify-between items-center px-1">
           <span className="text-[10px] md:text-sm font-extrabold text-stone-550">家長評核席</span>
           
@@ -427,7 +427,7 @@ export default function CanvasMode({
         </div>
 
         {/* Answer Display */}
-        <div className="flex-1 min-h-0 w-full bg-stone-50 border border-stone-200 rounded-xl flex items-center justify-center shadow-inner relative overflow-hidden p-2 my-2 md:my-3">
+        <div className="flex-1 min-h-0 w-full bg-stone-50 border border-stone-200 rounded-xl flex items-center justify-center shadow-inner relative overflow-hidden p-2">
           {showAnswer ? (
             <div className="animate-fade-in flex items-center justify-center scale-100 md:scale-110">
               <VerticalZhuyin correctAnswer={quiz.correctAnswer} />
