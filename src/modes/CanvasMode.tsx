@@ -338,10 +338,10 @@ export default function CanvasMode({
   };
 
   return (
-    <div className="w-full flex-1 flex flex-col items-center justify-center py-6 px-4 select-none relative">
+    <div className="w-full h-[100vh] md:h-auto flex-1 flex flex-col items-center justify-between md:justify-center p-2 sm:p-6 overflow-hidden select-none relative">
       
-      {/* Guidance Header */}
-      <div className="text-center mb-6">
+      {/* Guidance Header - hidden on mobile to maximize layout height */}
+      <div className="text-center mb-2 md:mb-6 hidden sm:block">
         <span className="inline-flex items-center space-x-1.5 bg-rose-100/80 border border-rose-200 px-3 py-1 rounded-full text-xs font-black text-rose-800 shadow-inner animate-pulse">
           <Sparkles className="w-3.5 h-3.5" />
           <span>手寫挑戰板</span>
@@ -352,55 +352,57 @@ export default function CanvasMode({
       </div>
 
       {/* Main Canvas writing board grid */}
-      <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch bg-white border-2 border-stone-200/80 p-6 sm:p-8 rounded-3xl shadow-sm min-h-[500px]">
+      <div className="w-full max-w-4xl flex flex-col md:grid md:grid-cols-2 gap-3 md:gap-8 items-center md:items-stretch bg-white border-2 border-stone-200/80 p-3 md:p-8 rounded-3xl shadow-sm flex-1 md:min-h-[500px] min-h-0 overflow-hidden">
         
-        {/* Left Column: Word details & sound trigger */}
-        <div className="flex flex-col items-center justify-center border-r-0 md:border-r border-stone-200/60 pr-0 md:pr-8 py-4 space-y-6">
-          <div className="w-36 h-36 sm:w-44 sm:h-44 bg-gradient-to-b from-stone-50 to-white border-3 border-stone-200 rounded-3xl flex items-center justify-center p-3 shadow-inner">
-            <img
-              src={quiz.imageUrl}
-              alt={quiz.wordText}
-              className="w-full h-full object-contain pointer-events-none select-none"
-            />
-          </div>
-          
-          <div className="text-center">
-            <span className="text-2xl font-black flex items-center justify-center tracking-wide">
-              {Array.from(word).map((char, index) => {
-                if (char === core) {
+        {/* Left Column: Word details & sound trigger - horizontal row layout on mobile */}
+        <div className="flex flex-row md:flex-col items-center justify-between md:justify-center w-full pb-2 md:pb-0 border-b border-stone-150 md:border-b-0 md:border-r border-stone-200/60 md:pr-8 md:space-y-6">
+          <div className="flex items-center space-x-3 md:flex-col md:space-x-0 md:space-y-6">
+            <div className="w-14 h-14 sm:w-20 sm:h-20 md:w-44 md:h-44 bg-gradient-to-b from-stone-50 to-white border-2 md:border-3 border-stone-200 rounded-2xl flex items-center justify-center p-1.5 shadow-inner">
+              <img
+                src={quiz.imageUrl}
+                alt={quiz.wordText}
+                className="w-full h-full object-contain pointer-events-none select-none"
+              />
+            </div>
+            
+            <div className="text-left md:text-center">
+              <span className="text-lg md:text-2xl font-black flex items-center md:justify-center tracking-wide">
+                {Array.from(word).map((char, index) => {
+                  if (char === core) {
+                    return (
+                      <span key={index} className="text-2xl md:text-4xl font-black text-emerald-600 inline-block px-0.5 md:px-1 animate-bounce">
+                        {char}
+                      </span>
+                    );
+                  }
                   return (
-                    <span key={index} className="text-4xl font-black text-emerald-600 scale-110 inline-block px-1 animate-bounce">
+                    <span key={index} className="text-stone-400 text-sm md:text-lg font-bold inline-block">
                       {char}
                     </span>
                   );
-                }
-                return (
-                  <span key={index} className="text-stone-400 text-lg font-bold inline-block">
-                    {char}
-                  </span>
-                );
-              })}
-            </span>
-            <span className="text-[10px] text-stone-450 block mt-2 font-bold tracking-widest uppercase">
-              請手寫高亮綠色字的注音
-            </span>
+                })}
+              </span>
+              <span className="text-[9px] md:text-[10px] text-stone-450 block mt-0.5 md:mt-2 font-bold tracking-widest uppercase">
+                請手寫高亮字的注音
+              </span>
+            </div>
           </div>
 
           <button
             onClick={() => playPronunciation(quiz.wordText)}
-            className="bg-gradient-to-br from-rose-400 to-pink-500 hover:from-rose-350 hover:to-pink-400 active:scale-95 transition-all text-white p-5 rounded-full shadow-md cursor-pointer border-b-4 border-pink-700 flex items-center justify-center"
+            className="bg-gradient-to-br from-rose-400 to-pink-500 hover:from-rose-350 hover:to-pink-400 active:scale-95 transition-all text-white p-3 md:p-5 rounded-full shadow-md cursor-pointer border-b-3 md:border-b-4 border-pink-700 flex items-center justify-center"
             aria-label="播放發音"
           >
-            <Volume2 className="w-8 h-8 text-white" />
+            <Volume2 className="w-5 h-5 md:w-8 md:h-8 text-white" />
           </button>
         </div>
 
         {/* Right Column: Writing Canvas & Parents decision zone */}
-        <div className="flex flex-col justify-between py-4 pl-0 md:pl-8 space-y-6">
+        <div className="flex flex-col justify-between items-center md:items-stretch w-full flex-1 min-h-0 md:pl-8 space-y-2 md:space-y-6">
           
           {/* Writing Board */}
-          <div className="flex-1 flex flex-col items-center justify-center space-y-3">
-            <div className="w-full max-w-[280px] aspect-square border-2 border-stone-200 rounded-2xl overflow-hidden relative bg-stone-50/50 shadow-inner touch-none select-none">
+          <div className="flex flex-col items-center justify-center w-full">
+            <div className="w-[180px] h-[180px] sm:w-[220px] sm:h-[220px] md:w-full md:max-w-[280px] md:aspect-square border-2 border-stone-200 rounded-2xl overflow-hidden relative bg-stone-50/50 shadow-inner touch-none select-none">
               <canvas
                 ref={canvasRef}
                 onMouseDown={startDrawing}
@@ -409,34 +411,33 @@ export default function CanvasMode({
                 onMouseLeave={stopDrawing}
                 className="w-full h-full cursor-crosshair block bg-transparent touch-none"
               />
+              <button
+                onClick={handleClear}
+                className="absolute bottom-2 right-2 flex items-center space-x-1 text-[10px] font-bold text-stone-500 hover:text-rose-600 transition-colors bg-white/90 border border-stone-200 hover:bg-stone-100 px-2 py-1 rounded-lg cursor-pointer shadow-sm"
+              >
+                <Trash2 className="w-3 h-3" />
+                <span>清除</span>
+              </button>
             </div>
-            
-            <button
-              onClick={handleClear}
-              className="flex items-center space-x-1 text-xs font-bold text-stone-500 hover:text-rose-600 transition-colors bg-stone-100 hover:bg-stone-200/50 px-3 py-1.5 rounded-xl cursor-pointer"
-            >
-              <Trash2 className="w-3.5 h-3.5" />
-              <span>清除重寫</span>
-            </button>
           </div>
 
           {/* Parental Decision Area */}
-          <div className="bg-stone-50 border border-stone-200/80 rounded-2xl p-4 flex flex-col items-center space-y-4 shadow-inner">
-            <div className="w-full flex justify-between items-center px-2">
-              <span className="text-xs font-extrabold text-stone-500">家長評核席 (對照答案)</span>
+          <div className="bg-stone-50 border border-stone-200/80 rounded-2xl p-2.5 md:p-4 flex flex-col items-center space-y-2 md:space-y-4 shadow-inner w-full">
+            <div className="w-full flex justify-between items-center px-1">
+              <span className="text-[10px] md:text-xs font-extrabold text-stone-500">家長評核席</span>
               
               <button
                 onClick={() => setShowAnswer(prev => !prev)}
-                className="text-stone-500 hover:text-stone-700 p-1.5 rounded-lg bg-white border border-stone-250 transition-colors cursor-pointer flex items-center space-x-1 text-[10px] font-black"
+                className="text-stone-500 hover:text-stone-700 p-1.5 rounded-lg bg-white border border-stone-250 transition-colors cursor-pointer flex items-center space-x-1 text-[9px] md:text-[10px] font-black"
               >
                 {showAnswer ? (
                   <>
-                    <EyeOff className="w-3.5 h-3.5" />
+                    <EyeOff className="w-3 h-3" />
                     <span>隱藏答案</span>
                   </>
                 ) : (
                   <>
-                    <Eye className="w-3.5 h-3.5" />
+                    <Eye className="w-3 h-3" />
                     <span>對照正確注音</span>
                   </>
                 )}
@@ -444,27 +445,27 @@ export default function CanvasMode({
             </div>
 
             {/* Answer Display */}
-            <div className="w-full h-auto py-6 bg-white border border-stone-200 rounded-xl flex items-center justify-center shadow-inner relative overflow-hidden">
+            <div className="w-full h-auto py-2 md:py-6 bg-white border border-stone-200 rounded-xl flex items-center justify-center shadow-inner relative overflow-hidden">
               {showAnswer ? (
-                <div className="animate-fade-in flex items-center justify-center">
+                <div className="animate-fade-in flex items-center justify-center scale-90 md:scale-100">
                   <VerticalZhuyin correctAnswer={quiz.correctAnswer} />
                 </div>
               ) : (
-                <span className="text-xs font-bold text-stone-400">❓ 點擊上方按鈕查看答案</span>
+                <span className="text-[10px] md:text-xs font-bold text-stone-400">❓ 對照答案</span>
               )}
             </div>
 
             {/* Judgment buttons */}
-            <div className="flex gap-4 w-full">
+            <div className="flex gap-2.5 w-full">
               <button
                 onClick={handleIncorrectClick}
-                className="flex-1 bg-red-50 border-2 border-red-200 hover:bg-red-100 text-red-650 font-black py-3 px-4 rounded-xl cursor-pointer flex items-center justify-center space-x-2 transition-all active:scale-95 shadow-sm text-sm"
+                className="flex-1 bg-red-50 border-2 border-red-250 hover:bg-red-100 text-red-650 font-black py-2 md:py-3 px-3 rounded-xl cursor-pointer flex items-center justify-center space-x-1.5 transition-all active:scale-95 shadow-sm text-xs md:text-sm"
               >
                 <span>❌ 需再練習</span>
               </button>
               <button
                 onClick={handleCorrectClick}
-                className="flex-1 bg-emerald-500 hover:bg-emerald-450 text-white font-black py-3 px-4 rounded-xl cursor-pointer flex items-center justify-center space-x-2 transition-all active:scale-95 shadow-md border-b-3 border-emerald-700 text-sm"
+                className="flex-1 bg-emerald-500 hover:bg-emerald-450 text-white font-black py-2 md:py-3 px-3 rounded-xl cursor-pointer flex items-center justify-center space-x-1.5 transition-all active:scale-95 shadow-md border-b-3 border-emerald-700 text-xs md:text-sm"
               >
                 <span>🎉 寫得好棒</span>
               </button>
