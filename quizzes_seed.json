@@ -1,0 +1,2498 @@
+[
+  {
+    "id": 1,
+    "wordText": "貓",
+    "imageUrl": "/images/cat.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄇ",
+      "medial": "",
+      "final": "ㄠ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 2,
+    "wordText": "狗",
+    "imageUrl": "/images/dog.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄍ",
+      "medial": "",
+      "final": "ㄡ",
+      "tone": "3"
+    }
+  },
+  {
+    "id": 3,
+    "wordText": "象",
+    "imageUrl": "/images/elephant.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄒ",
+      "medial": "ㄧ",
+      "final": "ㄤ",
+      "tone": "4"
+    }
+  },
+  {
+    "id": 4,
+    "wordText": "獅",
+    "imageUrl": "/images/lion.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄕ",
+      "medial": "",
+      "final": "",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 5,
+    "wordText": "虎",
+    "imageUrl": "/images/tiger.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄏ",
+      "medial": "",
+      "final": "ㄨ",
+      "tone": "3"
+    }
+  },
+  {
+    "id": 6,
+    "wordText": "鹿",
+    "imageUrl": "/images/giraffe.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄌ",
+      "medial": "",
+      "final": "ㄨ",
+      "tone": "4"
+    }
+  },
+  {
+    "id": 7,
+    "wordText": "馬",
+    "imageUrl": "/images/zebra.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄇ",
+      "medial": "",
+      "final": "ㄚ",
+      "tone": "3"
+    }
+  },
+  {
+    "id": 8,
+    "wordText": "馬",
+    "imageUrl": "/images/hippo.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄇ",
+      "medial": "",
+      "final": "ㄚ",
+      "tone": "3"
+    }
+  },
+  {
+    "id": 9,
+    "wordText": "牛",
+    "imageUrl": "/images/rhinoceros.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄋ",
+      "medial": "ㄧ",
+      "final": "ㄡ",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 10,
+    "wordText": "鼠",
+    "imageUrl": "/images/kangaroo.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄕ",
+      "medial": "",
+      "final": "ㄨ",
+      "tone": "3"
+    }
+  },
+  {
+    "id": 11,
+    "wordText": "猴",
+    "imageUrl": "/images/monkey.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄏ",
+      "medial": "",
+      "final": "ㄡ",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 12,
+    "wordText": "兔",
+    "imageUrl": "/images/rabbit.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄊ",
+      "medial": "",
+      "final": "ㄨ",
+      "tone": "4"
+    }
+  },
+  {
+    "id": 13,
+    "wordText": "鼠",
+    "imageUrl": "/images/squirrel.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄕ",
+      "medial": "",
+      "final": "ㄨ",
+      "tone": "3"
+    }
+  },
+  {
+    "id": 14,
+    "wordText": "狐",
+    "imageUrl": "/images/fox.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄏ",
+      "medial": "",
+      "final": "ㄨ",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 15,
+    "wordText": "羊",
+    "imageUrl": "/images/sheep.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "",
+      "medial": "ㄧ",
+      "final": "ㄤ",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 16,
+    "wordText": "羊",
+    "imageUrl": "/images/goat.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "",
+      "medial": "ㄧ",
+      "final": "ㄤ",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 17,
+    "wordText": "牛",
+    "imageUrl": "/images/cow.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄋ",
+      "medial": "ㄧ",
+      "final": "ㄡ",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 18,
+    "wordText": "豬",
+    "imageUrl": "/images/pig.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄓ",
+      "medial": "",
+      "final": "ㄨ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 19,
+    "wordText": "馬",
+    "imageUrl": "/images/horse.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄇ",
+      "medial": "",
+      "final": "ㄚ",
+      "tone": "3"
+    }
+  },
+  {
+    "id": 20,
+    "wordText": "熊",
+    "imageUrl": "/images/panda.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄒ",
+      "medial": "ㄩ",
+      "final": "ㄥ",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 21,
+    "wordText": "鵝",
+    "imageUrl": "/images/penguin.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "",
+      "medial": "",
+      "final": "ㄜ",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 22,
+    "wordText": "豚",
+    "imageUrl": "/images/dolphin.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄊ",
+      "medial": "ㄨ",
+      "final": "ㄣ",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 23,
+    "wordText": "鯨",
+    "imageUrl": "/images/whale.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄐ",
+      "medial": "ㄧ",
+      "final": "ㄥ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 24,
+    "wordText": "龜",
+    "imageUrl": "/images/sea_turtle.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄍ",
+      "medial": "ㄨ",
+      "final": "ㄟ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 25,
+    "wordText": "章",
+    "imageUrl": "/images/octopus.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄓ",
+      "medial": "",
+      "final": "ㄤ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 26,
+    "wordText": "蟹",
+    "imageUrl": "/images/crab.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄒ",
+      "medial": "ㄧ",
+      "final": "ㄝ",
+      "tone": "4"
+    }
+  },
+  {
+    "id": 27,
+    "wordText": "蝦",
+    "imageUrl": "/images/shrimp.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄒ",
+      "medial": "ㄧ",
+      "final": "ㄚ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 28,
+    "wordText": "魚",
+    "imageUrl": "/images/fish.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "",
+      "medial": "",
+      "final": "ㄩ",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 29,
+    "wordText": "蛙",
+    "imageUrl": "/images/frog.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "",
+      "medial": "ㄨ",
+      "final": "ㄚ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 30,
+    "wordText": "龜",
+    "imageUrl": "/images/turtle.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄍ",
+      "medial": "ㄨ",
+      "final": "ㄟ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 31,
+    "wordText": "蜂",
+    "imageUrl": "/images/honeybee.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄈ",
+      "medial": "",
+      "final": "ㄥ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 32,
+    "wordText": "蝶",
+    "imageUrl": "/images/butterfly.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄉ",
+      "medial": "ㄧ",
+      "final": "ㄝ",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 33,
+    "wordText": "瓢",
+    "imageUrl": "/images/ladybug.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄆ",
+      "medial": "ㄧ",
+      "final": "ㄠ",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 34,
+    "wordText": "蜻",
+    "imageUrl": "/images/dragonfly.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄑ",
+      "medial": "ㄧ",
+      "final": "ㄥ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 35,
+    "wordText": "蝸",
+    "imageUrl": "/images/snail.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄍ",
+      "medial": "ㄨ",
+      "final": "ㄚ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 36,
+    "wordText": "蟻",
+    "imageUrl": "/images/ant.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "",
+      "medial": "",
+      "final": "ㄧ",
+      "tone": "3"
+    }
+  },
+  {
+    "id": 37,
+    "wordText": "鳥",
+    "imageUrl": "/images/bird.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄋ",
+      "medial": "ㄧ",
+      "final": "ㄠ",
+      "tone": "3"
+    }
+  },
+  {
+    "id": 38,
+    "wordText": "鷹",
+    "imageUrl": "/images/owl.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "",
+      "medial": "ㄧ",
+      "final": "ㄥ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 39,
+    "wordText": "鴨",
+    "imageUrl": "/images/duck.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "",
+      "medial": "ㄧ",
+      "final": "ㄚ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 40,
+    "wordText": "龍",
+    "imageUrl": "/images/dinosaur.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄌ",
+      "medial": "ㄨ",
+      "final": "ㄥ",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 41,
+    "wordText": "鱷",
+    "imageUrl": "/images/alligator.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "",
+      "medial": "",
+      "final": "ㄜ",
+      "tone": "4"
+    }
+  },
+  {
+    "id": 42,
+    "wordText": "熊",
+    "imageUrl": "/images/koala.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄒ",
+      "medial": "ㄩ",
+      "final": "ㄥ",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 43,
+    "wordText": "懶",
+    "imageUrl": "/images/sloth.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄌ",
+      "medial": "",
+      "final": "ㄢ",
+      "tone": "3"
+    }
+  },
+  {
+    "id": 44,
+    "wordText": "駝",
+    "imageUrl": "/images/camel.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄊ",
+      "medial": "ㄨ",
+      "final": "ㄛ",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 45,
+    "wordText": "蝟",
+    "imageUrl": "/images/hedgehog.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "",
+      "medial": "ㄨ",
+      "final": "ㄟ",
+      "tone": "4"
+    }
+  },
+  {
+    "id": 46,
+    "wordText": "鼠",
+    "imageUrl": "/images/hamster.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄕ",
+      "medial": "",
+      "final": "ㄨ",
+      "tone": "3"
+    }
+  },
+  {
+    "id": 47,
+    "wordText": "鸚",
+    "imageUrl": "/images/parrot.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "",
+      "medial": "ㄧ",
+      "final": "ㄥ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 48,
+    "wordText": "鵝",
+    "imageUrl": "/images/penguin_b.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "",
+      "medial": "",
+      "final": "ㄜ",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 49,
+    "wordText": "蘋",
+    "imageUrl": "/images/apple.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄆ",
+      "medial": "ㄧ",
+      "final": "ㄥ",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 50,
+    "wordText": "蕉",
+    "imageUrl": "/images/banana.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄐ",
+      "medial": "ㄧ",
+      "final": "ㄠ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 51,
+    "wordText": "莓",
+    "imageUrl": "/images/strawberry.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄇ",
+      "medial": "",
+      "final": "ㄟ",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 52,
+    "wordText": "瓜",
+    "imageUrl": "/images/watermelon.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄍ",
+      "medial": "ㄨ",
+      "final": "ㄚ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 53,
+    "wordText": "葡",
+    "imageUrl": "/images/grapes.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄆ",
+      "medial": "",
+      "final": "ㄨ",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 54,
+    "wordText": "橘",
+    "imageUrl": "/images/orange.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄐ",
+      "medial": "",
+      "final": "ㄩ",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 55,
+    "wordText": "芒",
+    "imageUrl": "/images/mango.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄇ",
+      "medial": "",
+      "final": "ㄤ",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 56,
+    "wordText": "芭",
+    "imageUrl": "/images/guava.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄅ",
+      "medial": "",
+      "final": "ㄚ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 57,
+    "wordText": "鳳",
+    "imageUrl": "/images/pineapple.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄈ",
+      "medial": "",
+      "final": "ㄥ",
+      "tone": "4"
+    }
+  },
+  {
+    "id": 58,
+    "wordText": "瓜",
+    "imageUrl": "/images/papaya.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄍ",
+      "medial": "ㄨ",
+      "final": "ㄚ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 59,
+    "wordText": "檸",
+    "imageUrl": "/images/lemon.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄋ",
+      "medial": "ㄧ",
+      "final": "ㄥ",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 60,
+    "wordText": "櫻",
+    "imageUrl": "/images/cherry.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "",
+      "medial": "ㄧ",
+      "final": "ㄥ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 61,
+    "wordText": "桃",
+    "imageUrl": "/images/peach.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄊ",
+      "medial": "",
+      "final": "ㄠ",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 62,
+    "wordText": "荔",
+    "imageUrl": "/images/lychee.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄌ",
+      "medial": "",
+      "final": "ㄧ",
+      "tone": "4"
+    }
+  },
+  {
+    "id": 63,
+    "wordText": "莓",
+    "imageUrl": "/images/blueberry.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄇ",
+      "medial": "",
+      "final": "ㄟ",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 64,
+    "wordText": "茄",
+    "imageUrl": "/images/tomato.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄑ",
+      "medial": "ㄧ",
+      "final": "ㄝ",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 65,
+    "wordText": "玉",
+    "imageUrl": "/images/corn.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "",
+      "medial": "",
+      "final": "ㄩ",
+      "tone": "4"
+    }
+  },
+  {
+    "id": 66,
+    "wordText": "蘿",
+    "imageUrl": "/images/carrot.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄌ",
+      "medial": "ㄨ",
+      "final": "ㄛ",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 67,
+    "wordText": "菜",
+    "imageUrl": "/images/broccoli.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄘ",
+      "medial": "",
+      "final": "ㄞ",
+      "tone": "4"
+    }
+  },
+  {
+    "id": 68,
+    "wordText": "菜",
+    "imageUrl": "/images/cabbage.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄘ",
+      "medial": "",
+      "final": "ㄞ",
+      "tone": "4"
+    }
+  },
+  {
+    "id": 69,
+    "wordText": "蔥",
+    "imageUrl": "/images/onion.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄘ",
+      "medial": "ㄨ",
+      "final": "ㄥ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 70,
+    "wordText": "瓜",
+    "imageUrl": "/images/sweet_potato.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄍ",
+      "medial": "ㄨ",
+      "final": "ㄚ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 71,
+    "wordText": "薯",
+    "imageUrl": "/images/potato.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄕ",
+      "medial": "",
+      "final": "ㄨ",
+      "tone": "3"
+    }
+  },
+  {
+    "id": 72,
+    "wordText": "瓜",
+    "imageUrl": "/images/pumpkin.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄍ",
+      "medial": "ㄨ",
+      "final": "ㄚ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 73,
+    "wordText": "瓜",
+    "imageUrl": "/images/cucumber.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄍ",
+      "medial": "ㄨ",
+      "final": "ㄚ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 74,
+    "wordText": "菇",
+    "imageUrl": "/images/mushroom.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄍ",
+      "medial": "",
+      "final": "ㄨ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 75,
+    "wordText": "茄",
+    "imageUrl": "/images/eggplant.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄑ",
+      "medial": "ㄧ",
+      "final": "ㄝ",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 76,
+    "wordText": "豆",
+    "imageUrl": "/images/green_peas.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄉ",
+      "medial": "",
+      "final": "ㄡ",
+      "tone": "4"
+    }
+  },
+  {
+    "id": 77,
+    "wordText": "蘿",
+    "imageUrl": "/images/white_radish.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄌ",
+      "medial": "ㄨ",
+      "final": "ㄛ",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 78,
+    "wordText": "蒜",
+    "imageUrl": "/images/garlic.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄙ",
+      "medial": "ㄨ",
+      "final": "ㄢ",
+      "tone": "4"
+    }
+  },
+  {
+    "id": 79,
+    "wordText": "椒",
+    "imageUrl": "/images/bell_pepper.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄐ",
+      "medial": "ㄧ",
+      "final": "ㄠ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 80,
+    "wordText": "椒",
+    "imageUrl": "/images/chili.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄐ",
+      "medial": "ㄧ",
+      "final": "ㄠ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 81,
+    "wordText": "飯",
+    "imageUrl": "/images/rice_bowl.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄈ",
+      "medial": "",
+      "final": "ㄢ",
+      "tone": "4"
+    }
+  },
+  {
+    "id": 82,
+    "wordText": "麵",
+    "imageUrl": "/images/noodles.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄇ",
+      "medial": "ㄧ",
+      "final": "ㄢ",
+      "tone": "4"
+    }
+  },
+  {
+    "id": 83,
+    "wordText": "包",
+    "imageUrl": "/images/bread.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄅ",
+      "medial": "",
+      "final": "ㄠ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 84,
+    "wordText": "糕",
+    "imageUrl": "/images/cake.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄍ",
+      "medial": "",
+      "final": "ㄠ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 85,
+    "wordText": "餅",
+    "imageUrl": "/images/cookie.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄅ",
+      "medial": "ㄧ",
+      "final": "ㄥ",
+      "tone": "3"
+    }
+  },
+  {
+    "id": 86,
+    "wordText": "布",
+    "imageUrl": "/images/pudding.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄅ",
+      "medial": "",
+      "final": "ㄨ",
+      "tone": "4"
+    }
+  },
+  {
+    "id": 87,
+    "wordText": "冰",
+    "imageUrl": "/images/ice_cream.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄅ",
+      "medial": "ㄧ",
+      "final": "ㄥ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 88,
+    "wordText": "奶",
+    "imageUrl": "/images/milk_glass.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄋ",
+      "medial": "",
+      "final": "ㄞ",
+      "tone": "3"
+    }
+  },
+  {
+    "id": 89,
+    "wordText": "汁",
+    "imageUrl": "/images/juice.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄓ",
+      "medial": "",
+      "final": "",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 90,
+    "wordText": "蛋",
+    "imageUrl": "/images/boiled_egg.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄉ",
+      "medial": "",
+      "final": "ㄢ",
+      "tone": "4"
+    }
+  },
+  {
+    "id": 91,
+    "wordText": "壽",
+    "imageUrl": "/images/sushi.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄕ",
+      "medial": "",
+      "final": "ㄡ",
+      "tone": "4"
+    }
+  },
+  {
+    "id": 92,
+    "wordText": "薩",
+    "imageUrl": "/images/pizza.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄙ",
+      "medial": "",
+      "final": "ㄚ",
+      "tone": "4"
+    }
+  },
+  {
+    "id": 93,
+    "wordText": "堡",
+    "imageUrl": "/images/hamburger.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄅ",
+      "medial": "",
+      "final": "ㄠ",
+      "tone": "3"
+    }
+  },
+  {
+    "id": 94,
+    "wordText": "薯",
+    "imageUrl": "/images/french_fries.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄕ",
+      "medial": "",
+      "final": "ㄨ",
+      "tone": "3"
+    }
+  },
+  {
+    "id": 95,
+    "wordText": "餃",
+    "imageUrl": "/images/dumpling.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄐ",
+      "medial": "ㄧ",
+      "final": "ㄠ",
+      "tone": "3"
+    }
+  },
+  {
+    "id": 96,
+    "wordText": "包",
+    "imageUrl": "/images/steamed_bun.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄅ",
+      "medial": "",
+      "final": "ㄠ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 97,
+    "wordText": "三",
+    "imageUrl": "/images/sandwich.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄙ",
+      "medial": "",
+      "final": "ㄢ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 98,
+    "wordText": "餅",
+    "imageUrl": "/images/waffle.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄅ",
+      "medial": "ㄧ",
+      "final": "ㄥ",
+      "tone": "3"
+    }
+  },
+  {
+    "id": 99,
+    "wordText": "圈",
+    "imageUrl": "/images/donut.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄑ",
+      "medial": "ㄩ",
+      "final": "ㄢ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 100,
+    "wordText": "巧",
+    "imageUrl": "/images/chocolate_bar.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄑ",
+      "medial": "ㄧ",
+      "final": "ㄠ",
+      "tone": "3"
+    }
+  },
+  {
+    "id": 101,
+    "wordText": "餅",
+    "imageUrl": "/images/pancake.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄅ",
+      "medial": "ㄧ",
+      "final": "ㄥ",
+      "tone": "3"
+    }
+  },
+  {
+    "id": 102,
+    "wordText": "糕",
+    "imageUrl": "/images/cupcake.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄍ",
+      "medial": "",
+      "final": "ㄠ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 103,
+    "wordText": "花",
+    "imageUrl": "/images/popcorn.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄏ",
+      "medial": "ㄨ",
+      "final": "ㄚ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 104,
+    "wordText": "狗",
+    "imageUrl": "/images/hot_dog.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄍ",
+      "medial": "",
+      "final": "ㄡ",
+      "tone": "3"
+    }
+  },
+  {
+    "id": 105,
+    "wordText": "司",
+    "imageUrl": "/images/cheese_block.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄙ",
+      "medial": "",
+      "final": "",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 106,
+    "wordText": "糖",
+    "imageUrl": "/images/lollipop.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄊ",
+      "medial": "",
+      "final": "ㄤ",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 107,
+    "wordText": "餅",
+    "imageUrl": "/images/pretzel.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄅ",
+      "medial": "ㄧ",
+      "final": "ㄥ",
+      "tone": "3"
+    }
+  },
+  {
+    "id": 108,
+    "wordText": "頌",
+    "imageUrl": "/images/croissant.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄙ",
+      "medial": "ㄨ",
+      "final": "ㄥ",
+      "tone": "4"
+    }
+  },
+  {
+    "id": 109,
+    "wordText": "派",
+    "imageUrl": "/images/pie.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄆ",
+      "medial": "",
+      "final": "ㄞ",
+      "tone": "4"
+    }
+  },
+  {
+    "id": 110,
+    "wordText": "塔",
+    "imageUrl": "/images/taco.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄊ",
+      "medial": "",
+      "final": "ㄚ",
+      "tone": "3"
+    }
+  },
+  {
+    "id": 111,
+    "wordText": "凍",
+    "imageUrl": "/images/jelly.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄉ",
+      "medial": "ㄨ",
+      "final": "ㄥ",
+      "tone": "4"
+    }
+  },
+  {
+    "id": 112,
+    "wordText": "蜜",
+    "imageUrl": "/images/honey.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄇ",
+      "medial": "",
+      "final": "ㄧ",
+      "tone": "4"
+    }
+  },
+  {
+    "id": 113,
+    "wordText": "車",
+    "imageUrl": "/images/sedan_car.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄔ",
+      "medial": "",
+      "final": "ㄜ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 114,
+    "wordText": "車",
+    "imageUrl": "/images/bus.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄔ",
+      "medial": "",
+      "final": "ㄜ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 115,
+    "wordText": "車",
+    "imageUrl": "/images/cargo_truck.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄔ",
+      "medial": "",
+      "final": "ㄜ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 116,
+    "wordText": "車",
+    "imageUrl": "/images/motorcycle.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄔ",
+      "medial": "",
+      "final": "ㄜ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 117,
+    "wordText": "車",
+    "imageUrl": "/images/bicycle.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄔ",
+      "medial": "",
+      "final": "ㄜ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 118,
+    "wordText": "車",
+    "imageUrl": "/images/steam_train.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄔ",
+      "medial": "",
+      "final": "ㄜ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 119,
+    "wordText": "車",
+    "imageUrl": "/images/high_speed_train.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄔ",
+      "medial": "",
+      "final": "ㄜ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 120,
+    "wordText": "車",
+    "imageUrl": "/images/subway_train.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄔ",
+      "medial": "",
+      "final": "ㄜ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 121,
+    "wordText": "車",
+    "imageUrl": "/images/fire_truck.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄔ",
+      "medial": "",
+      "final": "ㄜ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 122,
+    "wordText": "車",
+    "imageUrl": "/images/ambulance.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄔ",
+      "medial": "",
+      "final": "ㄜ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 123,
+    "wordText": "車",
+    "imageUrl": "/images/police_car.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄔ",
+      "medial": "",
+      "final": "ㄜ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 124,
+    "wordText": "機",
+    "imageUrl": "/images/excavator.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄐ",
+      "medial": "",
+      "final": "ㄧ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 125,
+    "wordText": "機",
+    "imageUrl": "/images/bulldozer.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄐ",
+      "medial": "",
+      "final": "ㄧ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 126,
+    "wordText": "機",
+    "imageUrl": "/images/crane_truck.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄐ",
+      "medial": "",
+      "final": "ㄧ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 127,
+    "wordText": "車",
+    "imageUrl": "/images/garbage_truck.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄔ",
+      "medial": "",
+      "final": "ㄜ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 128,
+    "wordText": "車",
+    "imageUrl": "/images/cement_mixer_truck.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄔ",
+      "medial": "",
+      "final": "ㄜ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 129,
+    "wordText": "機",
+    "imageUrl": "/images/airplane.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄐ",
+      "medial": "",
+      "final": "ㄧ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 130,
+    "wordText": "機",
+    "imageUrl": "/images/helicopter.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄐ",
+      "medial": "",
+      "final": "ㄧ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 131,
+    "wordText": "箭",
+    "imageUrl": "/images/space_rocket.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄐ",
+      "medial": "ㄧ",
+      "final": "ㄢ",
+      "tone": "4"
+    }
+  },
+  {
+    "id": 132,
+    "wordText": "船",
+    "imageUrl": "/images/blimp_airship.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄔ",
+      "medial": "ㄨ",
+      "final": "ㄢ",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 133,
+    "wordText": "船",
+    "imageUrl": "/images/cruise_ship.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄔ",
+      "medial": "ㄨ",
+      "final": "ㄢ",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 134,
+    "wordText": "船",
+    "imageUrl": "/images/spaceship_or_sailboat.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄔ",
+      "medial": "ㄨ",
+      "final": "ㄢ",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 135,
+    "wordText": "艇",
+    "imageUrl": "/images/submarine.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄊ",
+      "medial": "ㄧ",
+      "final": "ㄥ",
+      "tone": "3"
+    }
+  },
+  {
+    "id": 136,
+    "wordText": "車",
+    "imageUrl": "/images/fuel_tanker_truck.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄔ",
+      "medial": "",
+      "final": "ㄜ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 137,
+    "wordText": "機",
+    "imageUrl": "/images/farm_tractor.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄐ",
+      "medial": "",
+      "final": "ㄧ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 138,
+    "wordText": "車",
+    "imageUrl": "/images/military_tank.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄔ",
+      "medial": "",
+      "final": "ㄜ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 139,
+    "wordText": "車",
+    "imageUrl": "/images/cable_car.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄔ",
+      "medial": "",
+      "final": "ㄜ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 140,
+    "wordText": "球",
+    "imageUrl": "/images/hot_air_balloon.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄑ",
+      "medial": "ㄧ",
+      "final": "ㄡ",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 141,
+    "wordText": "車",
+    "imageUrl": "/images/kick_scooter.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄔ",
+      "medial": "",
+      "final": "ㄜ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 142,
+    "wordText": "板",
+    "imageUrl": "/images/skateboard.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄅ",
+      "medial": "",
+      "final": "ㄢ",
+      "tone": "3"
+    }
+  },
+  {
+    "id": 143,
+    "wordText": "機",
+    "imageUrl": "/images/forklift.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄐ",
+      "medial": "",
+      "final": "ㄧ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 144,
+    "wordText": "機",
+    "imageUrl": "/images/drone.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄐ",
+      "medial": "",
+      "final": "ㄧ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 145,
+    "wordText": "桌",
+    "imageUrl": "/images/wooden_table.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄓ",
+      "medial": "ㄨ",
+      "final": "ㄛ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 146,
+    "wordText": "椅",
+    "imageUrl": "/images/chair.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "",
+      "medial": "",
+      "final": "ㄧ",
+      "tone": "3"
+    }
+  },
+  {
+    "id": 147,
+    "wordText": "床",
+    "imageUrl": "/images/cozy_bed.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄔ",
+      "medial": "ㄨ",
+      "final": "ㄤ",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 148,
+    "wordText": "沙",
+    "imageUrl": "/images/sofa.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄕ",
+      "medial": "",
+      "final": "ㄚ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 149,
+    "wordText": "扇",
+    "imageUrl": "/images/electric_fan.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄕ",
+      "medial": "",
+      "final": "ㄢ",
+      "tone": "4"
+    }
+  },
+  {
+    "id": 150,
+    "wordText": "電",
+    "imageUrl": "/images/television.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄉ",
+      "medial": "ㄧ",
+      "final": "ㄢ",
+      "tone": "4"
+    }
+  },
+  {
+    "id": 151,
+    "wordText": "箱",
+    "imageUrl": "/images/refrigerator.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄒ",
+      "medial": "ㄧ",
+      "final": "ㄤ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 152,
+    "wordText": "氣",
+    "imageUrl": "/images/air_conditioner.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄑ",
+      "medial": "",
+      "final": "ㄧ",
+      "tone": "4"
+    }
+  },
+  {
+    "id": 153,
+    "wordText": "機",
+    "imageUrl": "/images/smartphone.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄐ",
+      "medial": "",
+      "final": "ㄧ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 154,
+    "wordText": "鐘",
+    "imageUrl": "/images/wall_clock.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄓ",
+      "medial": "ㄨ",
+      "final": "ㄥ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 155,
+    "wordText": "燈",
+    "imageUrl": "/images/desk_lamp.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄉ",
+      "medial": "",
+      "final": "ㄥ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 156,
+    "wordText": "鏡",
+    "imageUrl": "/images/mirror.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄐ",
+      "medial": "ㄧ",
+      "final": "ㄥ",
+      "tone": "4"
+    }
+  },
+  {
+    "id": 157,
+    "wordText": "梳",
+    "imageUrl": "/images/hair_comb.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄕ",
+      "medial": "",
+      "final": "ㄨ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 158,
+    "wordText": "刷",
+    "imageUrl": "/images/toothbrush.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄕ",
+      "medial": "ㄨ",
+      "final": "ㄚ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 159,
+    "wordText": "巾",
+    "imageUrl": "/images/bath_towel.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄐ",
+      "medial": "ㄧ",
+      "final": "ㄣ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 160,
+    "wordText": "杯",
+    "imageUrl": "/images/mug_cup.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄅ",
+      "medial": "",
+      "final": "ㄟ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 161,
+    "wordText": "刀",
+    "imageUrl": "/images/scissors.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄉ",
+      "medial": "",
+      "final": "ㄠ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 162,
+    "wordText": "膠",
+    "imageUrl": "/images/glue.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄐ",
+      "medial": "ㄧ",
+      "final": "ㄠ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 163,
+    "wordText": "筆",
+    "imageUrl": "/images/pencil.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄅ",
+      "medial": "",
+      "final": "ㄧ",
+      "tone": "3"
+    }
+  },
+  {
+    "id": 164,
+    "wordText": "擦",
+    "imageUrl": "/images/eraser.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄘ",
+      "medial": "",
+      "final": "ㄚ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 165,
+    "wordText": "尺",
+    "imageUrl": "/images/plastic_ruler.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄔ",
+      "medial": "",
+      "final": "",
+      "tone": "3"
+    }
+  },
+  {
+    "id": 166,
+    "wordText": "包",
+    "imageUrl": "/images/school_backpack.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄅ",
+      "medial": "",
+      "final": "ㄠ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 167,
+    "wordText": "書",
+    "imageUrl": "/images/textbook.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄕ",
+      "medial": "",
+      "final": "ㄨ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 168,
+    "wordText": "本",
+    "imageUrl": "/images/notebook.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄅ",
+      "medial": "",
+      "final": "ㄣ",
+      "tone": "3"
+    }
+  },
+  {
+    "id": 169,
+    "wordText": "筆",
+    "imageUrl": "/images/marker_pen.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄅ",
+      "medial": "",
+      "final": "ㄧ",
+      "tone": "3"
+    }
+  },
+  {
+    "id": 170,
+    "wordText": "筆",
+    "imageUrl": "/images/crayon.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄅ",
+      "medial": "",
+      "final": "ㄧ",
+      "tone": "3"
+    }
+  },
+  {
+    "id": 171,
+    "wordText": "傘",
+    "imageUrl": "/images/umbrella.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄙ",
+      "medial": "",
+      "final": "ㄢ",
+      "tone": "3"
+    }
+  },
+  {
+    "id": 172,
+    "wordText": "鞋",
+    "imageUrl": "/images/rain_boots.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄒ",
+      "medial": "ㄧ",
+      "final": "ㄝ",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 173,
+    "wordText": "套",
+    "imageUrl": "/images/winter_coat.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄊ",
+      "medial": "",
+      "final": "ㄠ",
+      "tone": "4"
+    }
+  },
+  {
+    "id": 174,
+    "wordText": "帽",
+    "imageUrl": "/images/sun_hat.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄇ",
+      "medial": "",
+      "final": "ㄠ",
+      "tone": "4"
+    }
+  },
+  {
+    "id": 175,
+    "wordText": "鞋",
+    "imageUrl": "/images/sneakers.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄒ",
+      "medial": "ㄧ",
+      "final": "ㄝ",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 176,
+    "wordText": "襪",
+    "imageUrl": "/images/socks.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "",
+      "medial": "ㄨ",
+      "final": "ㄚ",
+      "tone": "4"
+    }
+  },
+  {
+    "id": 177,
+    "wordText": "陽",
+    "imageUrl": "/images/sun.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "",
+      "medial": "ㄧ",
+      "final": "ㄤ",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 178,
+    "wordText": "月",
+    "imageUrl": "/images/moon.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "",
+      "medial": "ㄩ",
+      "final": "ㄝ",
+      "tone": "4"
+    }
+  },
+  {
+    "id": 179,
+    "wordText": "星",
+    "imageUrl": "/images/star.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄒ",
+      "medial": "ㄧ",
+      "final": "ㄥ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 180,
+    "wordText": "雲",
+    "imageUrl": "/images/white_cloud.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "",
+      "medial": "ㄩ",
+      "final": "ㄣ",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 181,
+    "wordText": "虹",
+    "imageUrl": "/images/rainbow.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄏ",
+      "medial": "ㄨ",
+      "final": "ㄥ",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 182,
+    "wordText": "電",
+    "imageUrl": "/images/lightning_bolt.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄉ",
+      "medial": "ㄧ",
+      "final": "ㄢ",
+      "tone": "4"
+    }
+  },
+  {
+    "id": 183,
+    "wordText": "雨",
+    "imageUrl": "/images/raindrops.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "",
+      "medial": "",
+      "final": "ㄩ",
+      "tone": "3"
+    }
+  },
+  {
+    "id": 184,
+    "wordText": "雪",
+    "imageUrl": "/images/snowflakes.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄒ",
+      "medial": "ㄩ",
+      "final": "ㄝ",
+      "tone": "3"
+    }
+  },
+  {
+    "id": 185,
+    "wordText": "樹",
+    "imageUrl": "/images/big_green_tree.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄕ",
+      "medial": "",
+      "final": "ㄨ",
+      "tone": "4"
+    }
+  },
+  {
+    "id": 186,
+    "wordText": "草",
+    "imageUrl": "/images/small_green_grass.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄘ",
+      "medial": "",
+      "final": "ㄠ",
+      "tone": "3"
+    }
+  },
+  {
+    "id": 187,
+    "wordText": "花",
+    "imageUrl": "/images/beautiful_flower.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄏ",
+      "medial": "ㄨ",
+      "final": "ㄚ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 188,
+    "wordText": "葉",
+    "imageUrl": "/images/green_leaf.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "",
+      "medial": "ㄧ",
+      "final": "ㄝ",
+      "tone": "4"
+    }
+  },
+  {
+    "id": 189,
+    "wordText": "石",
+    "imageUrl": "/images/river_stone.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄕ",
+      "medial": "",
+      "final": "",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 190,
+    "wordText": "沙",
+    "imageUrl": "/images/sandy_beach.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄕ",
+      "medial": "",
+      "final": "ㄚ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 191,
+    "wordText": "海",
+    "imageUrl": "/images/deep_ocean.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄏ",
+      "medial": "",
+      "final": "ㄞ",
+      "tone": "3"
+    }
+  },
+  {
+    "id": 192,
+    "wordText": "山",
+    "imageUrl": "/images/high_mountain.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄕ",
+      "medial": "",
+      "final": "ㄢ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 193,
+    "wordText": "河",
+    "imageUrl": "/images/river.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄏ",
+      "medial": "",
+      "final": "ㄜ",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 194,
+    "wordText": "瀑",
+    "imageUrl": "/images/waterfall.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄆ",
+      "medial": "",
+      "final": "ㄨ",
+      "tone": "4"
+    }
+  },
+  {
+    "id": 195,
+    "wordText": "山",
+    "imageUrl": "/images/volcano.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄕ",
+      "medial": "",
+      "final": "ㄢ",
+      "tone": "1"
+    }
+  },
+  {
+    "id": 196,
+    "wordText": "球",
+    "imageUrl": "/images/planet_earth.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄑ",
+      "medial": "ㄧ",
+      "final": "ㄡ",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 197,
+    "wordText": "堡",
+    "imageUrl": "/images/castle.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄅ",
+      "medial": "",
+      "final": "ㄠ",
+      "tone": "3"
+    }
+  },
+  {
+    "id": 198,
+    "wordText": "房",
+    "imageUrl": "/images/house.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄈ",
+      "medial": "",
+      "final": "ㄤ",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 199,
+    "wordText": "篷",
+    "imageUrl": "/images/camping_tent.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄆ",
+      "medial": "",
+      "final": "ㄥ",
+      "tone": "2"
+    }
+  },
+  {
+    "id": 200,
+    "wordText": "塔",
+    "imageUrl": "/images/lighthouse.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄊ",
+      "medial": "",
+      "final": "ㄚ",
+      "tone": "3"
+    }
+  },
+  {
+    "id": 201,
+    "wordText": "跑",
+    "imageUrl": "/images/running_boy.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄆ",
+      "medial": "",
+      "final": "ㄠ",
+      "tone": "3"
+    }
+  },
+  {
+    "id": 202,
+    "wordText": "跳",
+    "imageUrl": "/images/jumping_girl.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄊ",
+      "medial": "ㄧ",
+      "final": "ㄠ",
+      "tone": "4"
+    }
+  },
+  {
+    "id": 203,
+    "wordText": "笑",
+    "imageUrl": "/images/laughing_boy.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄒ",
+      "medial": "ㄧ",
+      "final": "ㄠ",
+      "tone": "4"
+    }
+  },
+  {
+    "id": 204,
+    "wordText": "走",
+    "imageUrl": "/images/walking_girl.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄗ",
+      "medial": "",
+      "final": "ㄡ",
+      "tone": "3"
+    }
+  },
+  {
+    "id": 205,
+    "wordText": "唱",
+    "imageUrl": "/images/singing_boy.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄔ",
+      "medial": "",
+      "final": "ㄤ",
+      "tone": "4"
+    }
+  },
+  {
+    "id": 206,
+    "wordText": "舞",
+    "imageUrl": "/images/dancing_girl.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "",
+      "medial": "",
+      "final": "ㄨ",
+      "tone": "3"
+    }
+  },
+  {
+    "id": 207,
+    "wordText": "畫",
+    "imageUrl": "/images/drawing_boy.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄏ",
+      "medial": "ㄨ",
+      "final": "ㄚ",
+      "tone": "4"
+    }
+  },
+  {
+    "id": 208,
+    "wordText": "睡",
+    "imageUrl": "/images/sleeping_girl.webp",
+    "audioUrl": "",
+    "correctAnswer": {
+      "initial": "ㄕ",
+      "medial": "ㄨ",
+      "final": "ㄟ",
+      "tone": "4"
+    }
+  }
+]

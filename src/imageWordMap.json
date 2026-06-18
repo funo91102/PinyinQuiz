@@ -1,0 +1,834 @@
+{
+  "cat.webp": {
+    "word": "貓咪",
+    "core": "貓"
+  },
+  "dog.webp": {
+    "word": "小狗",
+    "core": "狗"
+  },
+  "elephant.webp": {
+    "word": "大象",
+    "core": "象"
+  },
+  "lion.webp": {
+    "word": "獅子",
+    "core": "獅"
+  },
+  "tiger.webp": {
+    "word": "老虎",
+    "core": "虎"
+  },
+  "giraffe.webp": {
+    "word": "長頸鹿",
+    "core": "鹿"
+  },
+  "zebra.webp": {
+    "word": "斑馬",
+    "core": "馬"
+  },
+  "hippo.webp": {
+    "word": "河馬",
+    "core": "馬"
+  },
+  "rhinoceros.webp": {
+    "word": "犀牛",
+    "core": "牛"
+  },
+  "kangaroo.webp": {
+    "word": "袋鼠",
+    "core": "鼠"
+  },
+  "monkey.webp": {
+    "word": "猴子",
+    "core": "猴"
+  },
+  "rabbit.webp": {
+    "word": "兔子",
+    "core": "兔"
+  },
+  "squirrel.webp": {
+    "word": "松鼠",
+    "core": "鼠"
+  },
+  "fox.webp": {
+    "word": "狐狸",
+    "core": "狐"
+  },
+  "sheep.webp": {
+    "word": "綿羊",
+    "core": "羊"
+  },
+  "goat.webp": {
+    "word": "山羊",
+    "core": "羊"
+  },
+  "cow.webp": {
+    "word": "乳牛",
+    "core": "牛"
+  },
+  "pig.webp": {
+    "word": "小豬",
+    "core": "豬"
+  },
+  "horse.webp": {
+    "word": "馬兒",
+    "core": "馬"
+  },
+  "panda.webp": {
+    "word": "熊貓",
+    "core": "熊"
+  },
+  "penguin.webp": {
+    "word": "企鵝",
+    "core": "鵝"
+  },
+  "dolphin.webp": {
+    "word": "海豚",
+    "core": "豚"
+  },
+  "whale.webp": {
+    "word": "鯨魚",
+    "core": "鯨"
+  },
+  "sea_turtle.webp": {
+    "word": "海龜",
+    "core": "龜"
+  },
+  "octopus.webp": {
+    "word": "章魚",
+    "core": "章"
+  },
+  "crab.webp": {
+    "word": "螃蟹",
+    "core": "蟹"
+  },
+  "shrimp.webp": {
+    "word": "蝦子",
+    "core": "蝦"
+  },
+  "fish.webp": {
+    "word": "小魚",
+    "core": "魚"
+  },
+  "frog.webp": {
+    "word": "青蛙",
+    "core": "蛙"
+  },
+  "turtle.webp": {
+    "word": "烏龜",
+    "core": "龜"
+  },
+  "honeybee.webp": {
+    "word": "蜜蜂",
+    "core": "蜂"
+  },
+  "butterfly.webp": {
+    "word": "蝴蝶",
+    "core": "蝶"
+  },
+  "ladybug.webp": {
+    "word": "瓢蟲",
+    "core": "瓢"
+  },
+  "dragonfly.webp": {
+    "word": "蜻蜓",
+    "core": "蜻"
+  },
+  "snail.webp": {
+    "word": "蝸牛",
+    "core": "蝸"
+  },
+  "ant.webp": {
+    "word": "螞蟻",
+    "core": "蟻"
+  },
+  "bird.webp": {
+    "word": "小鳥",
+    "core": "鳥"
+  },
+  "owl.webp": {
+    "word": "貓頭鷹",
+    "core": "鷹"
+  },
+  "duck.webp": {
+    "word": "鴨子",
+    "core": "鴨"
+  },
+  "dinosaur.webp": {
+    "word": "恐龍",
+    "core": "龍"
+  },
+  "alligator.webp": {
+    "word": "鱷魚",
+    "core": "鱷"
+  },
+  "koala.webp": {
+    "word": "無尾熊",
+    "core": "熊"
+  },
+  "sloth.webp": {
+    "word": "樹懶",
+    "core": "懶"
+  },
+  "camel.webp": {
+    "word": "駱駝",
+    "core": "駝"
+  },
+  "hedgehog.webp": {
+    "word": "刺蝟",
+    "core": "蝟"
+  },
+  "hamster.webp": {
+    "word": "倉鼠",
+    "core": "鼠"
+  },
+  "parrot.webp": {
+    "word": "鸚鵡",
+    "core": "鸚"
+  },
+  "penguin_b.webp": {
+    "word": "企鵝(複)",
+    "core": "鵝"
+  },
+  "apple.webp": {
+    "word": "蘋果",
+    "core": "蘋"
+  },
+  "banana.webp": {
+    "word": "香蕉",
+    "core": "蕉"
+  },
+  "strawberry.webp": {
+    "word": "草莓",
+    "core": "莓"
+  },
+  "watermelon.webp": {
+    "word": "西瓜",
+    "core": "瓜"
+  },
+  "grapes.webp": {
+    "word": "葡萄",
+    "core": "葡"
+  },
+  "orange.webp": {
+    "word": "橘子",
+    "core": "橘"
+  },
+  "mango.webp": {
+    "word": "芒果",
+    "core": "芒"
+  },
+  "guava.webp": {
+    "word": "芭樂",
+    "core": "芭"
+  },
+  "pineapple.webp": {
+    "word": "鳳梨",
+    "core": "鳳"
+  },
+  "papaya.webp": {
+    "word": "木瓜",
+    "core": "瓜"
+  },
+  "lemon.webp": {
+    "word": "檸檬",
+    "core": "檸"
+  },
+  "cherry.webp": {
+    "word": "櫻桃",
+    "core": "櫻"
+  },
+  "peach.webp": {
+    "word": "桃子",
+    "core": "桃"
+  },
+  "lychee.webp": {
+    "word": "荔枝",
+    "core": "荔"
+  },
+  "blueberry.webp": {
+    "word": "藍莓",
+    "core": "莓"
+  },
+  "tomato.webp": {
+    "word": "番茄",
+    "core": "茄"
+  },
+  "corn.webp": {
+    "word": "玉米",
+    "core": "玉"
+  },
+  "carrot.webp": {
+    "word": "胡蘿蔔",
+    "core": "蘿"
+  },
+  "broccoli.webp": {
+    "word": "花椰菜",
+    "core": "菜"
+  },
+  "cabbage.webp": {
+    "word": "高麗菜",
+    "core": "菜"
+  },
+  "onion.webp": {
+    "word": "洋蔥",
+    "core": "蔥"
+  },
+  "sweet_potato.webp": {
+    "word": "地瓜",
+    "core": "瓜"
+  },
+  "potato.webp": {
+    "word": "馬鈴薯",
+    "core": "薯"
+  },
+  "pumpkin.webp": {
+    "word": "南瓜",
+    "core": "瓜"
+  },
+  "cucumber.webp": {
+    "word": "小黃瓜",
+    "core": "瓜"
+  },
+  "mushroom.webp": {
+    "word": "香菇",
+    "core": "菇"
+  },
+  "eggplant.webp": {
+    "word": "茄子",
+    "core": "茄"
+  },
+  "green_peas.webp": {
+    "word": "豌豆",
+    "core": "豆"
+  },
+  "white_radish.webp": {
+    "word": "白蘿蔔",
+    "core": "蘿"
+  },
+  "garlic.webp": {
+    "word": "大蒜",
+    "core": "蒜"
+  },
+  "bell_pepper.webp": {
+    "word": "彩椒",
+    "core": "椒"
+  },
+  "chili.webp": {
+    "word": "辣椒",
+    "core": "椒"
+  },
+  "rice_bowl.webp": {
+    "word": "米飯",
+    "core": "飯"
+  },
+  "noodles.webp": {
+    "word": "麵條",
+    "core": "麵"
+  },
+  "bread.webp": {
+    "word": "麵包",
+    "core": "包"
+  },
+  "cake.webp": {
+    "word": "蛋糕",
+    "core": "糕"
+  },
+  "cookie.webp": {
+    "word": "餅乾",
+    "core": "餅"
+  },
+  "pudding.webp": {
+    "word": "布丁",
+    "core": "布"
+  },
+  "ice_cream.webp": {
+    "word": "冰淇淋",
+    "core": "冰"
+  },
+  "milk_glass.webp": {
+    "word": "牛奶",
+    "core": "奶"
+  },
+  "juice.webp": {
+    "word": "果汁",
+    "core": "汁"
+  },
+  "boiled_egg.webp": {
+    "word": "雞蛋",
+    "core": "蛋"
+  },
+  "sushi.webp": {
+    "word": "壽司",
+    "core": "壽"
+  },
+  "pizza.webp": {
+    "word": "披薩",
+    "core": "薩"
+  },
+  "hamburger.webp": {
+    "word": "漢堡",
+    "core": "堡"
+  },
+  "french_fries.webp": {
+    "word": "薯條",
+    "core": "薯"
+  },
+  "dumpling.webp": {
+    "word": "水餃",
+    "core": "餃"
+  },
+  "steamed_bun.webp": {
+    "word": "包子",
+    "core": "包"
+  },
+  "sandwich.webp": {
+    "word": "三明治",
+    "core": "三"
+  },
+  "waffle.webp": {
+    "word": "鬆餅",
+    "core": "餅"
+  },
+  "donut.webp": {
+    "word": "甜甜圈",
+    "core": "圈"
+  },
+  "chocolate_bar.webp": {
+    "word": "巧克力",
+    "core": "巧"
+  },
+  "pancake.webp": {
+    "word": "薄煎餅",
+    "core": "餅"
+  },
+  "cupcake.webp": {
+    "word": "杯子蛋糕",
+    "core": "糕"
+  },
+  "popcorn.webp": {
+    "word": "爆米花",
+    "core": "花"
+  },
+  "hot_dog.webp": {
+    "word": "熱狗",
+    "core": "狗"
+  },
+  "cheese_block.webp": {
+    "word": "起司",
+    "core": "司"
+  },
+  "lollipop.webp": {
+    "word": "棒棒糖",
+    "core": "糖"
+  },
+  "pretzel.webp": {
+    "word": "蝴蝶餅",
+    "core": "餅"
+  },
+  "croissant.webp": {
+    "word": "可頌",
+    "core": "頌"
+  },
+  "pie.webp": {
+    "word": "派",
+    "core": "派"
+  },
+  "taco.webp": {
+    "word": "塔可",
+    "core": "塔"
+  },
+  "jelly.webp": {
+    "word": "果凍",
+    "core": "凍"
+  },
+  "honey.webp": {
+    "word": "蜂蜜",
+    "core": "蜜"
+  },
+  "sedan_car.webp": {
+    "word": "汽車",
+    "core": "車"
+  },
+  "bus.webp": {
+    "word": "公車",
+    "core": "車"
+  },
+  "cargo_truck.webp": {
+    "word": "卡車",
+    "core": "車"
+  },
+  "motorcycle.webp": {
+    "word": "機車",
+    "core": "車"
+  },
+  "bicycle.webp": {
+    "word": "腳踏車",
+    "core": "車"
+  },
+  "steam_train.webp": {
+    "word": "蒸汽火車",
+    "core": "車"
+  },
+  "high_speed_train.webp": {
+    "word": "高鐵",
+    "core": "車"
+  },
+  "subway_train.webp": {
+    "word": "捷運",
+    "core": "車"
+  },
+  "fire_truck.webp": {
+    "word": "消防車",
+    "core": "車"
+  },
+  "ambulance.webp": {
+    "word": "救護車",
+    "core": "車"
+  },
+  "police_car.webp": {
+    "word": "警車",
+    "core": "車"
+  },
+  "excavator.webp": {
+    "word": "挖土機",
+    "core": "機"
+  },
+  "bulldozer.webp": {
+    "word": "推土機",
+    "core": "機"
+  },
+  "crane_truck.webp": {
+    "word": "起重機",
+    "core": "機"
+  },
+  "garbage_truck.webp": {
+    "word": "垃圾車",
+    "core": "車"
+  },
+  "cement_mixer_truck.webp": {
+    "word": "水泥車",
+    "core": "車"
+  },
+  "airplane.webp": {
+    "word": "飛機",
+    "core": "機"
+  },
+  "helicopter.webp": {
+    "word": "直升機",
+    "core": "機"
+  },
+  "space_rocket.webp": {
+    "word": "火箭",
+    "core": "箭"
+  },
+  "blimp_airship.webp": {
+    "word": "飛船",
+    "core": "船"
+  },
+  "cruise_ship.webp": {
+    "word": "輪船",
+    "core": "船"
+  },
+  "spaceship_or_sailboat.webp": {
+    "word": "帆船",
+    "core": "船"
+  },
+  "submarine.webp": {
+    "word": "潛水艇",
+    "core": "艇"
+  },
+  "fuel_tanker_truck.webp": {
+    "word": "油罐車",
+    "core": "車"
+  },
+  "farm_tractor.webp": {
+    "word": "拖拉機",
+    "core": "機"
+  },
+  "military_tank.webp": {
+    "word": "戰車",
+    "core": "車"
+  },
+  "cable_car.webp": {
+    "word": "纜車",
+    "core": "車"
+  },
+  "hot_air_balloon.webp": {
+    "word": "熱氣球",
+    "core": "球"
+  },
+  "kick_scooter.webp": {
+    "word": "滑板車",
+    "core": "車"
+  },
+  "skateboard.webp": {
+    "word": "滑板",
+    "core": "板"
+  },
+  "forklift.webp": {
+    "word": "堆高機",
+    "core": "機"
+  },
+  "drone.webp": {
+    "word": "空拍機",
+    "core": "機"
+  },
+  "wooden_table.webp": {
+    "word": "桌子",
+    "core": "桌"
+  },
+  "chair.webp": {
+    "word": "椅子",
+    "core": "椅"
+  },
+  "cozy_bed.webp": {
+    "word": "床鋪",
+    "core": "床"
+  },
+  "sofa.webp": {
+    "word": "沙發",
+    "core": "沙"
+  },
+  "electric_fan.webp": {
+    "word": "電風扇",
+    "core": "扇"
+  },
+  "television.webp": {
+    "word": "電視",
+    "core": "電"
+  },
+  "refrigerator.webp": {
+    "word": "冰箱",
+    "core": "箱"
+  },
+  "air_conditioner.webp": {
+    "word": "冷氣",
+    "core": "氣"
+  },
+  "smartphone.webp": {
+    "word": "手機",
+    "core": "機"
+  },
+  "wall_clock.webp": {
+    "word": "時鐘",
+    "core": "鐘"
+  },
+  "desk_lamp.webp": {
+    "word": "檯燈",
+    "core": "燈"
+  },
+  "mirror.webp": {
+    "word": "鏡子",
+    "core": "鏡"
+  },
+  "hair_comb.webp": {
+    "word": "梳子",
+    "core": "梳"
+  },
+  "toothbrush.webp": {
+    "word": "牙刷",
+    "core": "刷"
+  },
+  "bath_towel.webp": {
+    "word": "毛巾",
+    "core": "巾"
+  },
+  "mug_cup.webp": {
+    "word": "杯子",
+    "core": "杯"
+  },
+  "scissors.webp": {
+    "word": "剪刀",
+    "core": "刀"
+  },
+  "glue.webp": {
+    "word": "膠水",
+    "core": "膠"
+  },
+  "pencil.webp": {
+    "word": "鉛筆",
+    "core": "筆"
+  },
+  "eraser.webp": {
+    "word": "橡皮擦",
+    "core": "擦"
+  },
+  "plastic_ruler.webp": {
+    "word": "尺",
+    "core": "尺"
+  },
+  "school_backpack.webp": {
+    "word": "書包",
+    "core": "包"
+  },
+  "textbook.webp": {
+    "word": "課本",
+    "core": "書"
+  },
+  "notebook.webp": {
+    "word": "筆記本",
+    "core": "本"
+  },
+  "marker_pen.webp": {
+    "word": "彩色筆",
+    "core": "筆"
+  },
+  "crayon.webp": {
+    "word": "蠟筆",
+    "core": "筆"
+  },
+  "umbrella.webp": {
+    "word": "雨傘",
+    "core": "傘"
+  },
+  "rain_boots.webp": {
+    "word": "雨鞋",
+    "core": "鞋"
+  },
+  "winter_coat.webp": {
+    "word": "外套",
+    "core": "套"
+  },
+  "sun_hat.webp": {
+    "word": "帽子",
+    "core": "帽"
+  },
+  "sneakers.webp": {
+    "word": "鞋子",
+    "core": "鞋"
+  },
+  "socks.webp": {
+    "word": "襪子",
+    "core": "襪"
+  },
+  "sun.webp": {
+    "word": "太陽",
+    "core": "陽"
+  },
+  "moon.webp": {
+    "word": "月亮",
+    "core": "月"
+  },
+  "star.webp": {
+    "word": "星星",
+    "core": "星"
+  },
+  "white_cloud.webp": {
+    "word": "白雲",
+    "core": "雲"
+  },
+  "rainbow.webp": {
+    "word": "彩虹",
+    "core": "虹"
+  },
+  "lightning_bolt.webp": {
+    "word": "閃電",
+    "core": "電"
+  },
+  "raindrops.webp": {
+    "word": "下雨",
+    "core": "雨"
+  },
+  "snowflakes.webp": {
+    "word": "下雪",
+    "core": "雪"
+  },
+  "big_green_tree.webp": {
+    "word": "大樹",
+    "core": "樹"
+  },
+  "small_green_grass.webp": {
+    "word": "小草",
+    "core": "草"
+  },
+  "beautiful_flower.webp": {
+    "word": "小花",
+    "core": "花"
+  },
+  "green_leaf.webp": {
+    "word": "葉子",
+    "core": "葉"
+  },
+  "river_stone.webp": {
+    "word": "石頭",
+    "core": "石"
+  },
+  "sandy_beach.webp": {
+    "word": "沙灘",
+    "core": "沙"
+  },
+  "deep_ocean.webp": {
+    "word": "大海",
+    "core": "海"
+  },
+  "high_mountain.webp": {
+    "word": "高山",
+    "core": "山"
+  },
+  "river.webp": {
+    "word": "河流",
+    "core": "河"
+  },
+  "waterfall.webp": {
+    "word": "瀑布",
+    "core": "瀑"
+  },
+  "volcano.webp": {
+    "word": "火山",
+    "core": "山"
+  },
+  "planet_earth.webp": {
+    "word": "地球",
+    "core": "球"
+  },
+  "castle.webp": {
+    "word": "城堡",
+    "core": "堡"
+  },
+  "house.webp": {
+    "word": "房子",
+    "core": "房"
+  },
+  "camping_tent.webp": {
+    "word": "帳篷",
+    "core": "篷"
+  },
+  "lighthouse.webp": {
+    "word": "燈塔",
+    "core": "塔"
+  },
+  "running_boy.webp": {
+    "word": "跑步",
+    "core": "跑"
+  },
+  "jumping_girl.webp": {
+    "word": "跳躍",
+    "core": "跳"
+  },
+  "laughing_boy.webp": {
+    "word": "大笑",
+    "core": "笑"
+  },
+  "walking_girl.webp": {
+    "word": "走路",
+    "core": "走"
+  },
+  "singing_boy.webp": {
+    "word": "唱歌",
+    "core": "唱"
+  },
+  "dancing_girl.webp": {
+    "word": "跳舞",
+    "core": "舞"
+  },
+  "drawing_boy.webp": {
+    "word": "畫畫",
+    "core": "畫"
+  },
+  "sleeping_girl.webp": {
+    "word": "睡覺",
+    "core": "睡"
+  }
+}

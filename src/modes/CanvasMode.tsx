@@ -1,0 +1,427 @@
+import React, { useState, useEffect, useRef } from 'react';
+import { Volume2, Eye, EyeOff, Trash2, Sparkles } from 'lucide-react';
+import VerticalZhuyin from '../components/VerticalZhuyin';
+import imageWordMap from '../imageWordMap.json';
+
+interface QuizItem {
+  id: number;
+  wordText: string;
+  imageUrl: string;
+  audioUrl: string;
+  correctAnswer: {
+    initial: string;
+    medial: string;
+    final: string;
+    tone: string;
+  };
+}
+
+interface CanvasModeProps {
+  quiz: QuizItem;
+  isLastQuestion: boolean;
+  onCorrect: (hasMadeMistake: boolean) => void;
+  onWrongAttempt: (wrongAnswer: { initial: string; medial: string; final: string; tone: string }) => void;
+  onNext: () => void;
+}
+
+export default function CanvasMode({
+  quiz,
+  onCorrect,
+  onWrongAttempt,
+  onNext
+}: CanvasModeProps) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [isDrawing, setIsDrawing] = useState(false);
+  const [showAnswer, setShowAnswer] = useState(false);
+  const lastPosRef = useRef<{ x: number; y: number } | null>(null);
+
+  // Play pronunciation via TTS
+  const playPronunciation = (word: string) => {
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(word);
+      utterance.lang = 'zh-TW';
+      utterance.rate = 0.70; // Kids friendly slower speed
+      window.speechSynthesis.speak(utterance);
+    }
+  };
+
+  // Play audio on load and when quiz changes
+  useEffect(() => {
+    setShowAnswer(false);
+    const timer = setTimeout(() => {
+      playPronunciation(quiz.wordText);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [quiz]);
+
+  // Draw traditional Taiwanese '米字格' helper grid lines
+  const drawGrid = (ctx: CanvasRenderingContext2D, w: number, h: number) => {
+    ctx.clearRect(0, 0, w, h);
+    
+    // Draw outer boundary border
+    ctx.strokeStyle = '#e5e7eb'; // border-gray-200
+    ctx.lineWidth = 3;
+    ctx.strokeRect(0, 0, w, h);
+
+    // Draw helper lines inside grid using dashed dashes
+    ctx.strokeStyle = '#d1d5db'; // gray-300
+    ctx.lineWidth = 1;
+    ctx.setLineDash([4, 4]);
+
+    // Horizontal split line
+    ctx.beginPath();
+    ctx.moveTo(0, h / 2);
+    ctx.lineTo(w, h / 2);
+    ctx.stroke();
+
+    // Vertical split line
+    ctx.beginPath();
+    ctx.moveTo(w / 2, 0);
+    ctx.lineTo(w / 2, h);
+    ctx.stroke();
+
+    // Diagonal backslash split line
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(w, h);
+    ctx.stroke();
+
+    // Diagonal slash split line
+    ctx.beginPath();
+    ctx.moveTo(w, 0);
+    ctx.lineTo(0, h);
+    ctx.stroke();
+
+    // Reset line dash pattern for user drawing
+    ctx.setLineDash([]);
+  };
+
+  // Set canvas scale based on client bounding rect
+  const initCanvas = () => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const rect = canvas.getBoundingClientRect();
+    canvas.width = rect.width || 300;
+    canvas.height = rect.height || 300;
+
+    drawGrid(ctx, canvas.width, canvas.height);
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      initCanvas();
+    }, 100);
+
+    window.addEventListener('resize', initCanvas);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('resize', initCanvas);
+    };
+  }, [quiz]);
+
+  // Clear Canvas Board
+  const handleClear = () => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    drawGrid(ctx, canvas.width, canvas.height);
+  };
+
+  // Get mouse/touch coordinates relative to Canvas element bounds
+  const getCoordinates = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return null;
+    const rect = canvas.getBoundingClientRect();
+
+    let clientX = 0;
+    let clientY = 0;
+
+    if ('touches' in e) {
+      if (e.touches.length === 0) return null;
+      clientX = e.touches[0].clientX;
+      clientY = e.touches[0].clientY;
+    } else {
+      clientX = e.clientX;
+      clientY = e.clientY;
+    }
+
+    return {
+      x: clientX - rect.left,
+      y: clientY - rect.top
+    };
+  };
+
+  // Start Drawing action
+  const startDrawing = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
+    const coords = getCoordinates(e);
+    if (!coords) return;
+
+    setIsDrawing(true);
+    lastPosRef.current = coords;
+
+    const canvas = canvasRef.current;
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      if (ctx) {
+        ctx.beginPath();
+        ctx.arc(coords.x, coords.y, 3, 0, 2 * Math.PI);
+        ctx.fillStyle = '#1e293b'; // slate-800
+        ctx.fill();
+      }
+    }
+  };
+
+  // Process Continuous Line Drawing
+  const draw = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
+    if (!isDrawing || !lastPosRef.current) return;
+    const coords = getCoordinates(e);
+    if (!coords) return;
+
+    const canvas = canvasRef.current;
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      if (ctx) {
+        ctx.beginPath();
+        ctx.moveTo(lastPosRef.current.x, lastPosRef.current.y);
+        ctx.lineTo(coords.x, coords.y);
+        ctx.strokeStyle = '#1e293b'; // slate-800
+        ctx.lineWidth = 6;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.stroke();
+        lastPosRef.current = coords;
+      }
+    }
+  };
+
+  // Stop Drawing action
+  const stopDrawing = () => {
+    setIsDrawing(false);
+    lastPosRef.current = null;
+  };
+
+  // Resolve word and core character for highlight
+  const getWordDetails = (imageUrl: string, defaultWord: string) => {
+    const parts = imageUrl.split('/');
+    const fileName = parts[parts.length - 1];
+    const mapData = (imageWordMap as Record<string, { word: string; core: string }>)[fileName];
+    if (mapData) {
+      return {
+        word: mapData.word,
+        core: mapData.core
+      };
+    }
+    return {
+      word: defaultWord,
+      core: defaultWord
+    };
+  };
+
+  const { word, core } = getWordDetails(quiz.imageUrl, quiz.wordText);
+
+  // Web Audio review synthesizer
+  const playSoundEffect = (success: boolean) => {
+    try {
+      const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
+      if (!AudioContext) return;
+      const ctx = new AudioContext();
+      
+      if (success) {
+        const notes = [523.25, 659.25, 783.99, 1046.50]; // C5 -> E5 -> G5 -> C6
+        notes.forEach((freq, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.06);
+          gain.gain.setValueAtTime(0, ctx.currentTime);
+          gain.gain.linearRampToValueAtTime(0.06, ctx.currentTime + idx * 0.06 + 0.02);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + idx * 0.06 + 0.3);
+          osc.start(ctx.currentTime + idx * 0.06);
+          osc.stop(ctx.currentTime + idx * 0.06 + 0.3);
+        });
+      } else {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(130, ctx.currentTime);
+        osc.frequency.linearRampToValueAtTime(80, ctx.currentTime + 0.25);
+        gain.gain.setValueAtTime(0, ctx.currentTime);
+        gain.gain.linearRampToValueAtTime(0.1, ctx.currentTime + 0.04);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.25);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.25);
+      }
+    } catch (e) {
+      console.warn('Web Audio failure:', e);
+    }
+  };
+
+  // Correct handler click
+  const handleCorrectClick = () => {
+    playSoundEffect(true);
+    onCorrect(false);
+    onNext();
+  };
+
+  // Incorrect handler click
+  const handleIncorrectClick = () => {
+    playSoundEffect(false);
+    onWrongAttempt(quiz.correctAnswer);
+    onCorrect(true);
+    onNext();
+  };
+
+  return (
+    <div className="w-full flex-1 flex flex-col items-center justify-center py-6 px-4 select-none relative">
+      
+      {/* Guidance Header */}
+      <div className="text-center mb-6">
+        <span className="inline-flex items-center space-x-1.5 bg-rose-100/80 border border-rose-200 px-3 py-1 rounded-full text-xs font-black text-rose-800 shadow-inner animate-pulse">
+          <Sparkles className="w-3.5 h-3.5" />
+          <span>手寫挑戰板</span>
+        </span>
+        <h2 className="text-lg sm:text-xl font-bold mt-2 text-stone-550">
+          請看左側發音，在米字格中手寫拼寫出正確的注音！
+        </h2>
+      </div>
+
+      {/* Main Canvas writing board grid */}
+      <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch bg-white border-2 border-stone-200/80 p-6 sm:p-8 rounded-3xl shadow-sm min-h-[500px]">
+        
+        {/* Left Column: Word details & sound trigger */}
+        <div className="flex flex-col items-center justify-center border-r-0 md:border-r border-stone-200/60 pr-0 md:pr-8 py-4 space-y-6">
+          <div className="w-36 h-36 sm:w-44 sm:h-44 bg-gradient-to-b from-stone-50 to-white border-3 border-stone-200 rounded-3xl flex items-center justify-center p-3 shadow-inner">
+            <img
+              src={quiz.imageUrl}
+              alt={quiz.wordText}
+              className="w-full h-full object-contain pointer-events-none select-none"
+            />
+          </div>
+          
+          <div className="text-center">
+            <span className="text-2xl font-black flex items-center justify-center tracking-wide">
+              {Array.from(word).map((char, index) => {
+                if (char === core) {
+                  return (
+                    <span key={index} className="text-4xl font-black text-emerald-600 scale-110 inline-block px-1 animate-bounce">
+                      {char}
+                    </span>
+                  );
+                }
+                return (
+                  <span key={index} className="text-stone-400 text-lg font-bold inline-block">
+                    {char}
+                  </span>
+                );
+              })}
+            </span>
+            <span className="text-[10px] text-stone-450 block mt-2 font-bold tracking-widest uppercase">
+              請手寫高亮綠色字的注音
+            </span>
+          </div>
+
+          <button
+            onClick={() => playPronunciation(quiz.wordText)}
+            className="bg-gradient-to-br from-rose-400 to-pink-500 hover:from-rose-350 hover:to-pink-400 active:scale-95 transition-all text-white p-5 rounded-full shadow-md cursor-pointer border-b-4 border-pink-700 flex items-center justify-center"
+            aria-label="播放發音"
+          >
+            <Volume2 className="w-8 h-8 text-white" />
+          </button>
+        </div>
+
+        {/* Right Column: Writing Canvas & Parents decision zone */}
+        <div className="flex flex-col justify-between py-4 pl-0 md:pl-8 space-y-6">
+          
+          {/* Writing Board */}
+          <div className="flex-1 flex flex-col items-center justify-center space-y-3">
+            <div className="w-full max-w-[280px] aspect-square border-2 border-stone-200 rounded-2xl overflow-hidden relative bg-stone-50/50 shadow-inner">
+              <canvas
+                ref={canvasRef}
+                onMouseDown={startDrawing}
+                onMouseMove={draw}
+                onMouseUp={stopDrawing}
+                onMouseLeave={stopDrawing}
+                onTouchStart={(e) => { e.preventDefault(); startDrawing(e); }}
+                onTouchMove={(e) => { e.preventDefault(); draw(e); }}
+                onTouchEnd={stopDrawing}
+                className="w-full h-full cursor-crosshair block bg-transparent"
+              />
+            </div>
+            
+            <button
+              onClick={handleClear}
+              className="flex items-center space-x-1 text-xs font-bold text-stone-500 hover:text-rose-600 transition-colors bg-stone-100 hover:bg-stone-200/50 px-3 py-1.5 rounded-xl cursor-pointer"
+            >
+              <Trash2 className="w-3.5 h-3.5" />
+              <span>清除重寫</span>
+            </button>
+          </div>
+
+          {/* Parental Decision Area */}
+          <div className="bg-stone-50 border border-stone-200/80 rounded-2xl p-4 flex flex-col items-center space-y-4 shadow-inner">
+            <div className="w-full flex justify-between items-center px-2">
+              <span className="text-xs font-extrabold text-stone-500">家長評核席 (對照答案)</span>
+              
+              <button
+                onClick={() => setShowAnswer(prev => !prev)}
+                className="text-stone-500 hover:text-stone-700 p-1.5 rounded-lg bg-white border border-stone-250 transition-colors cursor-pointer flex items-center space-x-1 text-[10px] font-black"
+              >
+                {showAnswer ? (
+                  <>
+                    <EyeOff className="w-3.5 h-3.5" />
+                    <span>隱藏答案</span>
+                  </>
+                ) : (
+                  <>
+                    <Eye className="w-3.5 h-3.5" />
+                    <span>對照正確注音</span>
+                  </>
+                )}
+              </button>
+            </div>
+
+            {/* Answer Display */}
+            <div className="w-full h-auto py-6 bg-white border border-stone-200 rounded-xl flex items-center justify-center shadow-inner relative overflow-hidden">
+              {showAnswer ? (
+                <div className="animate-fade-in flex items-center justify-center">
+                  <VerticalZhuyin correctAnswer={quiz.correctAnswer} />
+                </div>
+              ) : (
+                <span className="text-xs font-bold text-stone-400">❓ 點擊上方按鈕查看答案</span>
+              )}
+            </div>
+
+            {/* Judgment buttons */}
+            <div className="flex gap-4 w-full">
+              <button
+                onClick={handleIncorrectClick}
+                className="flex-1 bg-red-50 border-2 border-red-200 hover:bg-red-100 text-red-650 font-black py-3 px-4 rounded-xl cursor-pointer flex items-center justify-center space-x-2 transition-all active:scale-95 shadow-sm text-sm"
+              >
+                <span>❌ 需再練習</span>
+              </button>
+              <button
+                onClick={handleCorrectClick}
+                className="flex-1 bg-emerald-500 hover:bg-emerald-450 text-white font-black py-3 px-4 rounded-xl cursor-pointer flex items-center justify-center space-x-2 transition-all active:scale-95 shadow-md border-b-3 border-emerald-700 text-sm"
+              >
+                <span>🎉 寫得好棒</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  );
+}
