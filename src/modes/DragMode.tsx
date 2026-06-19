@@ -448,10 +448,10 @@ export default function DragMode({
   };
 
   // Responsive styling
-  const cabinSizeClass = "w-12 h-12 md:w-24 md:h-24";
-  const toneSizeClass = "w-14 h-14 md:w-24 md:h-24";
-  const letterTextSize = "text-xl md:text-4xl";
-  const toneTextSize = "text-xl md:text-4xl";
+  const cabinSizeClass = "w-12 h-12 sm:w-24 sm:h-24";
+  const toneSizeClass = "w-14 h-14 sm:w-24 sm:h-24";
+  const letterTextSize = "text-xl sm:text-4xl";
+  const toneTextSize = "text-xl sm:text-4xl";
 
   return (
     <div className="max-w-6xl mx-auto w-full min-h-[100dvh] h-auto bg-gray-50 flex flex-col gap-4 p-3 pb-10 select-none relative">
@@ -508,7 +508,7 @@ export default function DragMode({
           {/* Initial (聲母) */}
           <div
             ref={initialZoneRef}
-            className={`relative ${cabinSizeClass} rounded-xl md:rounded-2xl border-2 flex flex-col items-center justify-center transition-all duration-300 shadow-sm overflow-hidden ${
+            className={`relative ${cabinSizeClass} rounded-xl sm:rounded-2xl border-2 flex flex-col items-center justify-center transition-all duration-300 shadow-sm overflow-hidden ${
               placedAnswers.initial
                 ? 'border-teal-500 bg-teal-50/50 text-teal-800'
                 : (wrongPlacedAnswers.initial && !isResettingWrong)
@@ -528,7 +528,7 @@ export default function DragMode({
                 {wrongPlacedAnswers.initial}
               </span>
             ) : (
-              <span className="text-[9px] md:text-lg text-stone-400 font-bold">聲母</span>
+              <span className="text-[9px] sm:text-lg text-stone-400 font-bold">聲母</span>
             )}
             {placedAnswers.initial && (
               <div className="absolute bottom-0.5 bg-teal-100 p-0.5 rounded-full">
@@ -541,7 +541,7 @@ export default function DragMode({
           {hasMedial && (
             <div
               ref={medialZoneRef}
-              className={`relative ${cabinSizeClass} rounded-xl md:rounded-2xl border-2 flex flex-col items-center justify-center transition-all duration-300 shadow-sm overflow-hidden ${
+              className={`relative ${cabinSizeClass} rounded-xl sm:rounded-2xl border-2 flex flex-col items-center justify-center transition-all duration-300 shadow-sm overflow-hidden ${
                 placedAnswers.medial
                   ? 'border-teal-500 bg-teal-50/50 text-teal-800'
                   : (wrongPlacedAnswers.medial && !isResettingWrong)
@@ -561,7 +561,7 @@ export default function DragMode({
                   {wrongPlacedAnswers.medial}
                 </span>
               ) : (
-                <span className="text-[9px] md:text-lg text-stone-400 font-bold">介母</span>
+                <span className="text-[9px] sm:text-lg text-stone-400 font-bold">介母</span>
               )}
               {placedAnswers.medial && (
                 <div className="absolute bottom-0.5 bg-teal-100 p-0.5 rounded-full">
@@ -574,7 +574,7 @@ export default function DragMode({
           {/* Final (韻母) */}
           <div
             ref={finalZoneRef}
-            className={`relative ${cabinSizeClass} rounded-xl md:rounded-2xl border-2 flex flex-col items-center justify-center transition-all duration-300 shadow-sm overflow-hidden ${
+            className={`relative ${cabinSizeClass} rounded-xl sm:rounded-2xl border-2 flex flex-col items-center justify-center transition-all duration-300 shadow-sm overflow-hidden ${
               placedAnswers.final
                 ? 'border-teal-500 bg-teal-50/50 text-teal-800'
                 : (wrongPlacedAnswers.final && !isResettingWrong)
@@ -594,7 +594,7 @@ export default function DragMode({
                 {wrongPlacedAnswers.final}
               </span>
             ) : (
-              <span className="text-[9px] md:text-lg text-stone-400 font-bold">韻母</span>
+              <span className="text-[9px] sm:text-lg text-stone-400 font-bold">韻母</span>
             )}
             {placedAnswers.final && (
               <div className="absolute bottom-0.5 bg-teal-100 p-0.5 rounded-full">
@@ -609,7 +609,7 @@ export default function DragMode({
         <div className="flex flex-col items-center justify-center">
           <div
             ref={toneZoneRef}
-            className={`relative ${toneSizeClass} rounded-xl md:rounded-2xl border-2 flex flex-col items-center justify-center transition-all duration-300 shadow-sm overflow-hidden ${
+            className={`relative ${toneSizeClass} rounded-xl sm:rounded-2xl border-2 flex flex-col items-center justify-center transition-all duration-300 shadow-sm overflow-hidden ${
               placedAnswers.tone
                 ? 'border-amber-500 bg-amber-50/50 text-amber-800'
                 : (wrongPlacedAnswers.tone && !isResettingWrong)
@@ -629,7 +629,7 @@ export default function DragMode({
                 {getToneDisplay(wrongPlacedAnswers.tone)}
               </span>
             ) : (
-              <span className="text-[9px] md:text-lg text-amber-400 font-bold">聲調</span>
+              <span className="text-[9px] sm:text-lg text-amber-400 font-bold">聲調</span>
             )}
             {placedAnswers.tone && (
               <div className="absolute bottom-0.5 bg-amber-100 p-0.5 rounded-full">
@@ -660,10 +660,10 @@ export default function DragMode({
                 onTouchStart={(e) => handleDragStart(e, card)}
                 onMouseDown={(e) => handleDragStart(e, card)}
                 style={{ opacity: isDragging ? 0.25 : 1 }}
-                className="draggable-card w-10 h-10 md:w-16 md:h-16 bg-gradient-to-br border-2 md:border-2 rounded-xl md:rounded-2xl flex items-center justify-center cursor-grab active:cursor-grabbing shadow-sm md:shadow-lg transition-all duration-150 transform hover:-translate-y-0.5 hover:shadow-md"
+                className="draggable-card w-10 h-10 sm:w-16 sm:h-16 bg-gradient-to-br border-2 rounded-xl sm:rounded-2xl flex items-center justify-center cursor-grab active:cursor-grabbing shadow-sm sm:shadow-lg transition-all duration-150 transform hover:-translate-y-0.5 hover:shadow-md"
               >
-                <div className={`w-full h-full flex items-center justify-center rounded-lg md:rounded-xl bg-gradient-to-br ${typeStyles}`}>
-                  <span className="text-base md:text-2xl font-black">
+                <div className={`w-full h-full flex items-center justify-center rounded-lg sm:rounded-xl bg-gradient-to-br ${typeStyles}`}>
+                  <span className="text-base sm:text-2xl font-black">
                     {card.symbol}
                   </span>
                 </div>
@@ -672,7 +672,7 @@ export default function DragMode({
           })}
 
         {/* Separator line */}
-        <div className="hidden md:block h-12 border-r border-stone-200 mx-2 md:mx-3"></div>
+        <div className="hidden sm:block h-12 border-r border-stone-200 mx-2 sm:mx-3"></div>
 
         {/* Right part: tones */}
         {TONE_CARDS.map((card) => {
@@ -689,10 +689,10 @@ export default function DragMode({
                 opacity: isDragging ? 0.25 : isPlaced ? 0.4 : 1,
                 pointerEvents: isPlaced ? 'none' : 'auto',
               }}
-              className="draggable-card w-11 h-11 md:w-16 md:h-16 bg-gradient-to-br border-2 md:border-2 rounded-xl md:rounded-2xl flex flex-col items-center justify-center cursor-grab active:cursor-grabbing shadow-sm md:shadow-lg transition-all duration-150 transform hover:-translate-y-0.5 hover:shadow-md"
+              className="draggable-card w-11 h-11 sm:w-16 sm:h-16 bg-gradient-to-br border-2 rounded-xl sm:rounded-2xl flex flex-col items-center justify-center cursor-grab active:cursor-grabbing shadow-sm sm:shadow-lg transition-all duration-150 transform hover:-translate-y-0.5 hover:shadow-md"
             >
-              <div className={`w-full h-full flex items-center justify-center rounded-lg md:rounded-xl bg-gradient-to-br ${typeStyles}`}>
-                <span className="text-xl md:text-2xl font-extrabold">
+              <div className={`w-full h-full flex items-center justify-center rounded-lg sm:rounded-xl bg-gradient-to-br ${typeStyles}`}>
+                <span className="text-xl sm:text-2xl font-extrabold">
                   {card.display}
                 </span>
               </div>
