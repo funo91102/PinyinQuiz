@@ -7,6 +7,7 @@ import MatchMode from '../modes/MatchMode';
 import ListenMode from '../modes/ListenMode';
 import CanvasMode from '../modes/CanvasMode';
 import fallbackQuizzes from '../../quizzes_seed.json';
+import { useQuizWeight } from '../hooks/useQuizWeight';
 
 const API_BASE = import.meta.env.PROD ? 'http://100.95.126.72:3001' : '';
 
@@ -60,6 +61,9 @@ export default function GameSession({ mode, onBackToLobby, onBackToModeSelect }:
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  // V5.0 加權抽題演算法 Hook
+  const { recordWrongAttempt, generateWeightedQuizzes } = useQuizWeight();
+
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [correctCount, setCorrectCount] = useState(0);
   const [logsArray, setLogsArray] = useState<WrongAttempt[]>([]);
@@ -92,7 +96,8 @@ export default function GameSession({ mode, onBackToLobby, onBackToModeSelect }:
           ...item,
           imageUrl: getImageUrl(item.imageUrl)
         }));
-        setQuizzes(processed);
+        // V5.0：以加權演算法抽出 15 題，讓錯題優先複習
+        setQuizzes(generateWeightedQuizzes(processed, 15));
         setLoading(false);
         sessionStartTimeRef.current = Date.now();
         questionStartTimeRef.current = Date.now();
@@ -101,14 +106,13 @@ export default function GameSession({ mode, onBackToLobby, onBackToModeSelect }:
         clearTimeout(timeoutId);
         console.warn('Backend API fetch failed, falling back to local seed quizzes:', err);
         try {
-          const shuffled = [...fallbackQuizzes]
-            .sort(() => Math.random() - 0.5)
-            .slice(0, 15)
-            .map(item => ({
-              ...item,
-              imageUrl: getImageUrl(item.imageUrl)
-            }));
-          setQuizzes(shuffled);
+          // V5.0：先 map imageUrl，再以加權演算法抽出 15 題
+          const processedFallback = (fallbackQuizzes as QuizItem[]).map(item => ({
+            ...item,
+            imageUrl: getImageUrl(item.imageUrl)
+          }));
+          const weightedFallback = generateWeightedQuizzes(processedFallback, 15);
+          setQuizzes(weightedFallback);
           setLoading(false);
           sessionStartTimeRef.current = Date.now();
           questionStartTimeRef.current = Date.now();
@@ -307,12 +311,15 @@ export default function GameSession({ mode, onBackToLobby, onBackToModeSelect }:
 
   // Wrong attempt callback from DragMode
   const handleWrongAttempt = (wrongAnswerObj: { initial: string; medial: string; final: string; tone: string }) => {
-    
+    // V5.0：立即將此題錯誤記入 localStorage，下次開局時提升其抽中權重
+    const currentQuiz = quizzes[currentQuestionIndex];
+    if (currentQuiz) {
+      recordWrongAttempt(currentQuiz.id);
+    }
     // Telemetry log
     logQuestionAttempt(quizzes[currentQuestionIndex].id, false, wrongAnswerObj);
 
     // Record wrong answer in logsArray (only record first mistake for each question)
-    const currentQuiz = quizzes[currentQuestionIndex];
     if (currentQuiz) {
       setLogsArray(prev => {
         if (prev.some(log => log.quizId === currentQuiz.id)) {
