@@ -54,13 +54,13 @@ export default function ModeSelect({ onBack, onSelectMode }: ModeSelectProps) {
       enabled: true,
     },
     {
-      id: 'mix',
+      id: 'mixed',
       name: 'Mode 5：混合冒險模式',
-      desc: '綜合前述四種模式隨機出題，終極測驗孩子的注音實力！',
+      desc: '綜合手寫與拖曳兩種模式隨機出題，搭配錯題加權抽題演算法，終極測驗孩子的注音實力！',
       icon: '🌀',
-      color: 'from-stone-300 to-stone-400 border-stone-250 text-stone-550',
-      badge: '暫鎖',
-      enabled: false,
+      color: 'from-violet-400 to-purple-500 border-violet-300 shadow-violet-500/10 text-violet-850',
+      badge: '開放中',
+      enabled: true,
     },
   ];
 
