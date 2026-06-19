@@ -203,31 +203,7 @@ export default function DragMode({
     }
   }, [quiz]);
 
-  // Lock body scroll and touch actions when component is mounted
-  useEffect(() => {
-    document.body.style.overflow = 'hidden';
-    document.body.style.touchAction = 'none';
-
-    const footer = footerRef.current;
-    const preventDefaultTouch = (e: TouchEvent) => {
-      // Prevent scrolling the card pool container
-      e.preventDefault();
-    };
-
-    if (footer) {
-      footer.addEventListener('touchstart', preventDefaultTouch, { passive: false });
-      footer.addEventListener('touchmove', preventDefaultTouch, { passive: false });
-    }
-
-    return () => {
-      document.body.style.overflow = '';
-      document.body.style.touchAction = '';
-      if (footer) {
-        footer.removeEventListener('touchstart', preventDefaultTouch);
-        footer.removeEventListener('touchmove', preventDefaultTouch);
-      }
-    };
-  }, []);
+  // ── 全域 body 鎖定已移除：改為在各拖曳積木上局部使用 passive:false ──
 
   // Check completion
   useEffect(() => {
@@ -478,10 +454,10 @@ export default function DragMode({
   const toneTextSize = "text-xl md:text-3xl";
 
   return (
-    <div className="max-w-6xl mx-auto w-full h-[100dvh] overflow-hidden flex flex-col justify-between p-3 select-none relative">
+    <div className="max-w-6xl mx-auto w-full min-h-[100dvh] h-auto bg-gray-50 flex flex-col gap-4 p-3 pb-10 select-none relative">
       
       {/* Word Card & Audio Pronounce (Top) */}
-      <div className="shrink-0 flex flex-row items-center justify-between gap-3 bg-white rounded-2xl px-4 h-[10dvh] shadow-sm w-full">
+      <div className="shrink-0 flex flex-row items-center justify-between gap-3 bg-white rounded-2xl px-4 py-3 shadow-sm w-full">
         <div className="flex items-center gap-3">
             <div className="bg-stone-50 border border-stone-200/60 rounded-xl overflow-hidden shadow-inner">
               <img
@@ -524,7 +500,7 @@ export default function DragMode({
         </div>
 
       {/* Drop zones / space cabins (Middle) - 台灣直式注音結構 */}
-      <div className="h-[45dvh] shrink-0 bg-white rounded-2xl p-3 md:p-6 flex flex-row justify-center items-center gap-6 md:gap-10 w-full shadow-sm">
+      <div className="h-auto shrink-0 bg-white rounded-2xl px-3 py-6 md:px-6 flex flex-row justify-center items-center gap-6 md:gap-10 w-full shadow-sm">
 
         {/* 左側：聲母 + 介母 + 韻母（由上往下垂直堆疊） */}
         <div className="flex flex-col gap-2 items-center">
@@ -666,7 +642,7 @@ export default function DragMode({
       </div>
 
       {/* Card pool (Bottom) */}
-      <footer ref={footerRef} className="h-[38dvh] shrink-0 bg-white rounded-2xl p-2 md:p-4 flex flex-wrap gap-1.5 md:gap-2 content-center justify-center items-center shadow-sm w-full select-none overflow-hidden">
+      <footer ref={footerRef} className="h-auto shrink-0 bg-white rounded-2xl p-2 md:p-4 flex flex-wrap gap-1.5 md:gap-2 content-center justify-center items-center shadow-sm w-full select-none">
         {/* Left part: symbols */}
         {cardPool
           .filter((card) => card.type !== 'tone')
