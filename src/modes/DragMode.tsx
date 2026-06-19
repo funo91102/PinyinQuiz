@@ -463,7 +463,7 @@ export default function DragMode({
               <img
                 src={quiz.imageUrl}
                 alt={quiz.wordText}
-                className="w-14 h-14 md:w-20 md:h-20 object-contain p-1 select-none pointer-events-none"
+                className="w-20 h-20 md:w-24 md:h-24 object-contain p-1 select-none pointer-events-none"
               />
             </div>
 
@@ -503,7 +503,7 @@ export default function DragMode({
       <div className="h-auto shrink-0 bg-white rounded-2xl px-3 py-6 md:px-6 flex flex-row justify-center items-center gap-6 md:gap-10 w-full shadow-sm">
 
         {/* 左側：聲母 + 介母 + 韻母（由上往下垂直堆疊） */}
-        <div className="flex flex-col gap-2 items-center">
+        <div className="flex flex-col gap-4 items-center">
 
           {/* Initial (聲母) */}
           <div

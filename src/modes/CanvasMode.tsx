@@ -374,8 +374,8 @@ export default function CanvasMode({
       </div>
 
       {/* ② 中間畫布區 */}
-      <div className="h-auto my-4 shrink-0 bg-white rounded-2xl p-3 flex items-center justify-center relative shadow-sm w-full">
-        <div className="relative w-full h-full max-w-[32dvh] max-h-[32dvh] md:max-w-[38dvh] md:max-h-[38dvh] border border-stone-200 rounded-2xl overflow-hidden bg-stone-50/50 shadow-inner touch-none select-none">
+      <div className="h-auto my-4 shrink-0 bg-white rounded-2xl p-4 flex items-center justify-center relative shadow-sm w-full">
+        <div className="relative w-full aspect-square max-w-[350px] md:max-w-[500px] border border-stone-200 rounded-2xl overflow-hidden bg-stone-50/50 shadow-inner touch-none select-none">
           <canvas
             ref={canvasRef}
             onMouseDown={startDrawing}
