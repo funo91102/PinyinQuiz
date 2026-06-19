@@ -33,6 +33,15 @@ interface QuizItem {
   };
 }
 
+/**
+ * V6.0：在原始 QuizItem 上擴展 assignedMode，
+ * 記錄本题在本次展缺中被隨機指派的關卡形式。
+ */
+interface QuizItemWithMode extends QuizItem {
+  /** 本题被分發到的展示模式：手寫關卡或拖曳關卡 */
+  assignedMode: 'handwriting' | 'drag';
+}
+
 interface WrongAttempt {
   quizId: number;
   wordText: string;
@@ -51,13 +60,13 @@ interface WrongAttempt {
 }
 
 interface GameSessionProps {
-  mode: 'drag-drop' | 'matching' | 'listening' | 'handwriting';
+  mode: 'drag-drop' | 'matching' | 'listening' | 'handwriting' | 'mixed';
   onBackToLobby: () => void;
   onBackToModeSelect: () => void;
 }
 
 export default function GameSession({ mode, onBackToLobby, onBackToModeSelect }: GameSessionProps) {
-  const [quizzes, setQuizzes] = useState<QuizItem[]>([]);
+  const [quizzes, setQuizzes] = useState<QuizItemWithMode[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -97,7 +106,9 @@ export default function GameSession({ mode, onBackToLobby, onBackToModeSelect }:
           imageUrl: getImageUrl(item.imageUrl)
         }));
         // V5.0：以加權演算法抽出 15 題，讓錯題優先複習
-        setQuizzes(generateWeightedQuizzes(processed, 15));
+        // V6.0：為每題隨機分發 50/50 的展示模式（手寫 or 拖曳）
+        const weightedQuizzes = generateWeightedQuizzes(processed, 15);
+        setQuizzes(assignRandomDisplayModes(weightedQuizzes));
         setLoading(false);
         sessionStartTimeRef.current = Date.now();
         questionStartTimeRef.current = Date.now();
@@ -112,7 +123,8 @@ export default function GameSession({ mode, onBackToLobby, onBackToModeSelect }:
             imageUrl: getImageUrl(item.imageUrl)
           }));
           const weightedFallback = generateWeightedQuizzes(processedFallback, 15);
-          setQuizzes(weightedFallback);
+          // V6.0：Fallback 路徑同步套用隨機模式分發
+          setQuizzes(assignRandomDisplayModes(weightedFallback));
           setLoading(false);
           sessionStartTimeRef.current = Date.now();
           questionStartTimeRef.current = Date.now();
@@ -408,8 +420,22 @@ export default function GameSession({ mode, onBackToLobby, onBackToModeSelect }:
       case 'matching': return '連連看挑戰';
       case 'listening': return '聽音選字關卡';
       case 'handwriting': return '手寫挑戰板';
+      case 'mixed': return '混合隨機關卡';
       default: return '注音練習';
     }
+  };
+
+  /**
+   * V6.0 隨機模式分發純函式
+   * 為每道題目指派 50% 機率的 assignedMode，輸入資料不变動，回傳新陣列。
+   * @param quizPool - 已經加權抽出的題目陣列
+   * @returns 上有 assignedMode 標記的新陣列
+   */
+  const assignRandomDisplayModes = (quizPool: QuizItem[]): QuizItemWithMode[] => {
+    return quizPool.map(quizItem => ({
+      ...quizItem,
+      assignedMode: Math.random() < 0.5 ? 'handwriting' : 'drag'
+    }));
   };
 
   if (gameState === 'result') {
@@ -456,7 +482,27 @@ export default function GameSession({ mode, onBackToLobby, onBackToModeSelect }:
       {/* Progress Bar Component */}
       <ProgressBar current={currentQuestionIndex + 1} total={quizzes.length} />
 
-      {/* Gameplay Board */}
+      {/* Gameplay Board — V6.0 動態視圖路由 */}
+      {mode === 'mixed' && currentQuiz.assignedMode === 'handwriting' && (
+        <CanvasMode
+          key={currentQuestionIndex}
+          quiz={currentQuiz}
+          isLastQuestion={isLastQuestion}
+          onCorrect={handleCorrectAnswer}
+          onWrongAttempt={handleWrongAttempt}
+          onNext={handleNextQuestion}
+        />
+      )}
+      {mode === 'mixed' && currentQuiz.assignedMode === 'drag' && (
+        <DragMode
+          key={currentQuestionIndex}
+          quiz={currentQuiz}
+          isLastQuestion={isLastQuestion}
+          onCorrect={handleCorrectAnswer}
+          onWrongAttempt={handleWrongAttempt}
+          onNext={handleNextQuestion}
+        />
+      )}
       {mode === 'handwriting' && (
         <CanvasMode
           key={currentQuestionIndex}
