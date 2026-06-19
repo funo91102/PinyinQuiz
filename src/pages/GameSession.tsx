@@ -65,6 +65,22 @@ interface GameSessionProps {
   onBackToModeSelect: () => void;
 }
 
+/**
+ * V6.0 隨機模式分發純函式（模組層級，提升至組件外部）
+ *
+ * 將此函式置於組件外部，確保在模組解析階段即完成初始化，
+ * 彻底避免 fetchQuizzes 在組件構造階段觸發暫時性死區（Temporal Dead Zone）錯誤。
+ *
+ * @param quizPool - 已經加權抽出的題目陣列
+ * @returns 上有 assignedMode 標記的新陣列（原始資料不變動）
+ */
+function assignRandomDisplayModes(quizPool: QuizItem[]): QuizItemWithMode[] {
+  return quizPool.map(quizItem => ({
+    ...quizItem,
+    assignedMode: Math.random() < 0.5 ? 'handwriting' : 'drag'
+  }));
+}
+
 export default function GameSession({ mode, onBackToLobby, onBackToModeSelect }: GameSessionProps) {
   const [quizzes, setQuizzes] = useState<QuizItemWithMode[]>([]);
   const [loading, setLoading] = useState(true);
@@ -425,18 +441,6 @@ export default function GameSession({ mode, onBackToLobby, onBackToModeSelect }:
     }
   };
 
-  /**
-   * V6.0 隨機模式分發純函式
-   * 為每道題目指派 50% 機率的 assignedMode，輸入資料不变動，回傳新陣列。
-   * @param quizPool - 已經加權抽出的題目陣列
-   * @returns 上有 assignedMode 標記的新陣列
-   */
-  const assignRandomDisplayModes = (quizPool: QuizItem[]): QuizItemWithMode[] => {
-    return quizPool.map(quizItem => ({
-      ...quizItem,
-      assignedMode: Math.random() < 0.5 ? 'handwriting' : 'drag'
-    }));
-  };
 
   if (gameState === 'result') {
     return (
