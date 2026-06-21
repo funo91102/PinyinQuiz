@@ -8,6 +8,11 @@ import ListenMode from '../modes/ListenMode';
 import CanvasMode from '../modes/CanvasMode';
 import fallbackQuizzes from '../../quizzes_seed.json';
 import { useQuizWeight } from '../hooks/useQuizWeight';
+import {
+  type UniversalQuizItem,
+  type QuizItemWithAssignedMode,
+  type LearningSubjectCode
+} from '../types/quiz';
 
 const API_BASE = import.meta.env.PROD ? 'http://100.95.126.72:3001' : '';
 
@@ -20,27 +25,13 @@ const getImageUrl = (pathStr: string) => {
   const baseUrl = import.meta.env.BASE_URL || '/';
   return `${baseUrl}${cleanPath}`;
 };
-interface QuizItem {
-  id: number;
-  wordText: string;
-  imageUrl: string;
-  audioUrl: string;
-  correctAnswer: {
-    initial: string;
-    medial: string;
-    final: string;
-    tone: string;
-  };
-}
-
 /**
- * V6.0：在原始 QuizItem 上擴展 assignedMode，
- * 記錄本题在本次展缺中被隨機指派的關卡形式。
+ * V7.0：本檔案內部使用的型別別名。
+ * 所有題目型別定義已統一集中至 src/types/quiz.ts，
+ * 此處保留別名以利閱讀，避免到處散落長型別名。
  */
-interface QuizItemWithMode extends QuizItem {
-  /** 本题被分發到的展示模式：手寫關卡或拖曳關卡 */
-  assignedMode: 'handwriting' | 'drag';
-}
+type QuizItem = UniversalQuizItem;
+type QuizItemWithMode = QuizItemWithAssignedMode;
 
 interface WrongAttempt {
   quizId: number;
@@ -79,7 +70,7 @@ export interface PracticeLogPayload {
   correct: boolean;
   mode: string;
   gameDisplayMode: 'drag' | 'canvas' | 'match' | 'listen';
-  learningSubject: 'zhuyin' | 'english';
+  learningSubject: LearningSubjectCode;
   userAnswer: { initial: string; medial: string; final: string; tone: string };
   user_answer: { initial: string; medial: string; final: string; tone: string };
   wrongPart: string[];
@@ -101,11 +92,11 @@ interface GameSessionProps {
  * @param quizPool - 已經加權抽出的題目陣列
  * @returns 上有 assignedMode 標記的新陣列（原始資料不變動）
  */
-function assignRandomDisplayModes(quizPool: QuizItem[]): QuizItemWithMode[] {
+function assignRandomDisplayModes(quizPool: UniversalQuizItem[]): QuizItemWithAssignedMode[] {
   return quizPool.map(quizItem => ({
     ...quizItem,
     assignedMode: Math.random() < 0.5 ? 'handwriting' : 'drag'
-  }));
+  } as QuizItemWithAssignedMode));
 }
 
 /**
@@ -122,7 +113,7 @@ function assignRandomDisplayModes(quizPool: QuizItem[]): QuizItemWithMode[] {
  */
 function resolveGameDisplayMode(
   sessionMode: GameSessionProps['mode'],
-  assignedMode: QuizItemWithMode['assignedMode']
+  assignedMode: QuizItemWithAssignedMode['assignedMode']
 ): PracticeLogPayload['gameDisplayMode'] {
   if (sessionMode === 'mixed') {
     return assignedMode === 'handwriting' ? 'canvas' : 'drag';
@@ -171,14 +162,15 @@ export default function GameSession({ mode, onBackToLobby, onBackToModeSelect }:
         if (!res.ok) throw new Error('無法取得注音關卡資料');
         return res.json();
       })
-      .then((data: QuizItem[]) => {
-        const processed = data.map(item => ({
+      .then((data: Omit<QuizItem, 'subject'>[]) => {
+        const processed: UniversalQuizItem[] = data.map(item => ({
           ...item,
+          subject: 'zhuyin' as const,   // V7.0: 現階段所有 API 資料為注音科目
           imageUrl: getImageUrl(item.imageUrl)
         }));
         // V5.0：以加權演算法抽出 15 題，讓錯題優先複習
         // V6.0：為每題隨機分發 50/50 的展示模式（手寫 or 拖曳）
-        const weightedQuizzes = generateWeightedQuizzes(processed, 15);
+        const weightedQuizzes = generateWeightedQuizzes(processed, 15) as UniversalQuizItem[];
         setQuizzes(assignRandomDisplayModes(weightedQuizzes));
         setLoading(false);
         sessionStartTimeRef.current = Date.now();
@@ -189,11 +181,12 @@ export default function GameSession({ mode, onBackToLobby, onBackToModeSelect }:
         console.warn('Backend API fetch failed, falling back to local seed quizzes:', err);
         try {
           // V5.0：先 map imageUrl，再以加權演算法抽出 15 題
-          const processedFallback = (fallbackQuizzes as QuizItem[]).map(item => ({
+          const processedFallback: UniversalQuizItem[] = (fallbackQuizzes as Omit<QuizItem, 'subject'>[]).map(item => ({
             ...item,
+            subject: 'zhuyin' as const,  // V7.0: fallback 種子資料全為注音科目
             imageUrl: getImageUrl(item.imageUrl)
           }));
-          const weightedFallback = generateWeightedQuizzes(processedFallback, 15);
+          const weightedFallback = generateWeightedQuizzes(processedFallback, 15) as UniversalQuizItem[];
           // V6.0：Fallback 路徑同步套用隨機模式分發
           setQuizzes(assignRandomDisplayModes(weightedFallback));
           setLoading(false);

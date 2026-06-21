@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Volume2, Check, ArrowRight } from 'lucide-react';
 import imageWordMap from '../imageWordMap.json';
+import { resolveUtteranceParameters } from '../types/quiz';
 
 interface QuizItem {
   id: number;
+  subject?: 'zhuyin' | 'phonics'; // V7.0: 學習科目維度，預設注音
   wordText: string;
   imageUrl: string;
   audioUrl: string;
@@ -198,7 +200,7 @@ export default function DragMode({
       setCardPool(shuffle(pool));
 
       setTimeout(() => {
-        playPronunciation(quiz.wordText);
+        playPronunciation(quiz);
       }, 500);
     }
   }, [quiz]);
@@ -223,13 +225,17 @@ export default function DragMode({
     }
   }, [placedAnswers, quiz, hasMadeMistake, levelCompleted, hasMedial]);
 
-  // Speech Synthesizer
-  const playPronunciation = (word: string) => {
+  // V7.0: 雙語化 TTS 語音播放函式
+  // 根據 quiz.subject 動態解析語言策略：
+  //   - 'zhuyin'  → zh-TW, rate 0.70 (台灣中文偏慢，注音辨識用)
+  //   - 'phonics' → en-US, rate 0.85 (兒童英語音素辨識用)
+  const playPronunciation = (quiz: QuizItem) => {
     if ('speechSynthesis' in window) {
       window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(word);
-      utterance.lang = 'zh-TW';
-      utterance.rate = 0.75;
+      const utterance = new SpeechSynthesisUtterance(quiz.wordText);
+      const { lang, rate } = resolveUtteranceParameters(quiz.subject ?? 'zhuyin');
+      utterance.lang = lang;
+      utterance.rate = rate;
       window.speechSynthesis.speak(utterance);
     }
   };
@@ -491,7 +497,7 @@ export default function DragMode({
           </div>
 
           <button
-            onClick={() => playPronunciation(quiz.wordText)}
+            onClick={() => playPronunciation(quiz)}
             className="bg-amber-500 hover:bg-amber-400 active:scale-95 transition-all text-white p-2.5 md:p-3 rounded-full shadow-md flex items-center justify-center cursor-pointer"
             aria-label="播放讀音"
           >

@@ -2,9 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Volume2, Eye, EyeOff, Trash2 } from 'lucide-react';
 import VerticalZhuyin from '../components/VerticalZhuyin';
 import imageWordMap from '../imageWordMap.json';
+import { resolveUtteranceParameters } from '../types/quiz';
 
 interface QuizItem {
   id: number;
+  subject?: 'zhuyin' | 'phonics'; // V7.0: 學習科目維度，預設注音
   wordText: string;
   imageUrl: string;
   audioUrl: string;
@@ -35,13 +37,17 @@ export default function CanvasMode({
   const [showAnswer, setShowAnswer] = useState(false);
   const lastPosRef = useRef<{ x: number; y: number } | null>(null);
 
-  // Play pronunciation via TTS
-  const playPronunciation = (word: string) => {
+  // V7.0: 雙語化 TTS 語音播放函式
+  // 根據 quiz.subject 動態解析語言策略：
+  //   - 'zhuyin'  → zh-TW, rate 0.70 (台灣中文偏慢，注音辨識用)
+  //   - 'phonics' → en-US, rate 0.85 (兒童英語音素辨識用)
+  const playPronunciation = (quiz: QuizItem) => {
     if ('speechSynthesis' in window) {
       window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(word);
-      utterance.lang = 'zh-TW';
-      utterance.rate = 0.70; // Kids friendly slower speed
+      const utterance = new SpeechSynthesisUtterance(quiz.wordText);
+      const { lang, rate } = resolveUtteranceParameters(quiz.subject ?? 'zhuyin');
+      utterance.lang = lang;
+      utterance.rate = rate;
       window.speechSynthesis.speak(utterance);
     }
   };
@@ -50,7 +56,7 @@ export default function CanvasMode({
   useEffect(() => {
     setShowAnswer(false);
     const timer = setTimeout(() => {
-      playPronunciation(quiz.wordText);
+      playPronunciation(quiz);
     }, 500);
 
     return () => clearTimeout(timer);
@@ -365,7 +371,7 @@ export default function CanvasMode({
         </div>
 
         <button
-          onClick={() => playPronunciation(quiz.wordText)}
+          onClick={() => playPronunciation(quiz)}
           className="bg-gradient-to-br from-rose-400 to-pink-500 hover:from-rose-350 hover:to-pink-400 active:scale-95 transition-all text-white p-3 md:p-4 rounded-full shadow-md border-b-3 border-pink-700 flex items-center justify-center cursor-pointer"
           aria-label="播放發音"
         >

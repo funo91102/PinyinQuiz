@@ -2,9 +2,11 @@ import { useState, useEffect } from 'react';
 import { Volume2, Check, ArrowRight, Sparkles } from 'lucide-react';
 import allQuizzes from '../../quizzes_seed.json';
 import VerticalZhuyin from '../components/VerticalZhuyin';
+import { resolveUtteranceParameters } from '../types/quiz';
 
 interface QuizItem {
   id: number;
+  subject?: 'zhuyin' | 'phonics'; // V7.0: 學習科目維度，預設注音
   wordText: string;
   imageUrl: string;
   audioUrl: string;
@@ -112,18 +114,22 @@ export default function ListenMode({
 
       // Auto play pronunciation on load
       setTimeout(() => {
-        playPronunciation(quiz.wordText);
+        playPronunciation(quiz);
       }, 500);
     }
   }, [quiz]);
 
-  // TTS Pronunciation
-  const playPronunciation = (word: string) => {
+  // V7.0: 雙語化 TTS 語音播放函式
+  // 根據 quiz.subject 動態解析語言策略：
+  //   - 'zhuyin'  → zh-TW, rate 0.70 (台灣中文偏慢，注音辨識用)
+  //   - 'phonics' → en-US, rate 0.85 (兒童英語音素辨識用)
+  const playPronunciation = (quiz: QuizItem) => {
     if ('speechSynthesis' in window) {
       window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(word);
-      utterance.lang = 'zh-TW';
-      utterance.rate = 0.70; // Slightly slower for listening mode clarity
+      const utterance = new SpeechSynthesisUtterance(quiz.wordText);
+      const { lang, rate } = resolveUtteranceParameters(quiz.subject ?? 'zhuyin');
+      utterance.lang = lang;
+      utterance.rate = rate;
       window.speechSynthesis.speak(utterance);
     }
   };
@@ -205,7 +211,7 @@ export default function ListenMode({
           {/* Animated pulsing rings around the player */}
           <div className="absolute inset-0 bg-sky-400 rounded-full blur-xl opacity-20 animate-ping"></div>
           <button
-            onClick={() => playPronunciation(quiz.wordText)}
+            onClick={() => playPronunciation(quiz)}
             className="relative bg-gradient-to-br from-sky-400 to-indigo-500 hover:from-sky-350 hover:to-indigo-400 active:scale-95 transition-all text-white p-8 sm:p-10 rounded-full shadow-lg hover:shadow-sky-500/20 cursor-pointer flex items-center justify-center border-b-6 border-indigo-700"
             aria-label="播放單字發音"
           >

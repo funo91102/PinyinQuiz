@@ -21,9 +21,14 @@ import { useCallback } from 'react';
 
 // ── 型別定義 ────────────────────────────────────────────────────────────────
 
-/** 與各 mode 組件共享的題目資料結構（與 GameSession 中的 QuizItem 保持一致） */
+/**
+ * 與各 mode 組件共享的題目資料結構（與 GameSession 中的 QuizItem 保持一致）。
+ * V7.0：新增 subject 可選欄位，向下相容現有注音題目資料。
+ */
 export interface QuizItem {
   id: number;
+  /** V7.0 學習科目維度（optional，向下相容舊資料結構） */
+  subject?: 'zhuyin' | 'phonics';
   wordText: string;
   imageUrl: string;
   audioUrl: string;
