@@ -59,6 +59,33 @@ interface WrongAttempt {
   };
 }
 
+/**
+ * V7.0 雙語宇宙：作答紀錄傳送 Payload 的完整型別定義。
+ *
+ * @field gameDisplayMode - 本題實際呈現給學習者的遊戲介面類型。
+ *   - 'drag'   : 拖曳圖卡配對 (DragMode)
+ *   - 'canvas' : 手寫辨識板 (CanvasMode)
+ *   - 'match'  : 連連看配對 (MatchMode)
+ *   - 'listen' : 聽音辨義選字 (ListenMode)
+ * @field learningSubject - 本次作答的學習科目（課程維度）。
+ *   - 'zhuyin'  : 注音符號拼音練習
+ *   - 'english' : 英語學習課程（未來擴充）
+ */
+export interface PracticeLogPayload {
+  quizId: number;
+  isCorrect: boolean;
+  spentSeconds: number;
+  subject: string;
+  correct: boolean;
+  mode: string;
+  gameDisplayMode: 'drag' | 'canvas' | 'match' | 'listen';
+  learningSubject: 'zhuyin' | 'english';
+  userAnswer: { initial: string; medial: string; final: string; tone: string };
+  user_answer: { initial: string; medial: string; final: string; tone: string };
+  wrongPart: string[];
+  wrong_part: string[];
+}
+
 interface GameSessionProps {
   mode: 'drag-drop' | 'matching' | 'listening' | 'handwriting' | 'mixed';
   onBackToLobby: () => void;
@@ -79,6 +106,34 @@ function assignRandomDisplayModes(quizPool: QuizItem[]): QuizItemWithMode[] {
     ...quizItem,
     assignedMode: Math.random() < 0.5 ? 'handwriting' : 'drag'
   }));
+}
+
+/**
+ * V7.0 雙語宇宙：將遊戲 session mode 與題目的 assignedMode 解析為
+ * PracticeLogPayload 所需的標準化 gameDisplayMode 值。
+ *
+ * 解析規則：
+ *   - 混合模式 ('mixed')  → 讀取當前題目的 assignedMode 並對映至標準值
+ *   - 單一模式            → 直接對映當前 session 的 mode 至標準值
+ *
+ * @param sessionMode    - 目前遊戲 session 的整體模式
+ * @param assignedMode   - 混合模式下當前題目被分配到的展示模式
+ * @returns 標準化的 gameDisplayMode（供 PracticeLogPayload 使用）
+ */
+function resolveGameDisplayMode(
+  sessionMode: GameSessionProps['mode'],
+  assignedMode: QuizItemWithMode['assignedMode']
+): PracticeLogPayload['gameDisplayMode'] {
+  if (sessionMode === 'mixed') {
+    return assignedMode === 'handwriting' ? 'canvas' : 'drag';
+  }
+  switch (sessionMode) {
+    case 'handwriting': return 'canvas';
+    case 'drag-drop':   return 'drag';
+    case 'matching':    return 'match';
+    case 'listening':   return 'listen';
+    default:            return 'drag';
+  }
 }
 
 export default function GameSession({ mode, onBackToLobby, onBackToModeSelect }: GameSessionProps) {
@@ -183,13 +238,18 @@ export default function GameSession({ mode, onBackToLobby, onBackToModeSelect }:
         if (wrongAnswerObj.tone !== currentQuiz.correctAnswer.tone) wrongPartList.push('tone');
       }
 
-      const logPayload = {
+      /** V7.0：解析本題實際呈現的遊戲介面類型，供下游分析管線使用 */
+      const resolvedGameDisplayMode = resolveGameDisplayMode(mode, currentQuiz.assignedMode);
+
+      const logPayload: PracticeLogPayload = {
         quizId,
         isCorrect,
         spentSeconds: elapsed,
         subject: 'zhuyin',
         correct: isCorrect,
         mode: mode === 'handwriting' ? 'canvas' : mode,
+        gameDisplayMode: resolvedGameDisplayMode,
+        learningSubject: 'zhuyin',
         userAnswer: userAnswerObj,
         user_answer: userAnswerObj,
         wrongPart: wrongPartList,
