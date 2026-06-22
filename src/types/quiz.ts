@@ -22,6 +22,25 @@
 export type LearningSubjectCode = 'zhuyin' | 'phonics';
 
 /**
+ * V7.2 通用字母槽定義。
+ *
+ * 代表 DragMode 中一個放置艙位的完整定義。
+ * 注音科目由組件從 correctAnswer 合成；
+ * phonics 科目由資料源直接提供。
+ *
+ * @field slotKey   - 唯一識別此槽位的 key（如 'initial'、'L0'、'L1'）
+ * @field answer    - 此槽位期望的正確字母/符號
+ * @field slotLabel - 空艙時顯示的提示標籤（如 '聲母'、'L1'）
+ * @field colorTier - 配色分組（決定積木與艙位的視覺主題）
+ */
+export interface LetterSlot {
+  slotKey: string;
+  answer: string;
+  slotLabel: string;
+  colorTier: 'teal' | 'sky' | 'rose' | 'amber' | 'violet' | 'indigo';
+}
+
+/**
  * UniversalQuizItem — V7.0 雙語宇宙通用題目資料結構。
  *
  * 設計為向上相容原有 QuizItem 介面的超集型別：
@@ -35,6 +54,7 @@ export type LearningSubjectCode = 'zhuyin' | 'phonics';
  * @field imageUrl     - 題目配圖的 URL 路徑（通用欄位）
  * @field audioUrl     - 題目音檔的 URL 路徑（預留，TTS 優先時可空）
  * @field correctAnswer - 正確答案結構（注音四維：initial / medial / final / tone）
+ * @field letters      - V7.2 動態字母槽陣列（英語拼字模式用，注音科目由組件自動合成）
  */
 export interface UniversalQuizItem {
   id: number;
@@ -48,6 +68,12 @@ export interface UniversalQuizItem {
     final: string;
     tone: string;
   };
+  /**
+   * V7.2：動態字母槽定義陣列。
+   *   - phonics 科目：由後端/資料源提供，每個元素代表一個拼字位置
+   *   - zhuyin 科目：此欄位為空（undefined），組件從 correctAnswer 自動合成 4 槽結構
+   */
+  letters?: LetterSlot[];
 }
 
 /**
