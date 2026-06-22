@@ -6,6 +6,7 @@ import DragMode from '../modes/DragMode';
 import MatchMode from '../modes/MatchMode';
 import ListenMode from '../modes/ListenMode';
 import CanvasMode from '../modes/CanvasMode';
+import EnglishCanvas from '../modes/EnglishCanvas';
 import fallbackQuizzes from '../../quizzes_seed.json';
 import { useQuizWeight } from '../hooks/useQuizWeight';
 import {
@@ -25,6 +26,7 @@ const getImageUrl = (pathStr: string) => {
   const baseUrl = import.meta.env.BASE_URL || '/';
   return `${baseUrl}${cleanPath}`;
 };
+
 /**
  * V7.0：本檔案內部使用的型別別名。
  * 所有題目型別定義已統一集中至 src/types/quiz.ts，
@@ -32,6 +34,65 @@ const getImageUrl = (pathStr: string) => {
  */
 type QuizItem = UniversalQuizItem;
 type QuizItemWithMode = QuizItemWithAssignedMode;
+
+// ── V7.4 英文基礎題庫（Phonics Seed Pool）────────────────────────────────────
+/**
+ * 基礎英文測試題庫（符合 UniversalQuizItem[] 規範）
+ *
+ * 設計原則：
+ *   - subject: 'phonics' 固定標記
+ *   - wordText: 英文單字（小寫，短詞優先，適合 K1-K3 兒童）
+ *   - imageUrl: 留空（由 EnglishCanvas 以純文字渲染展示，無需圖片依賴）
+ *   - audioUrl: 留空（TTS en-US 動態產生，不依賴靜態音檔）
+ *   - correctAnswer: 沿用四維結構，initial 存首字母音素供後端分析
+ *   - letters: 略（EnglishCanvas 由 wordText 自動產生字母展示）
+ *
+ * 每批涵蓋短母音（CVC pattern）六大類：
+ *   a-family: cat, bat, hat, map, nap
+ *   e-family: bed, red, hen, ten, web
+ *   i-family: big, dig, pig, hit, sit
+ *   o-family: box, fox, hot, mop, top
+ *   u-family: bug, cup, mud, run, sun
+ *   blends/digraphs: ship, chip, shop, fish, dish
+ */
+const PHONICS_SEED_POOL: UniversalQuizItem[] = [
+  // ── Short-A family ──
+  { id: 9001, subject: 'phonics', wordText: 'cat', imageUrl: '', audioUrl: '', correctAnswer: { initial: 'c', medial: 'a', final: 't', tone: '' } },
+  { id: 9002, subject: 'phonics', wordText: 'bat', imageUrl: '', audioUrl: '', correctAnswer: { initial: 'b', medial: 'a', final: 't', tone: '' } },
+  { id: 9003, subject: 'phonics', wordText: 'hat', imageUrl: '', audioUrl: '', correctAnswer: { initial: 'h', medial: 'a', final: 't', tone: '' } },
+  { id: 9004, subject: 'phonics', wordText: 'map', imageUrl: '', audioUrl: '', correctAnswer: { initial: 'm', medial: 'a', final: 'p', tone: '' } },
+  { id: 9005, subject: 'phonics', wordText: 'nap', imageUrl: '', audioUrl: '', correctAnswer: { initial: 'n', medial: 'a', final: 'p', tone: '' } },
+  // ── Short-E family ──
+  { id: 9006, subject: 'phonics', wordText: 'bed', imageUrl: '', audioUrl: '', correctAnswer: { initial: 'b', medial: 'e', final: 'd', tone: '' } },
+  { id: 9007, subject: 'phonics', wordText: 'red', imageUrl: '', audioUrl: '', correctAnswer: { initial: 'r', medial: 'e', final: 'd', tone: '' } },
+  { id: 9008, subject: 'phonics', wordText: 'hen', imageUrl: '', audioUrl: '', correctAnswer: { initial: 'h', medial: 'e', final: 'n', tone: '' } },
+  { id: 9009, subject: 'phonics', wordText: 'ten', imageUrl: '', audioUrl: '', correctAnswer: { initial: 't', medial: 'e', final: 'n', tone: '' } },
+  { id: 9010, subject: 'phonics', wordText: 'web', imageUrl: '', audioUrl: '', correctAnswer: { initial: 'w', medial: 'e', final: 'b', tone: '' } },
+  // ── Short-I family ──
+  { id: 9011, subject: 'phonics', wordText: 'big', imageUrl: '', audioUrl: '', correctAnswer: { initial: 'b', medial: 'i', final: 'g', tone: '' } },
+  { id: 9012, subject: 'phonics', wordText: 'dig', imageUrl: '', audioUrl: '', correctAnswer: { initial: 'd', medial: 'i', final: 'g', tone: '' } },
+  { id: 9013, subject: 'phonics', wordText: 'pig', imageUrl: '', audioUrl: '', correctAnswer: { initial: 'p', medial: 'i', final: 'g', tone: '' } },
+  { id: 9014, subject: 'phonics', wordText: 'hit', imageUrl: '', audioUrl: '', correctAnswer: { initial: 'h', medial: 'i', final: 't', tone: '' } },
+  { id: 9015, subject: 'phonics', wordText: 'sit', imageUrl: '', audioUrl: '', correctAnswer: { initial: 's', medial: 'i', final: 't', tone: '' } },
+  // ── Short-O family ──
+  { id: 9016, subject: 'phonics', wordText: 'box', imageUrl: '', audioUrl: '', correctAnswer: { initial: 'b', medial: 'o', final: 'x', tone: '' } },
+  { id: 9017, subject: 'phonics', wordText: 'fox', imageUrl: '', audioUrl: '', correctAnswer: { initial: 'f', medial: 'o', final: 'x', tone: '' } },
+  { id: 9018, subject: 'phonics', wordText: 'hot', imageUrl: '', audioUrl: '', correctAnswer: { initial: 'h', medial: 'o', final: 't', tone: '' } },
+  { id: 9019, subject: 'phonics', wordText: 'mop', imageUrl: '', audioUrl: '', correctAnswer: { initial: 'm', medial: 'o', final: 'p', tone: '' } },
+  { id: 9020, subject: 'phonics', wordText: 'top', imageUrl: '', audioUrl: '', correctAnswer: { initial: 't', medial: 'o', final: 'p', tone: '' } },
+  // ── Short-U family ──
+  { id: 9021, subject: 'phonics', wordText: 'bug', imageUrl: '', audioUrl: '', correctAnswer: { initial: 'b', medial: 'u', final: 'g', tone: '' } },
+  { id: 9022, subject: 'phonics', wordText: 'cup', imageUrl: '', audioUrl: '', correctAnswer: { initial: 'c', medial: 'u', final: 'p', tone: '' } },
+  { id: 9023, subject: 'phonics', wordText: 'mud', imageUrl: '', audioUrl: '', correctAnswer: { initial: 'm', medial: 'u', final: 'd', tone: '' } },
+  { id: 9024, subject: 'phonics', wordText: 'run', imageUrl: '', audioUrl: '', correctAnswer: { initial: 'r', medial: 'u', final: 'n', tone: '' } },
+  { id: 9025, subject: 'phonics', wordText: 'sun', imageUrl: '', audioUrl: '', correctAnswer: { initial: 's', medial: 'u', final: 'n', tone: '' } },
+  // ── Blends & Digraphs ──
+  { id: 9026, subject: 'phonics', wordText: 'ship', imageUrl: '', audioUrl: '', correctAnswer: { initial: 'sh', medial: 'i', final: 'p', tone: '' } },
+  { id: 9027, subject: 'phonics', wordText: 'chip', imageUrl: '', audioUrl: '', correctAnswer: { initial: 'ch', medial: 'i', final: 'p', tone: '' } },
+  { id: 9028, subject: 'phonics', wordText: 'shop', imageUrl: '', audioUrl: '', correctAnswer: { initial: 'sh', medial: 'o', final: 'p', tone: '' } },
+  { id: 9029, subject: 'phonics', wordText: 'fish', imageUrl: '', audioUrl: '', correctAnswer: { initial: 'f', medial: 'i', final: 'sh', tone: '' } },
+  { id: 9030, subject: 'phonics', wordText: 'dish', imageUrl: '', audioUrl: '', correctAnswer: { initial: 'd', medial: 'i', final: 'sh', tone: '' } },
+];
 
 interface WrongAttempt {
   quizId: number;
@@ -55,12 +116,12 @@ interface WrongAttempt {
  *
  * @field gameDisplayMode - 本題實際呈現給學習者的遊戲介面類型。
  *   - 'drag'   : 拖曳圖卡配對 (DragMode)
- *   - 'canvas' : 手寫辨識板 (CanvasMode)
+ *   - 'canvas' : 手寫辨識板 (CanvasMode / EnglishCanvas)
  *   - 'match'  : 連連看配對 (MatchMode)
  *   - 'listen' : 聽音辨義選字 (ListenMode)
  * @field learningSubject - 本次作答的學習科目（課程維度）。
  *   - 'zhuyin'  : 注音符號拼音練習
- *   - 'english' : 英語學習課程（未來擴充）
+ *   - 'phonics' : 英語自然發音學習
  */
 export interface PracticeLogPayload {
   quizId: number;
@@ -79,6 +140,8 @@ export interface PracticeLogPayload {
 
 interface GameSessionProps {
   mode: 'drag-drop' | 'matching' | 'listening' | 'handwriting' | 'mixed';
+  /** V7.4：學習科目維度，決定題庫來源與手寫面板語系 */
+  subject: LearningSubjectCode;
   onBackToLobby: () => void;
   onBackToModeSelect: () => void;
 }
@@ -102,14 +165,6 @@ function assignRandomDisplayModes(quizPool: UniversalQuizItem[]): QuizItemWithAs
 /**
  * V7.0 雙語宇宙：將遊戲 session mode 與題目的 assignedMode 解析為
  * PracticeLogPayload 所需的標準化 gameDisplayMode 值。
- *
- * 解析規則：
- *   - 混合模式 ('mixed')  → 讀取當前題目的 assignedMode 並對映至標準值
- *   - 單一模式            → 直接對映當前 session 的 mode 至標準值
- *
- * @param sessionMode    - 目前遊戲 session 的整體模式
- * @param assignedMode   - 混合模式下當前題目被分配到的展示模式
- * @returns 標準化的 gameDisplayMode（供 PracticeLogPayload 使用）
  */
 function resolveGameDisplayMode(
   sessionMode: GameSessionProps['mode'],
@@ -127,7 +182,7 @@ function resolveGameDisplayMode(
   }
 }
 
-export default function GameSession({ mode, onBackToLobby, onBackToModeSelect }: GameSessionProps) {
+export default function GameSession({ mode, subject, onBackToLobby, onBackToModeSelect }: GameSessionProps) {
   const [quizzes, setQuizzes] = useState<QuizItemWithMode[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -149,10 +204,34 @@ export default function GameSession({ mode, onBackToLobby, onBackToModeSelect }:
     fetchQuizzes();
   }, []);
 
+  /**
+   * V7.4 fetchQuizzes — 雙語出題引擎
+   *
+   * 路由邏輯：
+   *   - subject === 'phonics' → 直接使用本地 PHONICS_SEED_POOL，注入加權引擎
+   *   - subject === 'zhuyin'  → 嘗試後端 API，失敗則 fallback 到 quizzes_seed.json
+   */
   const fetchQuizzes = () => {
     setLoading(true);
     setError(null);
 
+    // ── Phonics 路徑：直接使用本地英文題庫，不需要後端 API ────────────────
+    if (subject === 'phonics') {
+      try {
+        const weightedPhonics = generateWeightedQuizzes(PHONICS_SEED_POOL, 15) as UniversalQuizItem[];
+        setQuizzes(assignRandomDisplayModes(weightedPhonics));
+        setLoading(false);
+        sessionStartTimeRef.current = Date.now();
+        questionStartTimeRef.current = Date.now();
+      } catch (phonicsErr: any) {
+        console.error('Failed to load phonics quiz pool:', phonicsErr);
+        setError(phonicsErr.message || '英文題庫載入失敗');
+        setLoading(false);
+      }
+      return;
+    }
+
+    // ── Zhuyin 路徑：後端 API → fallback 本地 seed ────────────────────────
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 3000);
 
@@ -238,11 +317,11 @@ export default function GameSession({ mode, onBackToLobby, onBackToModeSelect }:
         quizId,
         isCorrect,
         spentSeconds: elapsed,
-        subject: 'zhuyin',
+        subject: subject,
         correct: isCorrect,
         mode: mode === 'handwriting' ? 'canvas' : mode,
         gameDisplayMode: resolvedGameDisplayMode,
-        learningSubject: 'zhuyin',
+        learningSubject: subject,
         userAnswer: userAnswerObj,
         user_answer: userAnswerObj,
         wrongPart: wrongPartList,
@@ -250,45 +329,48 @@ export default function GameSession({ mode, onBackToLobby, onBackToModeSelect }:
       };
 
       // 1. Log to local backend Express endpoints (with 2s timeout)
-      let localLogId: number | null = null;
-      try {
-        const controllerLocal = new AbortController();
-        const timeoutLocal = setTimeout(() => controllerLocal.abort(), 2000);
+      // Only log zhuyin to backend DB (phonics backend not yet implemented)
+      if (subject === 'zhuyin') {
+        let localLogId: number | null = null;
+        try {
+          const controllerLocal = new AbortController();
+          const timeoutLocal = setTimeout(() => controllerLocal.abort(), 2000);
 
-        const responseLocal = await fetch(`${API_BASE}/api/practice-logs`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            quizId,
-            isCorrect,
-            spentSeconds: elapsed
-          }),
-          signal: controllerLocal.signal
-        });
-        clearTimeout(timeoutLocal);
-        
-        if (responseLocal.ok) {
-          const resData = await responseLocal.json();
-          localLogId = resData.id;
-          
-          if (!isCorrect && wrongAnswerObj && localLogId) {
-            const controllerError = new AbortController();
-            const timeoutError = setTimeout(() => controllerError.abort(), 2000);
+          const responseLocal = await fetch(`${API_BASE}/api/practice-logs`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              quizId,
+              isCorrect,
+              spentSeconds: elapsed
+            }),
+            signal: controllerLocal.signal
+          });
+          clearTimeout(timeoutLocal);
 
-            await fetch(`${API_BASE}/api/error-analysis`, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                logId: localLogId,
-                wrongAnswer: wrongAnswerObj
-              }),
-              signal: controllerError.signal
-            });
-            clearTimeout(timeoutError);
+          if (responseLocal.ok) {
+            const resData = await responseLocal.json();
+            localLogId = resData.id;
+
+            if (!isCorrect && wrongAnswerObj && localLogId) {
+              const controllerError = new AbortController();
+              const timeoutError = setTimeout(() => controllerError.abort(), 2000);
+
+              await fetch(`${API_BASE}/api/error-analysis`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  logId: localLogId,
+                  wrongAnswer: wrongAnswerObj
+                }),
+                signal: controllerError.signal
+              });
+              clearTimeout(timeoutError);
+            }
           }
+        } catch (errLocal) {
+          console.error('Failed to log to local DB:', errLocal);
         }
-      } catch (errLocal) {
-        console.error('Failed to log to local DB:', errLocal);
       }
 
       // 2. Log to external n8n webhook (with 3s timeout)
@@ -354,6 +436,7 @@ export default function GameSession({ mode, onBackToLobby, onBackToModeSelect }:
           body: JSON.stringify({
             action: 'session-complete',
             mode: mode === 'handwriting' ? 'canvas' : mode,
+            learningSubject: subject,
             correctCount: finalCorrectCount,
             totalCount: quizzes.length,
             spentSeconds: elapsed,
@@ -368,7 +451,7 @@ export default function GameSession({ mode, onBackToLobby, onBackToModeSelect }:
     }
   };
 
-  // Correct answer callback from DragMode
+  // Correct answer callback from DragMode / CanvasMode / EnglishCanvas
   const handleCorrectAnswer = (hasMadeMistake: boolean) => {
     let newCorrectCount = correctCount;
     if (!hasMadeMistake) {
@@ -390,7 +473,7 @@ export default function GameSession({ mode, onBackToLobby, onBackToModeSelect }:
     }
   };
 
-  // Wrong attempt callback from DragMode
+  // Wrong attempt callback from DragMode / CanvasMode / EnglishCanvas
   const handleWrongAttempt = (wrongAnswerObj: { initial: string; medial: string; final: string; tone: string }) => {
     // V5.0：立即將此題錯誤記入 localStorage，下次開局時提升其抽中權重
     const currentQuiz = quizzes[currentQuestionIndex];
@@ -417,7 +500,7 @@ export default function GameSession({ mode, onBackToLobby, onBackToModeSelect }:
     }
   };
 
-  // Next level handler from DragMode Success Modal
+  // Next level handler from DragMode / CanvasMode / EnglishCanvas Success Modal
   const handleNextQuestion = () => {
     if (currentQuestionIndex < quizzes.length - 1) {
       setCurrentQuestionIndex(prev => prev + 1);
@@ -434,23 +517,43 @@ export default function GameSession({ mode, onBackToLobby, onBackToModeSelect }:
     fetchQuizzes();
   };
 
-  // Loading Screen
+  // ── Header label helpers ──────────────────────────────────────────────────
+
+  const getKingdomLabel = () => subject === 'phonics' ? '英文拼音王國' : '注音挑戰王國';
+
+  const getModeLabel = () => {
+    switch (mode) {
+      case 'drag-drop':   return subject === 'phonics' ? '字母拼組答題' : '拖曳圖卡答題';
+      case 'matching':    return '連連看挑戰';
+      case 'listening':   return subject === 'phonics' ? '聽音辨字關卡' : '聽音選字關卡';
+      case 'handwriting': return subject === 'phonics' ? '四線三格手寫板' : '手寫挑戰板';
+      case 'mixed':       return subject === 'phonics' ? '英文混合冒險' : '混合隨機關卡';
+      default:            return '練習';
+    }
+  };
+
+  // ── Loading Screen ────────────────────────────────────────────────────────
   if (loading) {
+    const isPhonics = subject === 'phonics';
     return (
       <div className="flex flex-col min-h-screen bg-[#faf8f5] items-center justify-center font-sans space-y-6">
         <div className="relative">
-          <div className="w-16 h-16 border-4 border-amber-200 border-t-amber-500 rounded-full animate-spin"></div>
-          <Sparkles className="w-6 h-6 text-amber-500 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 animate-pulse" />
+          <div className={`w-16 h-16 border-4 ${isPhonics ? 'border-violet-200 border-t-violet-500' : 'border-amber-200 border-t-amber-500'} rounded-full animate-spin`}></div>
+          <Sparkles className={`w-6 h-6 ${isPhonics ? 'text-violet-500' : 'text-amber-500'} absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 animate-pulse`} />
         </div>
         <div className="text-center space-y-2">
-          <h2 className="text-xl font-extrabold text-stone-750">正在載入專屬星系題庫...</h2>
-          <p className="text-xs text-stone-400 font-bold">隨機抽選 15 道精采關卡中</p>
+          <h2 className="text-xl font-extrabold text-stone-750">
+            {isPhonics ? '正在載入英文拼音題庫...' : '正在載入專屬星系題庫...'}
+          </h2>
+          <p className="text-xs text-stone-400 font-bold">
+            {isPhonics ? '注入弱項加權引擎，抽選 15 道英文關卡' : '隨機抽選 15 道精采關卡中'}
+          </p>
         </div>
       </div>
     );
   }
 
-  // Error Screen
+  // ── Error Screen ──────────────────────────────────────────────────────────
   if (error || quizzes.length === 0) {
     return (
       <div className="flex flex-col min-h-screen bg-[#faf8f5] items-center justify-center font-sans p-6 text-center max-w-md mx-auto space-y-6">
@@ -483,18 +586,7 @@ export default function GameSession({ mode, onBackToLobby, onBackToModeSelect }:
   const currentQuiz = quizzes[currentQuestionIndex];
   const isLastQuestion = currentQuestionIndex === quizzes.length - 1;
 
-  const getModeLabel = () => {
-    switch (mode) {
-      case 'drag-drop': return '拖曳圖卡答題';
-      case 'matching': return '連連看挑戰';
-      case 'listening': return '聽音選字關卡';
-      case 'handwriting': return '手寫挑戰板';
-      case 'mixed': return '混合隨機關卡';
-      default: return '注音練習';
-    }
-  };
-
-
+  // ── Result Screen ─────────────────────────────────────────────────────────
   if (gameState === 'result') {
     return (
       <ResultScreen
@@ -509,9 +601,16 @@ export default function GameSession({ mode, onBackToLobby, onBackToModeSelect }:
     );
   }
 
+  // ── Header accent color ───────────────────────────────────────────────────
+  const isPhonics = subject === 'phonics';
+  const headerAccentClass = isPhonics
+    ? 'bg-violet-100/60 border-violet-200'
+    : 'bg-amber-100/60 border-amber-200';
+  const scoreTextClass = isPhonics ? 'text-violet-700' : 'text-amber-700';
+
   return (
     <div className="flex flex-col min-h-screen bg-[#faf8f5] text-stone-800 font-sans select-none overflow-hidden pb-6">
-      
+
       {/* Header Info */}
       <header className="px-6 py-4 bg-white/95 border-b border-stone-200/60 flex justify-between items-center shadow-sm relative z-10">
         <div className="flex items-center space-x-3">
@@ -523,33 +622,48 @@ export default function GameSession({ mode, onBackToLobby, onBackToModeSelect }:
           </button>
           <div>
             <h1 className="text-base sm:text-lg font-black tracking-wide text-stone-850">
-              注音挑戰王國
+              {getKingdomLabel()}
             </h1>
             <p className="text-[10px] text-stone-400 font-bold">Mode：{getModeLabel()}</p>
           </div>
         </div>
 
         {/* Live Score stats */}
-        <div className="bg-amber-100/60 px-4 py-1.5 rounded-full border border-amber-200 flex items-center space-x-2 shadow-inner">
-          <span className="text-xs text-amber-700 font-bold">第一嘗試答對數:</span>
-          <span className="font-black text-amber-700 text-sm">{correctCount}</span>
+        <div className={`${headerAccentClass} px-4 py-1.5 rounded-full border flex items-center space-x-2 shadow-inner`}>
+          <span className={`text-xs ${scoreTextClass} font-bold`}>第一嘗試答對數:</span>
+          <span className={`font-black ${scoreTextClass} text-sm`}>{correctCount}</span>
         </div>
       </header>
 
       {/* Progress Bar Component */}
       <ProgressBar current={currentQuestionIndex + 1} total={quizzes.length} />
 
-      {/* Gameplay Board — V6.0 動態視圖路由 */}
+      {/* ── Gameplay Board — V7.4 雙語視圖路由 ──────────────────────────── */}
+
+      {/* Mixed mode: handwriting slot */}
       {mode === 'mixed' && currentQuiz.assignedMode === 'handwriting' && (
-        <CanvasMode
-          key={currentQuestionIndex}
-          quiz={currentQuiz}
-          isLastQuestion={isLastQuestion}
-          onCorrect={handleCorrectAnswer}
-          onWrongAttempt={handleWrongAttempt}
-          onNext={handleNextQuestion}
-        />
+        isPhonics ? (
+          <EnglishCanvas
+            key={currentQuestionIndex}
+            quiz={currentQuiz}
+            isLastQuestion={isLastQuestion}
+            onCorrect={handleCorrectAnswer}
+            onWrongAttempt={handleWrongAttempt}
+            onNext={handleNextQuestion}
+          />
+        ) : (
+          <CanvasMode
+            key={currentQuestionIndex}
+            quiz={currentQuiz}
+            isLastQuestion={isLastQuestion}
+            onCorrect={handleCorrectAnswer}
+            onWrongAttempt={handleWrongAttempt}
+            onNext={handleNextQuestion}
+          />
+        )
       )}
+
+      {/* Mixed mode: drag slot */}
       {mode === 'mixed' && currentQuiz.assignedMode === 'drag' && (
         <DragMode
           key={currentQuestionIndex}
@@ -560,16 +674,31 @@ export default function GameSession({ mode, onBackToLobby, onBackToModeSelect }:
           onNext={handleNextQuestion}
         />
       )}
+
+      {/* Pure handwriting mode — V7.4 學科路由 */}
       {mode === 'handwriting' && (
-        <CanvasMode
-          key={currentQuestionIndex}
-          quiz={currentQuiz}
-          isLastQuestion={isLastQuestion}
-          onCorrect={handleCorrectAnswer}
-          onWrongAttempt={handleWrongAttempt}
-          onNext={handleNextQuestion}
-        />
+        isPhonics ? (
+          <EnglishCanvas
+            key={currentQuestionIndex}
+            quiz={currentQuiz}
+            isLastQuestion={isLastQuestion}
+            onCorrect={handleCorrectAnswer}
+            onWrongAttempt={handleWrongAttempt}
+            onNext={handleNextQuestion}
+          />
+        ) : (
+          <CanvasMode
+            key={currentQuestionIndex}
+            quiz={currentQuiz}
+            isLastQuestion={isLastQuestion}
+            onCorrect={handleCorrectAnswer}
+            onWrongAttempt={handleWrongAttempt}
+            onNext={handleNextQuestion}
+          />
+        )
       )}
+
+      {/* Drag-drop mode */}
       {mode === 'drag-drop' && (
         <DragMode
           key={currentQuestionIndex}
@@ -580,6 +709,8 @@ export default function GameSession({ mode, onBackToLobby, onBackToModeSelect }:
           onNext={handleNextQuestion}
         />
       )}
+
+      {/* Listening mode */}
       {mode === 'listening' && (
         <ListenMode
           key={currentQuestionIndex}
@@ -590,6 +721,8 @@ export default function GameSession({ mode, onBackToLobby, onBackToModeSelect }:
           onNext={handleNextQuestion}
         />
       )}
+
+      {/* Matching mode */}
       {mode === 'matching' && (
         <MatchMode
           key={Math.floor(currentQuestionIndex / 5)}
@@ -634,3 +767,4 @@ export default function GameSession({ mode, onBackToLobby, onBackToModeSelect }:
     </div>
   );
 }
+
