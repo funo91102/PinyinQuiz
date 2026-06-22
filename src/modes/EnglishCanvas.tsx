@@ -406,15 +406,15 @@ export default function EnglishCanvas({
   // ── JSX ─────────────────────────────────────────────────────────────────
 
   return (
-    <div className="max-w-6xl mx-auto w-full min-h-[100dvh] h-auto bg-gray-50 flex flex-col gap-4 p-3 pb-10 select-none relative">
+    <div className="max-w-6xl mx-auto w-full min-h-[100dvh] h-auto bg-gray-50 flex flex-col gap-2 p-2 pb-4 select-none relative">
 
       {/* ① 頂部題目區：英文單字大字展示 + 播音鍵 */}
-      <div className="shrink-0 flex flex-row items-center justify-between gap-3 bg-white rounded-2xl px-5 py-4 shadow-sm w-full">
+      <div className="shrink-0 flex flex-row items-center justify-between gap-2 bg-white rounded-2xl px-4 py-2.5 shadow-sm w-full">
         <div className="flex items-center gap-4">
 
           {/* 題目圖片（若有） */}
           {quiz.imageUrl && (
-            <div className="w-14 h-14 md:w-20 md:h-20 bg-gradient-to-b from-sky-50 to-white border border-sky-100 rounded-xl flex items-center justify-center p-1 shadow-inner shrink-0">
+            <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-b from-sky-50 to-white border border-sky-100 rounded-xl flex items-center justify-center p-1 shadow-inner shrink-0">
               <img
                 src={quiz.imageUrl}
                 alt={quiz.wordText}
@@ -426,13 +426,13 @@ export default function EnglishCanvas({
           {/* 英文單字主標題（等寬字體，利於書寫模仿） */}
           <div className="flex flex-col">
             <span
-              className="text-3xl md:text-5xl font-black tracking-widest text-sky-700 drop-shadow-sm"
+              className="text-2xl md:text-4xl font-black tracking-widest text-sky-700 drop-shadow-sm"
               style={{ fontFamily: "'Courier New', Courier, monospace", letterSpacing: '0.15em' }}
             >
               {quiz.wordText.toLowerCase()}
             </span>
-            <span className="text-[9px] md:text-[11px] text-stone-400 font-bold tracking-widest uppercase mt-0.5">
-              Trace the word on the four-line grid below
+            <span className="text-[9px] md:text-[10px] text-stone-400 font-bold tracking-widest uppercase mt-0.5">
+              Trace the word below
             </span>
           </div>
         </div>
@@ -448,7 +448,7 @@ export default function EnglishCanvas({
       </div>
 
       {/* ② 四線三格手寫畫布區 */}
-      <div className="flex-1 shrink-0 bg-white rounded-2xl p-3 md:p-5 flex flex-col items-center justify-center relative shadow-sm w-full gap-3">
+      <div className="flex-1 shrink-0 bg-white rounded-2xl p-2 md:p-3 flex flex-col items-center justify-center relative shadow-sm w-full gap-2">
 
         {/* 格線說明徽章 */}
         <div className="flex items-center gap-3 self-start px-1">
@@ -463,7 +463,7 @@ export default function EnglishCanvas({
 
         {/* 畫布容器：寬長比 3:1，橫向展開，英文書寫習慣 */}
         <div className="relative w-full border-2 border-stone-200 rounded-2xl overflow-hidden bg-white shadow-inner touch-none select-none"
-             style={{ height: 'clamp(120px, 28vw, 220px)' }}>
+             style={{ height: 'clamp(100px, 22vw, 180px)' }}>
 
           <canvas
             ref={canvasRef}
@@ -494,7 +494,7 @@ export default function EnglishCanvas({
       </div>
 
       {/* ③ 家長評核席 */}
-      <div className="shrink-0 bg-white rounded-2xl p-3 pb-5 flex flex-col gap-3 shadow-sm w-full">
+      <div className="shrink-0 bg-white rounded-2xl p-2.5 pb-3 flex flex-col gap-2 shadow-sm w-full">
 
         <div className="w-full flex justify-between items-center px-1">
           <span className="text-[10px] md:text-sm font-extrabold text-stone-500">
@@ -506,9 +506,9 @@ export default function EnglishCanvas({
         </div>
 
         {/* 參考答案展示區（始終顯示目標單字） */}
-        <div className="w-full bg-sky-50 border border-sky-100 rounded-xl flex items-center justify-center py-3 shadow-inner">
+        <div className="w-full bg-sky-50 border border-sky-100 rounded-xl flex items-center justify-center py-2 shadow-inner">
           <span
-            className="text-2xl md:text-4xl font-black tracking-widest text-sky-600"
+            className="text-xl md:text-3xl font-black tracking-widest text-sky-600"
             style={{ fontFamily: "'Courier New', Courier, monospace", letterSpacing: '0.15em' }}
           >
             {quiz.wordText.toLowerCase()}
@@ -520,14 +520,14 @@ export default function EnglishCanvas({
           <button
             id="btn-english-canvas-incorrect"
             onClick={handleIncorrectClick}
-            className="flex-1 bg-red-50 border-2 border-red-200 hover:bg-red-100 text-red-600 font-black py-2.5 md:py-3.5 px-4 rounded-xl cursor-pointer flex items-center justify-center space-x-1.5 transition-all active:scale-95 shadow-sm text-xs md:text-base"
+            className="flex-1 bg-red-50 border-2 border-red-200 hover:bg-red-100 text-red-600 font-black py-2 md:py-3 px-4 rounded-xl cursor-pointer flex items-center justify-center space-x-1.5 transition-all active:scale-95 shadow-sm text-xs md:text-sm"
           >
             <span>❌ Needs Practice</span>
           </button>
           <button
             id="btn-english-canvas-correct"
             onClick={handleCorrectClick}
-            className="flex-1 bg-emerald-500 hover:bg-emerald-400 text-white font-black py-2.5 md:py-3.5 px-4 rounded-xl cursor-pointer flex items-center justify-center space-x-1.5 transition-all active:scale-95 shadow-md border-b-3 border-emerald-700 text-xs md:text-base"
+            className="flex-1 bg-emerald-500 hover:bg-emerald-400 text-white font-black py-2 md:py-3 px-4 rounded-xl cursor-pointer flex items-center justify-center space-x-1.5 transition-all active:scale-95 shadow-md border-b-3 border-emerald-700 text-xs md:text-sm"
           >
             <span>🎉 Well Done!</span>
           </button>

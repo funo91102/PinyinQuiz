@@ -5,6 +5,7 @@ import imageWordMap from '../imageWordMap.json';
 
 interface QuizItem {
   id: number;
+  subject?: 'zhuyin' | 'phonics'; // V7.x: 學習科目
   wordText: string;
   imageUrl: string;
   audioUrl: string;
@@ -18,6 +19,7 @@ interface QuizItem {
 
 interface RightCard {
   id: number;
+  subject?: 'zhuyin' | 'phonics';
   wordText: string;
   correctAnswer: {
     initial: string;
@@ -120,6 +122,7 @@ export default function MatchMode({
     if (batchQuizzes.length > 0) {
       const cards = batchQuizzes.map(quiz => ({
         id: quiz.id,
+        subject: quiz.subject,
         wordText: quiz.wordText,
         correctAnswer: quiz.correctAnswer
       }));
@@ -374,7 +377,9 @@ export default function MatchMode({
           <span>第 {batchIndex + 1} / 3 批連線</span>
         </span>
         <h2 className="text-lg sm:text-xl font-bold mt-2 text-stone-550">
-          請用手指拖曳，將左側的圖片與右側正確的注音連起來！
+          {batchQuizzes[0]?.subject === 'phonics'
+            ? 'Drag to match each picture with the correct English word!'
+            : '請用手指拖曳，將左側的圖片與右側正確的注音連起來！'}
         </h2>
       </div>
 
@@ -470,10 +475,11 @@ export default function MatchMode({
           })}
         </div>
 
-        {/* Right: Zhuyin spelling cards */}
+        {/* Right: Zhuyin / Phonics cards */}
         <div className="flex flex-col space-y-4 z-20">
           {rightCards.map(card => {
             const isMatched = matchedPairs.some(p => p.rightId === card.id);
+            const isPhonicsCard = card.subject === 'phonics';
             return (
               <div
                 key={card.id}
@@ -487,7 +493,18 @@ export default function MatchMode({
                   }
                 `}
               >
-                <VerticalZhuyin correctAnswer={card.correctAnswer} />
+                {isPhonicsCard ? (
+                  /* Phonics 模式：橫向連續呈現英文單字，禁止垂直拆解 */
+                  <span
+                    className="text-xl sm:text-2xl font-black text-sky-700 tracking-widest select-none"
+                    style={{ fontFamily: "'Courier New', Courier, monospace" }}
+                  >
+                    {card.wordText.toLowerCase()}
+                  </span>
+                ) : (
+                  /* Zhuyin 模式：保留原注音垂直展示 */
+                  <VerticalZhuyin correctAnswer={card.correctAnswer} />
+                )}
                 {isMatched && (
                   <div className="absolute top-1 right-1 bg-teal-100 p-0.5 rounded-full">
                     <Check className="w-3.5 h-3.5 text-teal-700 stroke-[3]" />

@@ -82,35 +82,59 @@ export default function ListenMode({
       setLevelCompleted(false);
       setHasMadeMistake(false);
 
-      const correctText = formatZhuyin(quiz.correctAnswer);
-      
-      // Filter candidates that are not the current quiz
-      const candidates = allQuizzes.filter(q => q.id !== quiz.id && formatZhuyin(q.correctAnswer) !== correctText);
+      const isPhonics = quiz.subject === 'phonics';
 
-      // Map to unique spellings
-      const uniqueMap = new Map<string, any>();
-      candidates.forEach(q => {
-        const spelling = formatZhuyin(q.correctAnswer);
-        if (!uniqueMap.has(spelling)) {
-          uniqueMap.set(spelling, q.correctAnswer);
-        }
-      });
+      if (isPhonics) {
+        // ── Phonics 分支：從英文单字池抽取干擾選項 ────────
+        const phonicsCandidates = (allQuizzes as any[])
+          .filter(q => q.subject === 'phonics' && q.id !== quiz.id && q.wordText.toLowerCase() !== quiz.wordText.toLowerCase());
 
-      const spellingChoices = Array.from(uniqueMap.entries());
-      const shuffledSpellings = spellingChoices.sort(() => Math.random() - 0.5);
-      
-      const distractors = shuffledSpellings.slice(0, 3).map(([spelling, ans]) => ({
-        spelling,
-        correctAnswer: ans,
-        isCorrect: false
-      }));
+        const uniqueWords = new Map<string, any>();
+        phonicsCandidates.forEach(q => {
+          const w = q.wordText.toLowerCase();
+          if (!uniqueWords.has(w)) uniqueWords.set(w, q);
+        });
 
-      const merged = [
-        { spelling: correctText, correctAnswer: quiz.correctAnswer, isCorrect: true },
-        ...distractors
-      ].sort(() => Math.random() - 0.5);
+        const shuffled = Array.from(uniqueWords.values()).sort(() => Math.random() - 0.5);
+        const distractors = shuffled.slice(0, 3).map(q => ({
+          spelling: q.wordText.toLowerCase(),
+          correctAnswer: q.correctAnswer,
+          isCorrect: false
+        }));
 
-      setChoices(merged);
+        const merged = [
+          { spelling: quiz.wordText.toLowerCase(), correctAnswer: quiz.correctAnswer, isCorrect: true },
+          ...distractors
+        ].sort(() => Math.random() - 0.5);
+
+        setChoices(merged);
+      } else {
+        // ── Zhuyin 分支：原有注音選項邏輯 ───────────────
+        const correctText = formatZhuyin(quiz.correctAnswer);
+        const candidates = (allQuizzes as any[]).filter(q => q.id !== quiz.id && formatZhuyin(q.correctAnswer) !== correctText);
+
+        const uniqueMap = new Map<string, any>();
+        candidates.forEach(q => {
+          const spelling = formatZhuyin(q.correctAnswer);
+          if (!uniqueMap.has(spelling)) uniqueMap.set(spelling, q.correctAnswer);
+        });
+
+        const spellingChoices = Array.from(uniqueMap.entries());
+        const shuffledSpellings = spellingChoices.sort(() => Math.random() - 0.5);
+
+        const distractors = shuffledSpellings.slice(0, 3).map(([spelling, ans]) => ({
+          spelling,
+          correctAnswer: ans,
+          isCorrect: false
+        }));
+
+        const merged = [
+          { spelling: correctText, correctAnswer: quiz.correctAnswer, isCorrect: true },
+          ...distractors
+        ].sort(() => Math.random() - 0.5);
+
+        setChoices(merged);
+      }
 
       // Auto play pronunciation on load
       setTimeout(() => {
@@ -198,10 +222,12 @@ export default function ListenMode({
       <div className="text-center mb-8">
         <span className="inline-flex items-center space-x-1.5 bg-sky-100/80 border border-sky-200 px-3 py-1 rounded-full text-xs font-black text-sky-850 shadow-inner animate-pulse">
           <Sparkles className="w-3.5 h-3.5" />
-          <span>聽音選字挑戰</span>
+          <span>{quiz.subject === 'phonics' ? 'Listen & Choose' : '聽音選字挑戰'}</span>
         </span>
         <h2 className="text-lg sm:text-xl font-bold mt-2 text-stone-550">
-          點擊中央發音鍵，在下方選出對應的正確注音！
+          {quiz.subject === 'phonics'
+            ? 'Listen and select the correct English word below!'
+            : '點擊中央發音鍵，在下方選出對應的正確注音！'}
         </h2>
       </div>
 
@@ -228,13 +254,14 @@ export default function ListenMode({
         {choices.map((choice, idx) => {
           const isWrong = wrongSpellings.includes(choice.spelling);
           const isSelectedCorrect = selectedSpelling === choice.spelling;
-          
+          const isPhonics = quiz.subject === 'phonics';
+
           return (
             <button
               key={idx}
               disabled={levelCompleted || isWrong}
               onClick={() => handleChoiceClick(choice)}
-              className={`py-6 px-4 rounded-3xl border-3 text-2xl sm:text-3xl font-black transition-all cursor-pointer shadow-sm select-none flex items-center justify-center
+              className={`py-6 px-4 rounded-3xl border-3 font-black transition-all cursor-pointer shadow-sm select-none flex items-center justify-center
                 ${isSelectedCorrect
                   ? 'border-emerald-500 bg-emerald-50 text-emerald-800 scale-103'
                   : isWrong
@@ -243,7 +270,18 @@ export default function ListenMode({
                 }
               `}
             >
-              <VerticalZhuyin correctAnswer={choice.correctAnswer} />
+              {isPhonics ? (
+                /* Phonics 模式：橫向英文字，禁止注音沙拉 */
+                <span
+                  className="text-2xl sm:text-3xl font-black text-sky-700 tracking-widest"
+                  style={{ fontFamily: "'Courier New', Courier, monospace" }}
+                >
+                  {choice.spelling}
+                </span>
+              ) : (
+                /* Zhuyin 模式：保留原 VerticalZhuyin */
+                <VerticalZhuyin correctAnswer={choice.correctAnswer} />
+              )}
             </button>
           );
         })}

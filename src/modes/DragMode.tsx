@@ -256,6 +256,7 @@ export default function DragMode({
   const [encouragementMsg, setEncouragementMsg] = useState('');
   const [isResettingWrong, setIsResettingWrong] = useState(false);
   const [hasMadeMistake, setHasMadeMistake] = useState(false);
+  const [imageError, setImageError] = useState(false);
 
   // 動態 slot ref map（以 slotKey 為 key）
   const slotRefs = useRef<Record<string, HTMLDivElement | null>>({});
@@ -275,6 +276,7 @@ export default function DragMode({
     if (!quiz) return;
     const slots = resolveLetterSlots(quiz);
     setLetterSlots(slots);
+    setImageError(false); // 題目切換時重置圖片錯誤狀態
 
     const initialPlaced: Record<string, string | null> = {};
     const initialWrong: Record<string, string | null>  = {};
@@ -492,12 +494,20 @@ export default function DragMode({
       {/* ① 頂部題目卡與播音鍵 */}
       <div className="shrink-0 flex flex-row items-center justify-between gap-3 bg-white rounded-2xl px-4 py-3 shadow-sm w-full">
         <div className="flex items-center gap-3">
-          <div className="bg-stone-50 border border-stone-200/60 rounded-xl overflow-hidden shadow-inner">
-            <img
-              src={quiz.imageUrl}
-              alt={quiz.wordText}
-              className="w-20 h-20 md:w-24 md:h-24 object-contain p-1 select-none pointer-events-none"
-            />
+          <div className="bg-stone-50 border border-stone-200/60 rounded-xl overflow-hidden shadow-inner flex items-center justify-center" style={{ width: '80px', height: '80px' }}>
+            {(!quiz.imageUrl || imageError) ? (
+              /* 圖片載入失敗 Fallback：彩色大字單字塊 */
+              <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-teal-50 to-cyan-100 rounded-xl">
+                <span className="text-2xl font-black text-teal-600 tracking-tight">{quiz.wordText}</span>
+              </div>
+            ) : (
+              <img
+                src={quiz.imageUrl}
+                alt={quiz.wordText}
+                onError={() => setImageError(true)}
+                className="w-20 h-20 md:w-24 md:h-24 object-contain p-1 select-none pointer-events-none"
+              />
+            )}
           </div>
 
           <div className="text-left">
