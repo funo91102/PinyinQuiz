@@ -406,7 +406,7 @@ export default function EnglishCanvas({
   // ── JSX ─────────────────────────────────────────────────────────────────
 
   return (
-    <div className="max-w-6xl mx-auto w-full min-h-[100dvh] h-auto bg-gray-50 flex flex-col gap-2 p-2 pb-4 select-none relative">
+    <div className="max-w-6xl mx-auto w-full h-[100dvh] max-h-[100dvh] overflow-hidden bg-gray-50 flex flex-col gap-2 p-2 select-none relative">
 
       {/* ① 頂部題目區：英文單字大字展示 + 播音鍵 */}
       <div className="shrink-0 flex flex-row items-center justify-between gap-2 bg-white rounded-2xl px-4 py-2.5 shadow-sm w-full">
@@ -448,7 +448,7 @@ export default function EnglishCanvas({
       </div>
 
       {/* ② 四線三格手寫畫布區 */}
-      <div className="flex-1 shrink-0 bg-white rounded-2xl p-2 md:p-3 flex flex-col items-center justify-center relative shadow-sm w-full gap-2">
+      <div className="flex-1 min-h-0 bg-white rounded-2xl p-2 md:p-3 flex flex-col items-center justify-center relative shadow-sm w-full gap-1">
 
         {/* 格線說明徽章 */}
         <div className="flex items-center gap-3 self-start px-1">
@@ -485,11 +485,9 @@ export default function EnglishCanvas({
           </button>
         </div>
 
-        {/* 格線區域標示說明（學習輔助） */}
-        <div className="flex justify-between w-full px-1 text-[9px] md:text-[11px] font-bold text-stone-350">
-          <span className="text-stone-300">↑ Ascender zone (tall letters: h, k, l)</span>
-          <span className="text-red-300">Baseline →</span>
-          <span className="text-stone-300">Descender zone (g, p, q, y) ↓</span>
+        {/* 格線區域標示說明（精簡版，僅顯示 Baseline 提示） */}
+        <div className="flex justify-end w-full px-1">
+          <span className="text-[9px] font-bold text-red-300">— Baseline</span>
         </div>
       </div>
 
